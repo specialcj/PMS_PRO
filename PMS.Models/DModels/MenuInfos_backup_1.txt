@@ -1,0 +1,9 @@
+MId,	MName,			ParenetId,	ParentName,	MKey,				MUrl,						IsTop,	MOrder,	IsDeleted,	Creator,	CreateTime,				MDesp,	MPic
+1, 		RDA2,			0,			NULL,		NoShortcuts,		NULL,						0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,	NULL
+2, 		Null1,			0,			NULL,		NoShortcuts,		NULL,						0,		2,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,	NULL
+3, 		Null2,			0,			NULL,		NoShortcuts,		NULL,						0,		3,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,	NULL
+
+4,		RDR2切换dll,	1,			NULL,		NoShortcuts,		Radar.FrmRDR2SelDll,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,	Imgs\R32x32\radar_1.png
+5,		RDR2换线,		1,			NULL,		NoShortcuts,		Radar.FrmRDR2ChangeOver,	0,		2,		0,			admin,		2022-1-1 00:00:00.000,	NULL,	NULL
+6,		Debug2,			1,			NULL,		NoShortcuts,		Radar.FrmRDR2Packing,		0,		3,		0,			admin,		2022-1-1 00:00:00.000,	NULL,	NULL
+

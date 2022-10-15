@@ -1,0 +1,10 @@
+MId,		MName,				ParenetId,	ParentName,	MKey,				MUrl,						IsTop,	MOrder,	IsDeleted,	Creator,	CreateTime,				MDesp,				MPic
+1000, 		RDA2,				0,			NULL,		NoShortcuts,		NULL,						0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+1100, 		Setting,			0,			NULL,		NoShortcuts,		NULL,						0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+1200, 		Help,				0,			NULL,		NoShortcuts,		NULL,						0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+
+2000,		RDR2 dll,			1000,		NULL,		NoShortcuts,		Radar.FrmRDR2Dll,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\dll_1.png
+2001,		RDR2 SystemConfig,	1000,		NULL,		NoShortcuts,		Radar.FrmRDR2SystemConfig,	0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\SystemConfig_3.png
+
+3000,		User Switch,		1100,		NULL,		NoShortcuts,		NULL,						0,		1,		0,			admin,		2022-1-1 00:00:00.000,	UserSwitch,			Imgs\R32x32\switch_user3.png
+3001,		ini Configuration,	1100,		NULL,		NoShortcuts,		NULL,						0,		1,		0,			admin,		2022-1-1 00:00:00.000,	IniConfiguration,	Imgs\R32x32\ini_1.png
