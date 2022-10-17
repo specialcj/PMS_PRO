@@ -24,8 +24,10 @@ namespace WinPMS.Debug
             DllCheck dllCheck = new DllCheck();
 
             List<string> sList = new List<string>();
-            sList.Add("Radar 77GHZ G1.2 BYD EKE FLR");
-            //sList.Add("Radar 77GHZ G1.2 GM Global B LRR");
+            //sList.Add("Radar 77GHZ G1.2 BYD EKE FLR");
+            //sList.Add("Radar 77GHz G1.2 GAC A60 FLR");
+            //sList.Add("Radar 77GHz G1.3 GWM ES13 RCR");
+            sList.Add("Radar 77GHZ G1.2 GM Global B LRR");
             //sList.Add("Radar 77GHZ G1.3 Nissan J32V Epower");
 
 

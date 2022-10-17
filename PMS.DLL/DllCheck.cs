@@ -114,7 +114,8 @@ namespace PMS.DLL
 
             List<string> dllExpectedFolderListForFixedNotExist = new List<string>();//期望的dll固定文件夹目录不存在
 
-            //循环遍历Ini中定义的需要dll切换的项目和版本
+            //循环遍历Ini中定义的需要dll切换的项目，判断当前项目的名称是否包含该项目
+            //如果包含，则获取对应的dll版本
             int i;
             for (i = 0; i < sDllSwitchProIniList.Length; i++)
             {
@@ -201,8 +202,8 @@ namespace PMS.DLL
                 //ALV_CAN_Comms - sweet400#ALV_CAN_COMMS - fft ghost v4
 
                 string sDllExpectedSpecial = ""; //期望使用的特殊的ALV_CAN_COMMS.dll
-                string sDllExpectedReplace;
-                string sDllExpectedReplaceCurrent;
+                string sDllExpectedFolder;
+                string sDllExpectedFolderReplaceCurrent;
 
                 if (sDllExpected.Contains("DLL_"))
                 {
@@ -213,30 +214,30 @@ namespace PMS.DLL
                      * sDllExpectedReplace -> ALV_CAN_COMMS - gm
                      */
                     sDllExpectedSpecial = sDllExpected.Substring(sDllExpected.LastIndexOf("#") + 1); //DLL_0_0_71_2
-                    sDllExpectedReplace = sDllExpected.Substring(0, sDllExpected.Length - sDllExpectedSpecial.Length - 1).Replace("#", ", "); //ALV_CAN_COMMS - gm
+                    sDllExpectedFolder = sDllExpected.Substring(0, sDllExpected.Length - sDllExpectedSpecial.Length - 1).Replace("#", ", "); //ALV_CAN_COMMS - gm
                 }
                 else
                 {
                     //原始字符串 -> ALV_CAN_Comms - sweet400#ALV_CAN_COMMS - fft ghost v4
                     //处理后 -> sDllExpectedReplace -> ALV_CAN_Comms - sweet400, ALV_CAN_COMMS - fft ghost v4
-                    sDllExpectedReplace = sDllExpected.Replace("#", ", ");
+                    sDllExpectedFolder = sDllExpected.Replace("#", ", ");
                 }
 
                 //sArrDllExpectedReplace as below:
                 //[0]"ALV_CAN_Comms - sweet400"
                 //[1]" ALV_CAN_COMMS - fft ghost v4"
-                string[] sArrDllExpectedReplace = sDllExpectedReplace.Split(',');
+                string[] sArrDllExpectedFolderReplace = sDllExpectedFolder.Split(',');
 
                 dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n";
 
-                for (int j = 0; j < sArrDllExpectedReplace.Length; j++)
-                {
-                    sDllExpectedReplaceCurrent = sArrDllExpectedReplace[j].Trim();
-
-                    dllExpectedFolderListForFixed.Add(Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpectedReplaceCurrent));
-                }
 
                 //获取期望的文件夹目录: C:\ALV_CAN_Comms - sweet400, C:\ALV_CAN_COMMS - fft ghost v4
+                for (int j = 0; j < sArrDllExpectedFolderReplace.Length; j++)
+                {
+                    sDllExpectedFolderReplaceCurrent = sArrDllExpectedFolderReplace[j].Trim();
+
+                    dllExpectedFolderListForFixed.Add(Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpectedFolderReplaceCurrent));
+                }
                 sDllExpectedFolderForFixed = string.Join(", ", dllExpectedFolderListForFixed.ToArray());
 
                 
@@ -269,21 +270,21 @@ namespace PMS.DLL
                         dllSwitchTemp1 = false;
                     }
 
-                    dllSwitchPro += "Expected dll: " + sDllExpectedTemp + "（期望的dll）" + "\n\n" + "Current dll: " + sDllVersionCurrent + "\n\n";
+                    dllSwitchPro += "Expected dll: " + sDllExpectedTemp + "\n\n" + "Current dll: " + sDllVersionCurrent + "\n\n";
                     //Console.WriteLine(dllSwitchPro);
 
                     //sWriteLog = DateTime.Now + "\n\n" + dllSwitchPro + "\n\n" + dllSwitchTemp + (dllSwitchTemp ? "[need switch dll]" : "[no need to switch dll]") + "\n\n" + sSeparator;
                 }
 
                 //判断是否存在固定的ALV_CAN DLL文件夹
-                for (int j = 0; j < sArrDllExpectedReplace.Length; j++)
+                for (int j = 0; j < sArrDllExpectedFolderReplace.Length; j++)
                 {
-                    if (!Directory.Exists(Path.Combine(_sRDR2AlvCanCommsFolderPath, sArrDllExpectedReplace[j].Trim())))
+                    if (!Directory.Exists(Path.Combine(_sRDR2AlvCanCommsFolderPath, sArrDllExpectedFolderReplace[j].Trim())))
                     {
                         dllSwitchTemp2 = true;//不存在
 
                         //将不存在的folder保存
-                        dllExpectedFolderListForFixedNotExist.Add(Path.Combine(_sRDR2AlvCanCommsFolderPath, sArrDllExpectedReplace[j].Trim()));
+                        dllExpectedFolderListForFixedNotExist.Add(Path.Combine(_sRDR2AlvCanCommsFolderPath, sArrDllExpectedFolderReplace[j].Trim()));
                     }
                     else
                     {
@@ -300,13 +301,13 @@ namespace PMS.DLL
                     dllSwitchPro += "Expected dll folder: " + sDllExpectedFolderForFixed + "\n\n" + "Current dll folder: folder exist";
                 }
 
-                dllSwitchPro += "\n\n" + "请联系线长 / 技术员切换成期望的dll ！！！";
+                //dllSwitchPro += "\n\n" + "请联系线长 / 技术员切换成期望的dll ！！！";
 
                 Console.WriteLine(dllSwitchPro);
 
                 dllSwitchTemp = dllSwitchTemp1 || dllSwitchTemp2;
 
-                sWriteLog = DateTime.Now + "\n\n" + dllSwitchPro + "\n\n" + dllSwitchTemp + (dllSwitchTemp ? "[need switch dll]" : "[no need to switch dll]") + "\n\n" + dllSwitchTemp2 + (dllSwitchTemp2 ? "[folder not exist]" : "[folder exist]") + "\n\n" + sSeparator;
+                sWriteLog = DateTime.Now + "\n\n" + dllSwitchPro + "\n\n" + dllSwitchTemp1 + (dllSwitchTemp1 ? "[need switch dll]" : "[no need to switch dll]") + "\n\n" + dllSwitchTemp2 + (dllSwitchTemp2 ? "[folder not exist]" : "[folder exist]") + "\n\n" + sSeparator;
             }
             else
             {
@@ -321,6 +322,11 @@ namespace PMS.DLL
 
                 //Console.WriteLine("当前dll" + "," + sDllVersionCurrent);
 
+                if (sDllExpected.StartsWith("DLL_"))
+                {
+                    sDllExpected = sDllExpected.Substring("DLL_".Length); //0_0_71_2
+                }
+
                 if (sDllExpected != sDllVersionCurrent)
                 {
                     //Console.WriteLine("需要切换dll");
@@ -332,9 +338,9 @@ namespace PMS.DLL
                     dllSwitchTemp = false;
                 }
 
-                dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n" + "Expected dll: " + sDllExpected + "（期望的dll）" + "\n\n" + "Current dll: " + sDllVersionCurrent;
+                dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n" + "Expected dll: " + sDllExpected + "\n\n" + "Current dll: " + sDllVersionCurrent;
 
-                dllSwitchPro += "\n\n" + "请联系线长 / 技术员切换成期望的dll ！！！";
+                //dllSwitchPro += "\n\n" + "请联系线长 / 技术员切换成期望的dll ！！！";
 
                 //Console.WriteLine(dllSwitchPro);
 
