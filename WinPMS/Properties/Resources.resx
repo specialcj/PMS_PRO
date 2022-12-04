@@ -196,4 +196,10 @@
   <data name="tlbg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Imgs\tlbg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="log_dir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imgs\R32x32\log_dir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="log_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Imgs\R32x32\log_file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

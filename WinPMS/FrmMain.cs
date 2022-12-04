@@ -389,6 +389,7 @@ namespace WinPMS
             {
                 MenuInfosModel menuInfosModel = mi.Tag as MenuInfosModel;
                 string mUrl = menuInfosModel.MUrl;//获取菜单的关联页面
+                string mDesp = menuInfosModel.MDesp;//获取菜单的描述信息
 
                 if (mUrl.StartsWith("Debug.Frm"))
                 {
@@ -400,7 +401,7 @@ namespace WinPMS
                         foreach (TabPage tabPage in tcPages.TabPages)
                         {
                             iTabPageIndex++;
-                            if(tabPage.Text == mUrl)
+                            if (tabPage.Text == mUrl)
                             {
                                 tcPages.SelectedTab = tabPage;
                                 break;
@@ -421,11 +422,13 @@ namespace WinPMS
 
                     });
 
-                    f.FuncMsgShowAccountEmpty = new Func<string>(() => {
+                    f.FuncMsgShowAccountEmpty = new Func<string>(() =>
+                    {
                         return "Account can't be empty!";
                     });
 
-                    f.FuncMsgShowAccountNotValid = new Func<string>(() => {
+                    f.FuncMsgShowAccountNotValid = new Func<string>(() =>
+                    {
                         return "Account not valid!";
                     });
 
@@ -441,13 +444,13 @@ namespace WinPMS
 
                     f.ShowDialog();
                 }
-                else if (!string.IsNullOrEmpty(mUrl) && "NULL" != mUrl)
+                else if (!string.IsNullOrEmpty(mUrl) && "NULL" != mUrl && "NULL" == mDesp)
                 {
                     CreateForm(mUrl, menuInfosModel.IsTop);
                 }
                 else
                 {
-                    //TODO 特殊响应处理(工具菜单中没有关联页面的响应处理)
+                    //特殊响应处理
                     if (menuInfosModel.MDesp == MenuInfosDesp.SwitchUser.ToString())
                     {
                         if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Are you sure to switch user？", "Switch user", 2))
@@ -475,7 +478,7 @@ namespace WinPMS
                                     break;
                                 case "CFM":
                                     //Process.Start("Explorer.exe", FileHelper.sIniFilePathCFM);
-                                    sIniDir = FileHelper.sIniFilePathDebug;
+                                    sIniDir = FileHelper.sIniFilePathCFM;
                                     break;
                                 default:
                                     break;
@@ -512,7 +515,7 @@ namespace WinPMS
                                         break;
                                     case "CFM":
                                         //Process.Start("Explorer.exe", FileHelper.sIniFilePathCFM);
-                                        sIniDir = FileHelper.sIniFilePathDebug;
+                                        sIniDir = FileHelper.sIniFilePathCFM;
                                         break;
                                     default:
                                         break;
@@ -522,11 +525,13 @@ namespace WinPMS
                                 Process.Start("Explorer.exe", sIniDir);
                             });
 
-                            f.FuncMsgShowAccountEmpty = new Func<string>(() => {
+                            f.FuncMsgShowAccountEmpty = new Func<string>(() =>
+                            {
                                 return "Account can't be empty!";
                             });
 
-                            f.FuncMsgShowAccountNotValid = new Func<string>(() => {
+                            f.FuncMsgShowAccountNotValid = new Func<string>(() =>
+                            {
                                 return "Account not valid!";
                             });
 
@@ -547,6 +552,10 @@ namespace WinPMS
                             MsgBoxHelper.MsgBoxError("Config not allowed！\nPlease login as Admin account！");
                             return;
                         }
+                    }
+                    else if (menuInfosModel.MDesp == MenuInfosDesp.Debug.ToString())
+                    {
+                        MsgBoxHelper.MsgBoxError("功能暂未开放！");
                     }
                 }
             }
@@ -632,7 +641,8 @@ namespace WinPMS
             SwitchUser = 2,
             ModifyPwd = 3,
             RefreshMenu = 4,
-            IniConfiguration = 5
+            IniConfiguration = 5,
+            Debug = 6
         }
 
 

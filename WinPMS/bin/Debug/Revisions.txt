@@ -1,9 +1,3 @@
 ﻿V1.0.0.0
 Initial Release
 
-V1.1.7.3
-A) switch ALV_CAN_Comms.dll
-
-V1.1.7.4
-A) function optimized
-B) bug fix

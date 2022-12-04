@@ -93,6 +93,12 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationFramework" />
+    <Reference Include="Spire.Doc, Version=10.8.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.10.8.0\lib\net40\Spire.Doc.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=8.8.6.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Doc.10.8.0\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -127,6 +133,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debug\FrmDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\FrmDemo.designer.cs">
+      <DependentUpon>FrmDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FModels\FrmLoginModel.cs" />
     <Compile Include="FModels\FrmProgressBarModel.cs" />
     <Compile Include="Debug\FrmDebug.cs">
@@ -140,6 +152,12 @@
     </Compile>
     <Compile Include="Debug\FrmDebugModeWarning.Designer.cs">
       <DependentUpon>FrmDebugModeWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAboutPMS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAboutPMS.Designer.cs">
+      <DependentUpon>FrmAboutPMS.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmAdminAuthority.cs">
       <SubType>Form</SubType>
@@ -224,6 +242,12 @@
     <Compile Include="Tools\FrmConvertToJPG.designer.cs">
       <DependentUpon>FrmConvertToJPG.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tools\FrmConformityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\FrmConformityReport.designer.cs">
+      <DependentUpon>FrmConformityReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tools\FrmQRCodeScan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,11 +266,17 @@
     <Compile Include="Tools\FrmSeparateST2PF.designer.cs">
       <DependentUpon>FrmSeparateST2PF.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Debug\FrmDemo.resx">
+      <DependentUpon>FrmDemo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Debug\FrmDebug.resx">
       <DependentUpon>FrmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Debug\FrmDebugModeWarning.resx">
       <DependentUpon>FrmDebugModeWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAboutPMS.resx">
+      <DependentUpon>FrmAboutPMS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAdminAuthority.resx">
       <DependentUpon>FrmAdminAuthority.cs</DependentUpon>
@@ -289,6 +319,9 @@
     <EmbeddedResource Include="Tools\FrmConvertToJPG.resx">
       <DependentUpon>FrmConvertToJPG.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tools\FrmConformityReport.resx">
+      <DependentUpon>FrmConformityReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\FrmQRCodeScan.resx">
       <DependentUpon>FrmQRCodeScan.cs</DependentUpon>
     </EmbeddedResource>
@@ -308,6 +341,12 @@
     <None Include="bin\Debug\Config\RecipeTemplate\Radar2_SEL_Recipe_Temp_1.ini" />
     <None Include="bin\Debug\Config\RecipeTemplate\Temp.ini" />
     <None Include="bin\Debug\WinPMS.exe.config" />
+    <None Include="Config\ConformityReportTemplate\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity list.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\ConformityReportTemplate\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity Report.doc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\PMS.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -531,12 +570,21 @@
     <Content Include="bin\Debug\runtimes\win-x86\native\WebView2Loader.dll" />
     <Content Include="bin\Debug\WinPMS.exe" />
     <Content Include="Config\issues.txt" />
+    <Content Include="test1.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Imgs\sp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Imgs\tlbg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Imgs\R32x32\log_dir.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\log_file.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MasterFile\XMLFile1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -72,36 +72,36 @@ namespace WinPMS
             {
                 case "Debug":
                     //从ini配置文件中获取ALV_CAN_COMMS目录所在的盘符(大写)
-                    _RdrAlvCanComms.FolderPath = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderPath", "NULL", FileHelper.sIniFilePathDebug);
+                    _RdrAlvCanComms.FolderPath = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderPath", "NULL", FileHelper.sIniFilePathDebug);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹名称的前缀
-                    _RdrAlvCanComms.FolderNamePrefix = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderNamePrefix", "NULL", FileHelper.sIniFilePathDebug);
+                    _RdrAlvCanComms.FolderNamePrefix = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderNamePrefix", "NULL", FileHelper.sIniFilePathDebug);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹下dll文件的名称
-                    _RdrAlvCanComms.DllFileName = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_DllFileName", "NULL", FileHelper.sIniFilePathDebug);
+                    _RdrAlvCanComms.DllFileName = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_DllFileName", "NULL", FileHelper.sIniFilePathDebug);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹名称的前缀 (该文件夹是固定的)
-                    _RdrAlvCanComms.DllFolderNamePrefixFixed = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderNamePrefix_Fixed", "NULL", FileHelper.sIniFilePathDebug);
+                    _RdrAlvCanComms.DllFolderNamePrefixFixed = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderNamePrefix_Fixed", "NULL", FileHelper.sIniFilePathDebug);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹下.dll文件的名称 (该.dll是固定的)
-                    _RdrAlvCanComms.DllFileNameFixed = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_DllFileName_Fixed", "NULL", FileHelper.sIniFilePathDebug);
+                    _RdrAlvCanComms.DllFileNameFixed = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_DllFileName_Fixed", "NULL", FileHelper.sIniFilePathDebug);
 
                     break;
                 case "CFM":
                     //从ini配置文件中获取ALV_CAN_COMMS目录所在的盘符(大写)
-                    _RdrAlvCanComms.FolderPath = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderPath", "NULL", FileHelper.sIniFilePathCFM);
+                    _RdrAlvCanComms.FolderPath = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderPath", "NULL", FileHelper.sIniFilePathCFM);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹名称的前缀
-                    _RdrAlvCanComms.FolderNamePrefix = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderNamePrefix", "NULL", FileHelper.sIniFilePathCFM);
+                    _RdrAlvCanComms.FolderNamePrefix = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderNamePrefix", "NULL", FileHelper.sIniFilePathCFM);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹下dll文件的名称
-                    _RdrAlvCanComms.DllFileName = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_DllFileName", "NULL", FileHelper.sIniFilePathCFM);
+                    _RdrAlvCanComms.DllFileName = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_DllFileName", "NULL", FileHelper.sIniFilePathCFM);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹名称的前缀 (该文件夹是固定的)
-                    _RdrAlvCanComms.DllFolderNamePrefixFixed = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_FolderNamePrefix_Fixed", "NULL", FileHelper.sIniFilePathCFM);
+                    _RdrAlvCanComms.DllFolderNamePrefixFixed = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderNamePrefix_Fixed", "NULL", FileHelper.sIniFilePathCFM);
 
                     //从ini配置文件中获取ALV_CAN_COMMS文件夹下.dll文件的名称 (该.dll是固定的)
-                    _RdrAlvCanComms.DllFileNameFixed = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "ALV_CAN_COMMS_DllFileName_Fixed", "NULL", FileHelper.sIniFilePathCFM);
+                    _RdrAlvCanComms.DllFileNameFixed = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_DllFileName_Fixed", "NULL", FileHelper.sIniFilePathCFM);
 
                     break;
                 default:

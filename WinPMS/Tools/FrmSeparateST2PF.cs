@@ -52,12 +52,30 @@ namespace WinPMS.Tools
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择S/T Log文件的目录...";
 
-            DialogResult dialogResult = dialog.ShowDialog();
-            if (dialogResult == DialogResult.Cancel)
+            //DialogResult dialogResult = dialog.ShowDialog();
+            //if (dialogResult == DialogResult.Cancel)
+            //{
+            //    return;
+            //}
+
+            if (groupBox2.Text == "Log Dest")
             {
-                return;
+                DialogResult dialogResult = dialog.ShowDialog();
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
             }
-            
+            else
+            {
+                dialog.SelectedPath = groupBox2.Text.Substring("Log Dest - ".Length);
+
+                DialogResult dialogResult = dialog.ShowDialog();
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
 
             listBox1.Items.Clear();
             listBox2.Items.Clear();
@@ -75,7 +93,7 @@ namespace WinPMS.Tools
 
             List<string> sFileAllList = new List<string>();
 
-            groupBox2.Text = "Log目标源";
+            groupBox2.Text = "Log Dest";
             groupBox2.Text += " - " + _sLogFolderPath;
 
             //删除已存在的log pass目录

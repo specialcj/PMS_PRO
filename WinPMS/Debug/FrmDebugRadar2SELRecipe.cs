@@ -667,10 +667,10 @@ namespace WinPMS.Debug
             switch (FileHelper.sIniPMSUsage)
             {
                 case "Debug":
-                    txt_TestFilesFolderVehNo.Text = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "TestFiles_Folder_ADrive", "NULL", FileHelper.sIniFilePathDebug);
+                    txt_TestFilesFolderVehNo.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestFiles_Folder_ADrive", "NULL", FileHelper.sIniFilePathDebug);
 
                     //TODO 是否可以用委托？
-                    sVeoneerCustomer = IniHelper.ReadIni(FileHelper.sIniVeoneerSection, "Veoneer_Customer", "NULL", FileHelper.sIniFilePathDebug);
+                    sVeoneerCustomer = IniHelper.ReadIni(FileHelper.INI_SECTION_VEONEER, "Veoneer_Customer", "NULL", FileHelper.sIniFilePathDebug);
                     sVeoneerCustomerArr = sVeoneerCustomer.Split(',');
                     for (int i = 0; i < sVeoneerCustomerArr.Length; i++)
                     {
@@ -678,9 +678,9 @@ namespace WinPMS.Debug
                     }
                     break;
                 case "CFM":
-                    txt_TestFilesFolderVehNo.Text = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "TestFiles_Folder_ADrive", "NULL", FileHelper.sIniFilePathCFM);
+                    txt_TestFilesFolderVehNo.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestFiles_Folder_ADrive", "NULL", FileHelper.sIniFilePathCFM);
 
-                    sVeoneerCustomer = IniHelper.ReadIni(FileHelper.sIniVeoneerSection, "Veoneer_Customer", "NULL", FileHelper.sIniFilePathDebug);
+                    sVeoneerCustomer = IniHelper.ReadIni(FileHelper.INI_SECTION_VEONEER, "Veoneer_Customer", "NULL", FileHelper.sIniFilePathDebug);
                     sVeoneerCustomerArr = sVeoneerCustomer.Split(',');
                     for (int i = 0; i < sVeoneerCustomerArr.Length; i++)
                     {

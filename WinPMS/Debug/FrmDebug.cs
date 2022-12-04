@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,12 +25,11 @@ namespace WinPMS.Debug
             DllCheck dllCheck = new DllCheck();
 
             List<string> sList = new List<string>();
-            //sList.Add("Radar 77GHZ G1.2 BYD EKE FLR");
-            //sList.Add("Radar 77GHz G1.2 GAC A60 FLR");
-            //sList.Add("Radar 77GHz G1.3 GWM ES13 RCR");
+            
             sList.Add("Radar 77GHZ G1.2 GM Global B LRR");
             //sList.Add("Radar 77GHZ G1.3 Nissan J32V Epower");
 
+            //sList.Add("Radar 77GHz G1.3 BYD EKE RCR ");
 
             foreach (string s in sList)
             {
@@ -139,6 +139,16 @@ namespace WinPMS.Debug
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"A:\ALV_CAN_COMMS_0.0.71.2");
+        }
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            this.CloseForm();
         }
     }
 }

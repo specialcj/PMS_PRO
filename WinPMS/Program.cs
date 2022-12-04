@@ -50,24 +50,24 @@ namespace WinPMS
 
 
             #region 加载Ini中的配置参数
-            FileHelper.sIniPMSDev = IniHelper.ReadIni(FileHelper.sIniPMSSection, "PMS_Dev", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniPMSDev = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Dev", "NULL", FileHelper.sIniFilePathPMS);
 
-            FileHelper.sIniPMSUsage = IniHelper.ReadIni(FileHelper.sIniPMSSection, "PMS_Usage", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniPMSUsage = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Usage", "NULL", FileHelper.sIniFilePathPMS);
 
-            FileHelper.sIniPMSFtpUpdate = IniHelper.ReadIni(FileHelper.sIniPMSSection, "PMS_FtpUpdate", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniPMSFtpUpdate = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_FtpUpdate", "NULL", FileHelper.sIniFilePathPMS);
 
-            FileHelper.sIniPwdOpr = IniHelper.ReadIni(FileHelper.sIniPMSSection, "PMS_Opr", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniPwdOpr = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Opr", "NULL", FileHelper.sIniFilePathPMS);
 
-            FileHelper.sIniPwdEncrypt = IniHelper.ReadIni(FileHelper.sIniPMSSection, "PMS_Encrypt", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniPwdEncrypt = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Encrypt", "NULL", FileHelper.sIniFilePathPMS);
 
-            FileHelper.sIniFormStartup = IniHelper.ReadIni(FileHelper.sIniPMSSection, "Form_Startup", "NULL", FileHelper.sIniFilePathPMS);
+            FileHelper.sIniFormStartup = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "Form_Startup", "NULL", FileHelper.sIniFilePathPMS);
 
 
             //define the input path of.HEIC file
-            FileHelper.sIniPMSLocalPath1 = IniHelper.ReadIni(FileHelper.sIniPMSLocalSection, "Path1", "NULL", FileHelper.sIniFilePathLocal);
+            FileHelper.sIniPMSLocalPath1 = IniHelper.ReadIni(FileHelper.INI_PMS_LOCAL_SECTION, "Path1", "NULL", FileHelper.sIniFilePathLocal);
 
             //define the output path of .jpg file
-            FileHelper.sIniPMSLocalPath2 = IniHelper.ReadIni(FileHelper.sIniPMSLocalSection, "Path2", "NULL", FileHelper.sIniFilePathLocal);
+            FileHelper.sIniPMSLocalPath2 = IniHelper.ReadIni(FileHelper.INI_PMS_LOCAL_SECTION, "Path2", "NULL", FileHelper.sIniFilePathLocal);
             #endregion
 
 
@@ -182,6 +182,8 @@ namespace WinPMS
             //Application.Run(new FrmRDR2SystemConfig());
             //Application.Run(new FrmQRCodeScan());
             //Application.Run(new FrmDebugRadar2SELRecipe());
+
+            //Application.Run(new FrmConformityReport());
 
         }
 

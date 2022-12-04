@@ -44,7 +44,6 @@ namespace WinPMS.Tools
         private async void btn_LoadSN_Click(object sender, EventArgs e)
         {
             string sFileName = "";
-            string sLine = "";
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "txt files (*.txt)|*.txt";
@@ -64,52 +63,73 @@ namespace WinPMS.Tools
 
             listBox1.Items.Clear();
             txtbox_LoadSN.Text = "";
+            txtbox_LoadSN.BackColor = default;
             btn_LoadSN.Enabled = false;
+            btn_Load_Log_Folder.Enabled = false;
             groupBox1.Text = ".txt Source";
             groupBox1.Text += " - " + sFileName;
 
-
-            btn_LoadSN.Enabled = await Task.Run(() =>
+            await Task.Run(() =>
             {
-                bool bScroll = false;
-                StreamReader sr = new StreamReader(sFileName, Encoding.Default);
-                _sSNSource.Clear();
-
-                while (null != (sLine = sr.ReadLine()))
-                {
-                    if (string.IsNullOrEmpty(sLine))
-                    {
-                        continue;
-                    }
-
-                    //listBox1.Items.Add(sLine);
-                    if (listBox1.InvokeRequired)
-                    {
-                        listBox1.Invoke(new Action(() =>
-                        {
-                            listBox1.Items.Add(sLine);
-
-                            if (listBox1.TopIndex == listBox1.Items.Count - (listBox1.Height / listBox1.ItemHeight))
-                                bScroll = true;
-                            if (bScroll)
-                                listBox1.TopIndex = listBox1.Items.Count - (listBox1.Height / listBox1.ItemHeight);
-                        }));
-                    }
-
-                    if (txtbox_LoadSN.InvokeRequired)
-                    {
-                        txtbox_LoadSN.Invoke(new Action(() =>
-                        {
-                            txtbox_LoadSN.Text = listBox1.Items.Count.ToString();
-                        }));
-                    }
-                    _sSNSource.Add(sLine);
-                }
-
-                return true;
+                DoLoadTxt(sFileName);
             });
 
             txtbox_LoadSN.BackColor = Color.GreenYellow;
+            btn_LoadSN.Enabled = true;
+            btn_Load_Log_Folder.Enabled = true;
+            //MessageBox.Show("SN: " + listBox1.Items.Count.ToString());
+        }
+
+
+        /// <summary>
+        /// Right Click -> Open .txt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tSMenuOpenTxt_Click(object sender, EventArgs e)
+        {
+            if (groupBox1.Text == ".txt Source")
+            {
+                MsgBoxHelper.MsgBoxError("please load .txt first!");
+                btn_LoadSN.Focus();
+                return;
+            }
+
+            string sTxt = groupBox1.Text.Substring(".txt Source - ".Length);
+
+            Process.Start(sTxt);
+        }
+
+
+        /// <summary>
+        /// Right Click -> Reload .txt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void tSMenuReloadTxt_Click(object sender, EventArgs e)
+        {
+            if (groupBox1.Text == ".txt Source")
+            {
+                MsgBoxHelper.MsgBoxError("please load .txt first!");
+                btn_LoadSN.Focus();
+                return;
+            }
+
+            string sTxt = groupBox1.Text.Substring(".txt Source - ".Length);
+
+            listBox1.Items.Clear();
+            txtbox_LoadSN.Text = "";
+            txtbox_LoadSN.BackColor = default;
+            btn_LoadSN.Enabled = false;
+            btn_Load_Log_Folder.Enabled = false;
+
+            await Task.Run(() =>
+            {
+                DoLoadTxt(sTxt);
+            });
+
+            txtbox_LoadSN.BackColor = Color.GreenYellow;
+            btn_LoadSN.Enabled = true;
             btn_Load_Log_Folder.Enabled = true;
             //MessageBox.Show("SN: " + listBox1.Items.Count.ToString());
         }
@@ -125,11 +145,33 @@ namespace WinPMS.Tools
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "please select the folder of ST Log...";
 
-            DialogResult dialogResult = dialog.ShowDialog();
-            if (dialogResult == DialogResult.Cancel)
+            if (groupBox2.Text == "Log Dest")
             {
-                return;
+                DialogResult dialogResult = dialog.ShowDialog();
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
             }
+            else
+            {
+                dialog.SelectedPath = groupBox2.Text.Substring("Log Dest - ".Length);
+
+                DialogResult dialogResult = dialog.ShowDialog();
+                if (dialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            //_sLogFolderPath = @"C:\_VNE_Work\_Log\RDR2\ST\GAC A11 conffin_Delete_1";
+            _sLogFolderPath = dialog.SelectedPath.Trim();//Log目标源的目录
+
+            _sLogFindFolderPath = _sLogFolderPath + @"\" + "log_find";
+            _sLogNotFindFolderPath = _sLogFolderPath + @"\" + "log_not_find_SN";
+
+            groupBox2.Text = "Log Dest";
+            groupBox2.Text += " - " + _sLogFolderPath;
 
             listBox2.Items.Clear();
             listBox3.Items.Clear();
@@ -140,15 +182,7 @@ namespace WinPMS.Tools
             btn_Load_Log_Folder.Enabled = false;
             btn_Fetching.Enabled = false;
 
-            //_sLogFolderPath = @"C:\_VNE_Work\_Log\RDR2\ST\GAC A11 conffin_Delete_1";
-            _sLogFolderPath = dialog.SelectedPath.Trim();//Log目标源的目录
-            _sLogFindFolderPath = _sLogFolderPath + @"\" + "log_find";
-            _sLogNotFindFolderPath = _sLogFolderPath + @"\" + "log_not_find_SN";
-
             List<string> sFileAllList = new List<string>();
-
-            groupBox2.Text = "Log Dest";
-            groupBox2.Text += " - " + _sLogFolderPath;
 
             //删除已存在的log find目录
             if (Directory.Exists(_sLogFindFolderPath))
@@ -366,6 +400,7 @@ namespace WinPMS.Tools
             MessageBox.Show("1. 将序列号拷贝到.txt文本中，点击Load SN.txt按钮，程序自动加载.txt中的所有序列号\n\n2. 点击Load Log Folder按钮，选择从FileZilla上download下来的Log目录，程序将自动加载该目录下的所有Log文件\n\n3. 点击Fetching按钮，程序将自动匹配从FileZilla上download下来的ST站数据与源文件.txt中的SN号比对，找出与源文件中匹配的Log以及未找到的SN", "帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
         private void tsbtnClose_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Close" + " ？", "Info", 2))
@@ -373,11 +408,71 @@ namespace WinPMS.Tools
                 this.CloseForm();
             }
         }
+
+
+        private void btn_Debug_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.AddRange(new List<string>() {
+                "1",
+                "2"
+            }.ToArray());
+        }
         #endregion
 
 
 
         #region 方法
+        private void DoLoadTxt(string fileName)
+        {
+            bool bScroll = false;
+
+            string sLine = "";
+
+            List<string> lstTxt = new List<string>();
+
+            StreamReader sr = new StreamReader(fileName, Encoding.UTF8);
+
+            _sSNSource.Clear();
+
+            while (null != (sLine = sr.ReadLine()))
+            {
+                if (string.IsNullOrEmpty(sLine.Trim()))
+                {
+                    continue;
+                }
+
+                if (!lstTxt.Contains(sLine))
+                {
+                    lstTxt.Add(sLine);
+
+                    //listBox1.Items.Add(sLine);
+                    if (listBox1.InvokeRequired)
+                    {
+                        listBox1.Invoke(new Action(() =>
+                        {
+                            //listBox1.Items.AddRange(lstTxt.ToArray());
+                            listBox1.Items.Add(sLine);
+
+                            if (listBox1.TopIndex == listBox1.Items.Count - (listBox1.Height / listBox1.ItemHeight))
+                                bScroll = true;
+                            if (bScroll)
+                                listBox1.TopIndex = listBox1.Items.Count - (listBox1.Height / listBox1.ItemHeight);
+                        }));
+                    }
+
+                    if (txtbox_LoadSN.InvokeRequired)
+                    {
+                        txtbox_LoadSN.Invoke(new Action(() =>
+                        {
+                            txtbox_LoadSN.Text = listBox1.Items.Count.ToString();
+                        }));
+                    }
+                    _sSNSource.Add(sLine);
+                }
+            }
+
+        }
+
         /// <summary>
         /// Fetching Log
         /// </summary>
@@ -466,6 +561,8 @@ namespace WinPMS.Tools
 
             UtilityHelper.SaveListBoxToTxt(listBox4, Path.Combine(_sLogNotFindFolderPath, "log_not_find_SN.txt"));
         }
+        #endregion
+
+ 
     }
-    #endregion
 }

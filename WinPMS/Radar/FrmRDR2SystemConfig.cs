@@ -322,7 +322,7 @@ proc.Create command, Null, conf, intProcessID
         /// </summary>
         private void InitInfo()
         {
-            txtSystemConfigMaster.Text = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "SystemConfig_Master", "NULL", FileHelper.sIniFilePathPMS);
+            txtSystemConfigMaster.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "SystemConfig_Master", "NULL", FileHelper.sIniFilePathPMS);
 
             _sSystemConfigMaster = txtSystemConfigMaster.Text;
 

@@ -34,6 +34,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtbox_LoadSN = new System.Windows.Forms.TextBox();
             this.btn_LoadSN = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tSMenuOpenTxt = new System.Windows.Forms.ToolStripMenuItem();
+            this.tSMenuReloadTxt = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMenus = new System.Windows.Forms.ToolStrip();
             this.tsbtnDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -61,12 +64,14 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btn_Debug = new System.Windows.Forms.Button();
             this.txtbox_LogNotFind = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btn_OpenLogNotFind = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             panel1 = new System.Windows.Forms.Panel();
             panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.tsMenus.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -83,39 +88,64 @@
             panel1.Controls.Add(this.txtbox_LoadSN);
             panel1.Controls.Add(this.btn_LoadSN);
             panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            panel1.Location = new System.Drawing.Point(1748, 22);
-            panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            panel1.Location = new System.Drawing.Point(1165, 15);
             panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(147, 165);
+            panel1.Size = new System.Drawing.Size(98, 106);
             panel1.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 65);
+            this.label1.Location = new System.Drawing.Point(2, 42);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 20);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "SN / PCBA:";
             // 
             // txtbox_LoadSN
             // 
             this.txtbox_LoadSN.Enabled = false;
-            this.txtbox_LoadSN.Location = new System.Drawing.Point(6, 88);
+            this.txtbox_LoadSN.Location = new System.Drawing.Point(4, 57);
+            this.txtbox_LoadSN.Margin = new System.Windows.Forms.Padding(2);
             this.txtbox_LoadSN.Name = "txtbox_LoadSN";
-            this.txtbox_LoadSN.Size = new System.Drawing.Size(138, 26);
+            this.txtbox_LoadSN.Size = new System.Drawing.Size(93, 20);
             this.txtbox_LoadSN.TabIndex = 1;
             // 
             // btn_LoadSN
             // 
+            this.btn_LoadSN.ContextMenuStrip = this.contextMenuStrip1;
             this.btn_LoadSN.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_LoadSN.Location = new System.Drawing.Point(0, 0);
+            this.btn_LoadSN.Margin = new System.Windows.Forms.Padding(2);
             this.btn_LoadSN.Name = "btn_LoadSN";
-            this.btn_LoadSN.Size = new System.Drawing.Size(147, 45);
+            this.btn_LoadSN.Size = new System.Drawing.Size(98, 29);
             this.btn_LoadSN.TabIndex = 0;
             this.btn_LoadSN.Text = "Load *.txt";
             this.btn_LoadSN.UseVisualStyleBackColor = true;
             this.btn_LoadSN.Click += new System.EventHandler(this.btn_LoadSN_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSMenuOpenTxt,
+            this.tSMenuReloadTxt});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 48);
+            // 
+            // tSMenuOpenTxt
+            // 
+            this.tSMenuOpenTxt.Name = "tSMenuOpenTxt";
+            this.tSMenuOpenTxt.Size = new System.Drawing.Size(130, 22);
+            this.tSMenuOpenTxt.Text = "Open .txt";
+            this.tSMenuOpenTxt.Click += new System.EventHandler(this.tSMenuOpenTxt_Click);
+            // 
+            // tSMenuReloadTxt
+            // 
+            this.tSMenuReloadTxt.Name = "tSMenuReloadTxt";
+            this.tSMenuReloadTxt.Size = new System.Drawing.Size(130, 22);
+            this.tSMenuReloadTxt.Text = "Reload .txt";
+            this.tSMenuReloadTxt.Click += new System.EventHandler(this.tSMenuReloadTxt_Click);
             // 
             // tsMenus
             // 
@@ -135,8 +165,8 @@
             this.tsBtnHelp});
             this.tsMenus.Location = new System.Drawing.Point(0, 0);
             this.tsMenus.Name = "tsMenus";
-            this.tsMenus.Padding = new System.Windows.Forms.Padding(0, 0, 1, 3);
-            this.tsMenus.Size = new System.Drawing.Size(1898, 70);
+            this.tsMenus.Padding = new System.Windows.Forms.Padding(0, 0, 1, 2);
+            this.tsMenus.Size = new System.Drawing.Size(1265, 45);
             this.tsMenus.TabIndex = 1;
             this.tsMenus.Text = "toolStrip1";
             // 
@@ -148,7 +178,7 @@
             this.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnDelete.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnDelete.Name = "tsbtnDelete";
-            this.tsbtnDelete.Size = new System.Drawing.Size(47, 61);
+            this.tsbtnDelete.Size = new System.Drawing.Size(31, 37);
             this.tsbtnDelete.Text = " Del";
             this.tsbtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -156,7 +186,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 67);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
             // 
             // tsbtnInfo
             // 
@@ -166,7 +196,7 @@
             this.tsbtnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnInfo.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnInfo.Name = "tsbtnInfo";
-            this.tsbtnInfo.Size = new System.Drawing.Size(61, 61);
+            this.tsbtnInfo.Size = new System.Drawing.Size(41, 37);
             this.tsbtnInfo.Text = "Detail";
             this.tsbtnInfo.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -174,7 +204,7 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 67);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 43);
             // 
             // tsbtnRefresh
             // 
@@ -184,7 +214,7 @@
             this.tsbtnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnRefresh.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnRefresh.Name = "tsbtnRefresh";
-            this.tsbtnRefresh.Size = new System.Drawing.Size(72, 61);
+            this.tsbtnRefresh.Size = new System.Drawing.Size(49, 37);
             this.tsbtnRefresh.Text = "Reflash";
             this.tsbtnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -192,7 +222,7 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 67);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 43);
             // 
             // tsbtnClose
             // 
@@ -201,7 +231,7 @@
             this.tsbtnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnClose.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnClose.Name = "tsbtnClose";
-            this.tsbtnClose.Size = new System.Drawing.Size(64, 61);
+            this.tsbtnClose.Size = new System.Drawing.Size(43, 37);
             this.tsbtnClose.Text = " Close";
             this.tsbtnClose.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -214,7 +244,7 @@
             this.tsBtnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnHelp.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsBtnHelp.Name = "tsBtnHelp";
-            this.tsBtnHelp.Size = new System.Drawing.Size(53, 61);
+            this.tsBtnHelp.Size = new System.Drawing.Size(36, 37);
             this.tsBtnHelp.Text = "Help";
             this.tsBtnHelp.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsBtnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -225,11 +255,11 @@
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.HorizontalScrollbar = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(3, 22);
+            this.listBox1.Location = new System.Drawing.Point(2, 15);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(1745, 165);
+            this.listBox1.Size = new System.Drawing.Size(1163, 106);
             this.listBox1.TabIndex = 3;
             // 
             // groupBox1
@@ -237,9 +267,11 @@
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(panel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 70);
+            this.groupBox1.Location = new System.Drawing.Point(0, 45);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1898, 190);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(1265, 123);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = ".txt Source";
@@ -248,8 +280,9 @@
             // 
             this.btn_Load_Log_Folder.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_Load_Log_Folder.Location = new System.Drawing.Point(0, 0);
+            this.btn_Load_Log_Folder.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Load_Log_Folder.Name = "btn_Load_Log_Folder";
-            this.btn_Load_Log_Folder.Size = new System.Drawing.Size(147, 45);
+            this.btn_Load_Log_Folder.Size = new System.Drawing.Size(98, 29);
             this.btn_Load_Log_Folder.TabIndex = 6;
             this.btn_Load_Log_Folder.Text = "Load Log Folder";
             this.btn_Load_Log_Folder.UseVisualStyleBackColor = true;
@@ -259,8 +292,9 @@
             // 
             this.btn_Fetching.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_Fetching.Location = new System.Drawing.Point(0, 0);
+            this.btn_Fetching.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Fetching.Name = "btn_Fetching";
-            this.btn_Fetching.Size = new System.Drawing.Size(147, 45);
+            this.btn_Fetching.Size = new System.Drawing.Size(98, 29);
             this.btn_Fetching.TabIndex = 7;
             this.btn_Fetching.Text = "Fetching";
             this.btn_Fetching.UseVisualStyleBackColor = true;
@@ -272,9 +306,11 @@
             this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox2.Location = new System.Drawing.Point(0, 260);
+            this.groupBox2.Location = new System.Drawing.Point(0, 168);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1898, 190);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(1265, 123);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Log Dest";
@@ -284,11 +320,11 @@
             this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.HorizontalScrollbar = true;
-            this.listBox2.ItemHeight = 20;
-            this.listBox2.Location = new System.Drawing.Point(3, 22);
+            this.listBox2.Location = new System.Drawing.Point(2, 15);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
-            this.listBox2.Size = new System.Drawing.Size(1745, 165);
+            this.listBox2.Size = new System.Drawing.Size(1163, 106);
             this.listBox2.TabIndex = 12;
             // 
             // panel2
@@ -297,25 +333,28 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.btn_Load_Log_Folder);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1748, 22);
+            this.panel2.Location = new System.Drawing.Point(1165, 15);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(147, 165);
+            this.panel2.Size = new System.Drawing.Size(98, 106);
             this.panel2.TabIndex = 11;
             // 
             // txtbox_Log
             // 
             this.txtbox_Log.Enabled = false;
-            this.txtbox_Log.Location = new System.Drawing.Point(6, 89);
+            this.txtbox_Log.Location = new System.Drawing.Point(4, 58);
+            this.txtbox_Log.Margin = new System.Windows.Forms.Padding(2);
             this.txtbox_Log.Name = "txtbox_Log";
-            this.txtbox_Log.Size = new System.Drawing.Size(138, 26);
+            this.txtbox_Log.Size = new System.Drawing.Size(93, 20);
             this.txtbox_Log.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 66);
+            this.label2.Location = new System.Drawing.Point(2, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 20);
+            this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Log:";
             // 
@@ -325,9 +364,11 @@
             this.groupBox3.Controls.Add(this.panel3);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox3.Location = new System.Drawing.Point(0, 450);
+            this.groupBox3.Location = new System.Drawing.Point(0, 291);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1898, 190);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(1265, 123);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Log Find";
@@ -338,11 +379,11 @@
             this.listBox3.ForeColor = System.Drawing.Color.DodgerBlue;
             this.listBox3.FormattingEnabled = true;
             this.listBox3.HorizontalScrollbar = true;
-            this.listBox3.ItemHeight = 20;
-            this.listBox3.Location = new System.Drawing.Point(3, 22);
+            this.listBox3.Location = new System.Drawing.Point(2, 15);
+            this.listBox3.Margin = new System.Windows.Forms.Padding(2);
             this.listBox3.Name = "listBox3";
             this.listBox3.ScrollAlwaysVisible = true;
-            this.listBox3.Size = new System.Drawing.Size(1745, 165);
+            this.listBox3.Size = new System.Drawing.Size(1163, 106);
             this.listBox3.TabIndex = 14;
             // 
             // panel3
@@ -352,36 +393,40 @@
             this.panel3.Controls.Add(this.btn_OpenLogFind);
             this.panel3.Controls.Add(this.btn_Fetching);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(1748, 22);
+            this.panel3.Location = new System.Drawing.Point(1165, 15);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(147, 165);
+            this.panel3.Size = new System.Drawing.Size(98, 106);
             this.panel3.TabIndex = 13;
             // 
             // txtbox_LogFind
             // 
             this.txtbox_LogFind.Enabled = false;
             this.txtbox_LogFind.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtbox_LogFind.Location = new System.Drawing.Point(6, 116);
+            this.txtbox_LogFind.Location = new System.Drawing.Point(4, 75);
+            this.txtbox_LogFind.Margin = new System.Windows.Forms.Padding(2);
             this.txtbox_LogFind.Name = "txtbox_LogFind";
-            this.txtbox_LogFind.Size = new System.Drawing.Size(138, 26);
+            this.txtbox_LogFind.Size = new System.Drawing.Size(93, 20);
             this.txtbox_LogFind.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label3.Location = new System.Drawing.Point(3, 93);
+            this.label3.Location = new System.Drawing.Point(2, 60);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 20);
+            this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Log Find:";
             // 
             // btn_OpenLogFind
             // 
             this.btn_OpenLogFind.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_OpenLogFind.Location = new System.Drawing.Point(0, 45);
+            this.btn_OpenLogFind.Location = new System.Drawing.Point(0, 29);
+            this.btn_OpenLogFind.Margin = new System.Windows.Forms.Padding(2);
             this.btn_OpenLogFind.Name = "btn_OpenLogFind";
-            this.btn_OpenLogFind.Size = new System.Drawing.Size(147, 45);
+            this.btn_OpenLogFind.Size = new System.Drawing.Size(98, 29);
             this.btn_OpenLogFind.TabIndex = 8;
             this.btn_OpenLogFind.Text = "Open Result";
             this.btn_OpenLogFind.UseVisualStyleBackColor = true;
@@ -393,9 +438,11 @@
             this.groupBox4.Controls.Add(this.panel4);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.groupBox4.Location = new System.Drawing.Point(0, 640);
+            this.groupBox4.Location = new System.Drawing.Point(0, 414);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1898, 410);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(1265, 268);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Log Not Find";
@@ -406,40 +453,55 @@
             this.listBox4.ForeColor = System.Drawing.Color.Red;
             this.listBox4.FormattingEnabled = true;
             this.listBox4.HorizontalScrollbar = true;
-            this.listBox4.ItemHeight = 20;
-            this.listBox4.Location = new System.Drawing.Point(3, 22);
+            this.listBox4.Location = new System.Drawing.Point(2, 15);
+            this.listBox4.Margin = new System.Windows.Forms.Padding(2);
             this.listBox4.Name = "listBox4";
             this.listBox4.ScrollAlwaysVisible = true;
-            this.listBox4.Size = new System.Drawing.Size(1745, 385);
+            this.listBox4.Size = new System.Drawing.Size(1163, 251);
             this.listBox4.TabIndex = 2;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btn_Debug);
             this.panel4.Controls.Add(this.txtbox_LogNotFind);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.btn_OpenLogNotFind);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1748, 22);
+            this.panel4.Location = new System.Drawing.Point(1165, 15);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(147, 385);
+            this.panel4.Size = new System.Drawing.Size(98, 251);
             this.panel4.TabIndex = 1;
+            // 
+            // btn_Debug
+            // 
+            this.btn_Debug.Location = new System.Drawing.Point(5, 105);
+            this.btn_Debug.Name = "btn_Debug";
+            this.btn_Debug.Size = new System.Drawing.Size(92, 38);
+            this.btn_Debug.TabIndex = 11;
+            this.btn_Debug.Text = "Debug";
+            this.btn_Debug.UseVisualStyleBackColor = true;
+            this.btn_Debug.Visible = false;
+            this.btn_Debug.Click += new System.EventHandler(this.btn_Debug_Click);
             // 
             // txtbox_LogNotFind
             // 
             this.txtbox_LogNotFind.Enabled = false;
             this.txtbox_LogNotFind.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtbox_LogNotFind.Location = new System.Drawing.Point(6, 89);
+            this.txtbox_LogNotFind.Location = new System.Drawing.Point(4, 58);
+            this.txtbox_LogNotFind.Margin = new System.Windows.Forms.Padding(2);
             this.txtbox_LogNotFind.Name = "txtbox_LogNotFind";
-            this.txtbox_LogNotFind.Size = new System.Drawing.Size(138, 26);
+            this.txtbox_LogNotFind.Size = new System.Drawing.Size(93, 20);
             this.txtbox_LogNotFind.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(3, 66);
+            this.label4.Location = new System.Drawing.Point(2, 43);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 20);
+            this.label4.Size = new System.Drawing.Size(71, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Log Not Find:";
             // 
@@ -447,8 +509,9 @@
             // 
             this.btn_OpenLogNotFind.Dock = System.Windows.Forms.DockStyle.Top;
             this.btn_OpenLogNotFind.Location = new System.Drawing.Point(0, 0);
+            this.btn_OpenLogNotFind.Margin = new System.Windows.Forms.Padding(2);
             this.btn_OpenLogNotFind.Name = "btn_OpenLogNotFind";
-            this.btn_OpenLogNotFind.Size = new System.Drawing.Size(147, 45);
+            this.btn_OpenLogNotFind.Size = new System.Drawing.Size(98, 29);
             this.btn_OpenLogNotFind.TabIndex = 0;
             this.btn_OpenLogNotFind.Text = "Open Result";
             this.btn_OpenLogNotFind.UseVisualStyleBackColor = true;
@@ -456,15 +519,14 @@
             // 
             // FrmFetchSTBySN
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1898, 1050);
+            this.ClientSize = new System.Drawing.Size(1265, 682);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tsMenus);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FrmFetchSTBySN";
             this.ShowIcon = false;
             this.Text = "Fetch ST Log By SN / PCBA";
@@ -472,6 +534,7 @@
             this.Load += new System.EventHandler(this.FrmFileZilla_Load);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tsMenus.ResumeLayout(false);
             this.tsMenus.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -524,5 +587,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtbox_LogNotFind;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tSMenuOpenTxt;
+        private System.Windows.Forms.ToolStripMenuItem tSMenuReloadTxt;
+        private System.Windows.Forms.Button btn_Debug;
     }
 }

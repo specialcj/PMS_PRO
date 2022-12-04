@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows.Forms;
 using WinPMS.FModels;
 
+
 namespace WinPMS.Radar
 {
     public partial class FrmRDR2Dll : Form
@@ -19,6 +20,7 @@ namespace WinPMS.Radar
         }
 
         private FrmProgressBarModel _frmProgressBarModel = null;
+        private string _sIniPathPMSUsed = "";
 
         #region 事件
         /// <summary>
@@ -224,7 +226,7 @@ namespace WinPMS.Radar
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnOpenCVI_Click_1(object sender, EventArgs e)
+        private void btnOpenTestStepsCVI_Click(object sender, EventArgs e)
         {
             btnSwitchDll.Enabled = true;
             try
@@ -315,6 +317,61 @@ namespace WinPMS.Radar
         }
 
 
+        /// <summary>
+        /// 打开PMS Log目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnLogDir_Click(object sender, EventArgs e)
+        {
+            string sDrive = IniHelper.ReadIni(FileHelper.INI_SECTION_RDR_ALV_CAN_COMMS_DLL, "DLL_SWITCH_LOG", "NULL", _sIniPathPMSUsed);
+
+            try
+            {
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sDrive + " ？", "提示", 2))
+                {
+                    Process.Start(sDrive);
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                MsgBoxHelper.MsgBoxError(ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// 打开PMS Log文件
+        /// 默认打开的是当前日期的文件，如果当前Log文件没有则提示用户文件不存在
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbtnLogFile_Click(object sender, EventArgs e)
+        {
+            string sYear = DateTime.Now.Year.ToString();
+            string sMonth = string.Format("{0:D2}", DateTime.Now.Month);
+            string sDay = string.Format("{0:D2}", DateTime.Now.Day);
+            string sDate = sYear + "_" + sMonth + "_" + sDay;
+
+            string sDrive = IniHelper.ReadIni(FileHelper.INI_SECTION_RDR_ALV_CAN_COMMS_DLL, "DLL_SWITCH_LOG", "NULL", _sIniPathPMSUsed);
+            string sPath = sDrive + Path.DirectorySeparatorChar + sYear + Path.DirectorySeparatorChar + sMonth + Path.DirectorySeparatorChar + sDate + ".txt";
+
+            try
+            {
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sPath + " ？", "提示", 2))
+                {
+                    Process.Start(sPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                MsgBoxHelper.MsgBoxError(ex.Message);
+            }
+        }
+
+
         private void dgvDll_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -327,22 +384,23 @@ namespace WinPMS.Radar
 
             if (sButtonText == "打开")
             {
-                DataGridViewRow row = dgvDll.SelectedRows[0];//获取选中的行
-                RDR2AlvCanCommsDll alvCanCommsDllInfo = row.DataBoundItem as RDR2AlvCanCommsDll;//将当前行绑定的数据转换为实体类
+                MsgBoxHelper.MsgBoxShow("功能禁用", "NA");
+               
+                //DataGridViewRow row = dgvDll.SelectedRows[0];//获取选中的行
+                //RDR2AlvCanCommsDll alvCanCommsDllInfo = row.DataBoundItem as RDR2AlvCanCommsDll;//将当前行绑定的数据转换为实体类
 
-                string sDrive = alvCanCommsDllInfo.FolderPath.Substring(0, alvCanCommsDllInfo.FolderPath.IndexOf("\\"));
-                string sPath = alvCanCommsDllInfo.FolderPath.Substring(alvCanCommsDllInfo.FolderPath.IndexOf("\\") + 1);
-                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sDrive + "\\" + "\n" + sPath + " ？", "提示", 2))
-                {
-                    Process.Start(alvCanCommsDllInfo.FolderPath);
-                }
+                ////string sDrive = alvCanCommsDllInfo.FolderPath.Substring(0, alvCanCommsDllInfo.FolderPath.IndexOf("\\"));
+                //string sDrive = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderPath", "NULL", _sIniPathPMSUsed);
+
+                //string sPath = alvCanCommsDllInfo.FolderPath.Substring(alvCanCommsDllInfo.FolderPath.LastIndexOf("\\") + 1);
+                //if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sDrive + "\\" + sPath + " ？", "提示", 2))
+                //{
+                //    Process.Start(alvCanCommsDllInfo.FolderPath);
+                //}
             }
         }
 
-        private void dgvDll_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
 
         /// <summary>
@@ -391,14 +449,18 @@ namespace WinPMS.Radar
             switch (FileHelper.sIniPMSUsage)
             {
                 case "Debug":
-                    txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "TestSteps_CVI", "NULL", FileHelper.sIniFilePathDebug);
+                    //txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestSteps_CVI", "NULL", FileHelper.sIniFilePathDebug);
+                    _sIniPathPMSUsed = FileHelper.sIniFilePathDebug;
                     break;
                 case "CFM":
-                    txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "TestSteps_CVI", "NULL", FileHelper.sIniFilePathCFM);
+                    //txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestSteps_CVI", "NULL", FileHelper.sIniFilePathCFM);
+                    _sIniPathPMSUsed = FileHelper.sIniFilePathCFM;
                     break;
                 default:
                     break;
             }
+
+            txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestSteps_CVI", "NULL", _sIniPathPMSUsed);
         }
 
 
@@ -481,10 +543,10 @@ namespace WinPMS.Radar
                             switch (FileHelper.sIniPMSUsage)
                             {
                                 case "Debug":
-                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "DLL_" + sDllVersion, "NULL", FileHelper.sIniFilePathDebug);
+                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, sDllVersion.Equals("-") ? "DLL_" + sDllVersion : "DLL_" + "X_X_" + sDllVersion.Substring(4), "NULL", FileHelper.sIniFilePathDebug);
                                     break;
                                 case "CFM":
-                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "DLL_" + sDllVersion, "NULL", FileHelper.sIniFilePathCFM);
+                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, sDllVersion.Equals("-") ? "DLL_" + sDllVersion : "DLL_" + "X_X_" + sDllVersion.Substring(4), "NULL", FileHelper.sIniFilePathCFM);
                                     break;
                                 default:
                                     break;
@@ -559,10 +621,10 @@ namespace WinPMS.Radar
                             switch (FileHelper.sIniPMSUsage)
                             {
                                 case "Debug":
-                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "DLL_" + sDllVersion, "NULL", FileHelper.sIniFilePathDebug);
+                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, sDllVersion.Equals("-") ? "DLL_" + sDllVersion : "DLL_" + "X_X_" + sDllVersion.Substring(4), "NULL", FileHelper.sIniFilePathDebug);
                                     break;
                                 case "CFM":
-                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.sIniRDRSELSection, "DLL_" + sDllVersion, "NULL", FileHelper.sIniFilePathCFM);
+                                    sDllUseProFromIni = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, sDllVersion.Equals("-") ? "DLL_" + sDllVersion : "DLL_" + "X_X_" + sDllVersion.Substring(4), "NULL", FileHelper.sIniFilePathCFM);
                                     break;
                                 default:
                                     break;
@@ -585,6 +647,7 @@ namespace WinPMS.Radar
             //dgvDll.Columns["DllBuildDate"].Visible = false;
             dgvDll.DataSource = alvCanCommsDllList;
         }
+
 
         #endregion
 

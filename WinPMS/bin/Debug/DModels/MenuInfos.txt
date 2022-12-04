@@ -6,7 +6,7 @@ MId,		MName,						ParenetId,	ParentName,	MKey,				MUrl,							IsTop,	MOrder,	IsD
 900, 		Help,						0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 200,		RDR ALV CAN DLL [SEL],		100,		NULL,		NoShortcuts,		Radar.FrmRDR2Dll,				0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\dll_1.png
-201,		RDR SystemConfig,			100,		NULL,		NoShortcuts,		Radar.FrmRDR2SystemConfig,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\SystemConfig_3.png
+201,		RDR SystemConfig,			100,		NULL,		NoShortcuts,		Radar.FrmRDR2SystemConfig,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				Imgs\R32x32\SystemConfig_3.png
 
 300,		Switch User,				110,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	SwitchUser,			Imgs\R32x32\switch_user3.png
 301,		ini Configuration,			110,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	IniConfiguration,	Imgs\R32x32\ini_1.png
@@ -16,11 +16,13 @@ MId,		MName,						ParenetId,	ParentName,	MKey,				MUrl,							IsTop,	MOrder,	IsD
 40002,		Separate To PF,				400,		NULL,		NoShortcuts,		Tools.FrmSeparateST2PF,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 401,		ImgConvert,					120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 40101,		Convert To .jpg,			401,		NULL,		NoShortcuts,		Tools.FrmConvertToJPG,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-40102,		Convert To .ico,			401,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+40102,		Convert To .ico,			401,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				NULL
+402,		Report,						120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+40201,		Conformity Report,			402,		NULL,		NoShortcuts,		Tools.FrmConformityReport,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				NULL
 
 
 500,		FrmDebug,					130,		NULL,		NoShortcuts,		Debug.FrmDebug,					0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 501,		FrmDebugRadar2SELRecipe,	130,		NULL,		NoShortcuts,		Debug.FrmDebugRadar2SELRecipe,	0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 9000,		View Help,					900,		NULL,		NoShortcuts,		NULL,							1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-9001,		About PMS,					900,		NULL,		NoShortcuts,		NULL,							1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+9001,		About PMS,					900,		NULL,		NoShortcuts,		FrmAboutPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL

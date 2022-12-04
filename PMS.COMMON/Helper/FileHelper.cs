@@ -80,37 +80,37 @@ namespace PMS.COMMON.Helper
         /// <summary>
         /// "PMS"
         /// </summary>
-        public static string sIniPMSSection = "PMS";
+        public const string INI_SECTION_PMS = "PMS";
 
-        public static string sIniPMSLocalSection = "PMS_Local";
+        public const string INI_PMS_LOCAL_SECTION = "PMS_Local";
 
-        public static string sIniVeoneerSection = "Veoneer";
+        public const string INI_SECTION_VEONEER = "Veoneer";
 
-        public static string sIniRDRSection = "RDR";
+        public const string INI_SECTION_RDR = "RDR";
 
-        public static string sIniRDRSELSection = "RDR_SEL";
+        public const string INI_RDR_SEL_SECTION = "RDR_SEL";
 
-        public static string sIniRDR1SELSection = "RDR1_SEL";
+        public const string INI_SECTION_RDR1_SEL = "RDR1_SEL";
 
-        public static string sIniRDR2SELSection = "RDR2_SEL";
+        public const string INI_SECTION_RDR2_SEL = "RDR2_SEL";
 
-        public static string sIniRDR3SELSection = "RDR3_SEL";
+        public const string INI_SECTION_RDR3_SEL = "RDR3_SEL";
 
-        public static string sIniRDR4SELSection = "RDR4_SEL";
+        public const string INI_SECTION_RDR4_SEL = "RDR4_SEL";
 
-        public static string sIniRDR5SELSection = "RDR5_SEL";
+        public const string INI_SECTION_RDR5_SEL = "RDR5_SEL";
 
-        public static string sIniRDRAlvCanCommsDllSection= "RDR_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR_ALV_CAN_COMMS_DLL = "RDR_ALV_CAN_COMMS_DLL";
 
-        public static string sIniRDR1AlvCanCommsDllSection= "RDR1_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR1_ALV_CAN_COMMS_DLL = "RDR1_ALV_CAN_COMMS_DLL";
 
-        public static string sIniRDR2AlvCanCommsDllSection= "RDR2_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR2_ALV_CAN_COMMS_DLL = "RDR2_ALV_CAN_COMMS_DLL";
 
-        public static string sIniRDR3AlvCanCommsDllSection= "RDR3_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR3_ALV_CAN_COMMS_DLL = "RDR3_ALV_CAN_COMMS_DLL";
         
-        public static string sIniRDR4AlvCanCommsDllSection= "RDR4_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR4_ALV_CAN_COMMS_DLL = "RDR4_ALV_CAN_COMMS_DLL";
         
-        public static string sIniRDR5AlvCanCommsDllSection= "RDR5_ALV_CAN_COMMS_DLL";
+        public const string INI_SECTION_RDR5_ALV_CAN_COMMS_DLL = "RDR5_ALV_CAN_COMMS_DLL";
         #endregion
 
     }
