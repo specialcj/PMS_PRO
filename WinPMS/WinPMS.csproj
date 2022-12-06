@@ -341,10 +341,10 @@
     <None Include="bin\Debug\Config\RecipeTemplate\Radar2_SEL_Recipe_Temp_1.ini" />
     <None Include="bin\Debug\Config\RecipeTemplate\Temp.ini" />
     <None Include="bin\Debug\WinPMS.exe.config" />
-    <None Include="Config\ConformityReportTemplate\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity list.xls">
+    <None Include="Config\ConformityReportTemplate\Radar\Burn In 77\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity list.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Config\ConformityReportTemplate\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity Report.doc">
+    <None Include="Config\ConformityReportTemplate\Radar\Burn In 77\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity Report.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Config\PMS.ini">
@@ -386,6 +386,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="Config\ConformityReportTemplate\Radar\Packing\" />
+    <Folder Include="Config\ConformityReportTemplate\Radar\SEL\" />
+    <Folder Include="Config\ConformityReportTemplate\Radar\SensorTest\" />
+    <Folder Include="Config\ConformityReportTemplate\Radar\VS412\" />
     <Folder Include="Resources\" />
     <Folder Include="Ver\" />
   </ItemGroup>

@@ -5,6 +5,7 @@ using Spire.Doc;
 using Spire.Doc.Documents;
 using Spire.Doc.Fields;
 using System.Drawing;
+using System.IO;
 
 namespace WinPMS.Tools
 {
@@ -25,9 +26,21 @@ namespace WinPMS.Tools
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string fileNameSrc = @"D:\_VNE_Work\CSharp\PMS\WinPMS\Config\ConformityReportTemplate\Radar\SensorTest\CFM-File-Num Acceptance Conformity for Radar XXX Sensor Test.doc";
+            string fileNameDest = @"D:\_VNE_Work\CSharp\PMS\WinPMS\Config\ConformityReportTemplate\Radar\SensorTest\CFM-File-Num Acceptance Conformity for Radar XXX Sensor Test - copy.doc";
+
+            File.Copy(fileNameSrc, fileNameDest);
+
+            
+            
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
             //创建一个Document类实例
             Document document = new Document();
-            
+
             //加载word
             document.LoadFromFile(@"D:\_VNE_Work\CSharp\PMS\WinPMS\Config\ConformityReportTemplate\CFM-PE-VR2G166 77 G1.3 Radar Burn In Tooling Fixture Conformity Report.doc");
 
@@ -83,10 +96,7 @@ namespace WinPMS.Tools
             document.Sections[0].HeadersFooters.Header.Paragraphs.Clear();
             document.SaveToFile("DocHeaderDelete.doc");
             */
-
         }
-
-
 
 
         private void tsbtnClose_Click(object sender, EventArgs e)
@@ -96,6 +106,7 @@ namespace WinPMS.Tools
                 this.CloseForm();
             }
         }
+
 
 
 

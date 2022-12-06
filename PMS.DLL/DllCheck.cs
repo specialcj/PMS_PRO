@@ -284,7 +284,7 @@ namespace PMS.DLL
                     //    dllSwitchTemp1 = false;
                     //}
 
-                    if (!sDllVersionCurrent.Contains(sDllExpectedTemp.Substring("X_X_".Length)))
+                    if (sDllExpectedTemp.Substring("X_X_".Length) != sDllVersionCurrent.Substring("X_X_".Length))
                     {
                         //Console.WriteLine("需要切换dll");
                         dllSwitchTemp1 = true;
@@ -367,7 +367,7 @@ namespace PMS.DLL
                 //    dllSwitchTemp = false;
                 //}
 
-                if (!sDllVersionCurrent.Contains(sDllExpected.Substring("X_X_".Length)))
+                if (sDllExpected.Substring("X_X_".Length) != sDllVersionCurrent.Substring("X_X_".Length))
                 {
                     //Console.WriteLine("需要切换dll");
                     dllSwitchTemp = true;
