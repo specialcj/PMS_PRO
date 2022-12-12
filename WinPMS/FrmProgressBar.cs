@@ -37,7 +37,7 @@ namespace WinPMS
         {
             LoadIni();
 
-            Thread.Sleep(new Random().Next(1000, 5000));
+            Thread.Sleep(new Random().Next(1000, 2000));
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

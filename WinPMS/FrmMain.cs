@@ -17,8 +17,10 @@ namespace WinPMS
 {
     public partial class FrmMain : Form
     {
+        //屏蔽右上角的X关闭按钮
         [DllImport("USER32.DLL")]
         private static extern IntPtr GetSystemMenu(IntPtr hWnd, UInt32 bRevert);
+
         [DllImport("USER32.DLL")]
         private static extern UInt32 RemoveMenu(IntPtr hMenu, UInt32 nPosition, UInt32 wFlags);
         private const UInt32 SC_CLOSE = 0x0000F060;

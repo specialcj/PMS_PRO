@@ -18,7 +18,7 @@ MId,		MName,						ParenetId,	ParentName,	MKey,				MUrl,							IsTop,	MOrder,	IsD
 40101,		Convert To .jpg,			401,		NULL,		NoShortcuts,		Tools.FrmConvertToJPG,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 40102,		Convert To .ico,			401,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				NULL
 402,		Report,						120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-40201,		Conformity Report,			402,		NULL,		NoShortcuts,		Tools.FrmConformityReport,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				NULL
+40201,		Conformity Report,			402,		NULL,		NoShortcuts,		Tools.FrmConformityReport,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 
 500,		FrmDebug,					130,		NULL,		NoShortcuts,		Debug.FrmDebug,					0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL

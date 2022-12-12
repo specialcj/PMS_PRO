@@ -4,9 +4,9 @@
 V1.1.8.1
 -> support config DLL_X_X_X_X in .ini file instead of specify the unique version of the DLL version, such as: DLL_0_0_71_2
 
-
+V1.1.8.2
+-> support generate conformity report (beta version)
 
 TBD
--> generate conformity report
 -> generate Recipe.ini for SEL
 

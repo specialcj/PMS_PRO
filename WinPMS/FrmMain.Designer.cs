@@ -60,18 +60,19 @@
             this.gboxMenus.Controls.Add(this.PMSMenus);
             this.gboxMenus.Dock = System.Windows.Forms.DockStyle.Top;
             this.gboxMenus.Location = new System.Drawing.Point(0, 0);
-            this.gboxMenus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.gboxMenus.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.gboxMenus.Name = "gboxMenus";
-            this.gboxMenus.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.gboxMenus.Size = new System.Drawing.Size(1924, 54);
+            this.gboxMenus.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.gboxMenus.Size = new System.Drawing.Size(1283, 35);
             this.gboxMenus.TabIndex = 0;
             this.gboxMenus.TabStop = false;
             // 
             // btn_Test
             // 
-            this.btn_Test.Location = new System.Drawing.Point(859, 14);
+            this.btn_Test.Location = new System.Drawing.Point(573, 9);
+            this.btn_Test.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_Test.Name = "btn_Test";
-            this.btn_Test.Size = new System.Drawing.Size(105, 38);
+            this.btn_Test.Size = new System.Drawing.Size(70, 25);
             this.btn_Test.TabIndex = 1;
             this.btn_Test.Text = "Test";
             this.btn_Test.UseVisualStyleBackColor = true;
@@ -81,12 +82,11 @@
             // PMSMenus
             // 
             this.PMSMenus.BackColor = System.Drawing.SystemColors.Control;
-            this.PMSMenus.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.PMSMenus.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.PMSMenus.Location = new System.Drawing.Point(4, 19);
+            this.PMSMenus.Location = new System.Drawing.Point(3, 13);
             this.PMSMenus.Name = "PMSMenus";
-            this.PMSMenus.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
-            this.PMSMenus.Size = new System.Drawing.Size(1916, 24);
+            this.PMSMenus.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.PMSMenus.Size = new System.Drawing.Size(1277, 24);
             this.PMSMenus.TabIndex = 0;
             this.PMSMenus.Text = "menuStrip1";
             // 
@@ -94,11 +94,11 @@
             // 
             this.gboxTools.Controls.Add(this.PMSTools);
             this.gboxTools.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gboxTools.Location = new System.Drawing.Point(0, 54);
-            this.gboxTools.Margin = new System.Windows.Forms.Padding(4, 1, 4, 5);
+            this.gboxTools.Location = new System.Drawing.Point(0, 35);
+            this.gboxTools.Margin = new System.Windows.Forms.Padding(3, 1, 3, 3);
             this.gboxTools.Name = "gboxTools";
-            this.gboxTools.Padding = new System.Windows.Forms.Padding(4, 0, 4, 5);
-            this.gboxTools.Size = new System.Drawing.Size(1924, 65);
+            this.gboxTools.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.gboxTools.Size = new System.Drawing.Size(1283, 42);
             this.gboxTools.TabIndex = 1;
             this.gboxTools.TabStop = false;
             // 
@@ -109,9 +109,9 @@
             this.PMSTools.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PMSTools.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.PMSTools.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.PMSTools.Location = new System.Drawing.Point(4, 19);
+            this.PMSTools.Location = new System.Drawing.Point(3, 13);
             this.PMSTools.Name = "PMSTools";
-            this.PMSTools.Size = new System.Drawing.Size(1916, 41);
+            this.PMSTools.Size = new System.Drawing.Size(1277, 26);
             this.PMSTools.TabIndex = 0;
             this.PMSTools.Text = "toolStrip1";
             // 
@@ -119,22 +119,20 @@
             // 
             this.panel1.Controls.Add(this.tcPages);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 119);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1924, 890);
+            this.panel1.Size = new System.Drawing.Size(1283, 578);
             this.panel1.TabIndex = 2;
             // 
             // tcPages
             // 
             this.tcPages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcPages.Location = new System.Drawing.Point(0, 0);
-            this.tcPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tcPages.Name = "tcPages";
             this.tcPages.Padding = new System.Drawing.Point(8, 4);
             this.tcPages.SelectedIndex = 0;
             this.tcPages.ShowToolTips = true;
-            this.tcPages.Size = new System.Drawing.Size(1924, 890);
+            this.tcPages.Size = new System.Drawing.Size(1283, 578);
             this.tcPages.TabIndex = 0;
             // 
             // PMSStatus
@@ -150,60 +148,59 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel5,
             this.lblCurrTime});
-            this.PMSStatus.Location = new System.Drawing.Point(0, 1009);
-            this.PMSStatus.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.PMSStatus.Location = new System.Drawing.Point(0, 655);
+            this.PMSStatus.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.PMSStatus.Name = "PMSStatus";
-            this.PMSStatus.Padding = new System.Windows.Forms.Padding(1, 0, 21, 0);
-            this.PMSStatus.Size = new System.Drawing.Size(1924, 41);
+            this.PMSStatus.Size = new System.Drawing.Size(1283, 27);
             this.PMSStatus.TabIndex = 7;
             this.PMSStatus.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(96, 34);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(65, 22);
             this.toolStripStatusLabel1.Text = "Account：";
             // 
             // lblUName
             // 
             this.lblUName.Name = "lblUName";
-            this.lblUName.Size = new System.Drawing.Size(52, 34);
+            this.lblUName.Size = new System.Drawing.Size(37, 22);
             this.lblUName.Text = "xxxxx";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.AutoSize = false;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 34);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 22);
             // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(118, 34);
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(79, 22);
             this.toolStripStatusLabel4.Text = "Login Time：";
             // 
             // lblLoginTime
             // 
             this.lblLoginTime.Name = "lblLoginTime";
-            this.lblLoginTime.Size = new System.Drawing.Size(151, 34);
+            this.lblLoginTime.Size = new System.Drawing.Size(110, 22);
             this.lblLoginTime.Text = "xxxx-xx-xx xx:xx:xx";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.AutoSize = false;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 34);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 22);
             // 
             // toolStripStatusLabel5
             // 
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(132, 34);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(89, 22);
             this.toolStripStatusLabel5.Text = "Current Time：";
             // 
             // lblCurrTime
             // 
             this.lblCurrTime.Name = "lblCurrTime";
-            this.lblCurrTime.Size = new System.Drawing.Size(151, 34);
+            this.lblCurrTime.Size = new System.Drawing.Size(110, 22);
             this.lblCurrTime.Text = "xxxx-xx-xx xx:xx:xx";
             // 
             // tmrFrmPrompt
@@ -219,17 +216,16 @@
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1283, 682);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gboxTools);
             this.Controls.Add(this.gboxMenus);
             this.Controls.Add(this.PMSStatus);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.PMSMenus;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PMS";
