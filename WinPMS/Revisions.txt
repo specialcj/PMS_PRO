@@ -6,6 +6,8 @@ V1.1.8.1
 
 V1.1.8.2
 -> support generate conformity report (beta version)
+   -> Radar - SensorTest
+   ->
 
 TBD
 -> generate Recipe.ini for SEL

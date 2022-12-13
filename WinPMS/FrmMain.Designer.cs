@@ -70,7 +70,7 @@
             // btn_Test
             // 
             this.btn_Test.Location = new System.Drawing.Point(573, 9);
-            this.btn_Test.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Test.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Test.Name = "btn_Test";
             this.btn_Test.Size = new System.Drawing.Size(70, 25);
             this.btn_Test.TabIndex = 1;
@@ -121,7 +121,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 77);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1283, 578);
+            this.panel1.Size = new System.Drawing.Size(1283, 778);
             this.panel1.TabIndex = 2;
             // 
             // tcPages
@@ -132,7 +132,7 @@
             this.tcPages.Padding = new System.Drawing.Point(8, 4);
             this.tcPages.SelectedIndex = 0;
             this.tcPages.ShowToolTips = true;
-            this.tcPages.Size = new System.Drawing.Size(1283, 578);
+            this.tcPages.Size = new System.Drawing.Size(1283, 778);
             this.tcPages.TabIndex = 0;
             // 
             // PMSStatus
@@ -148,7 +148,7 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel5,
             this.lblCurrTime});
-            this.PMSStatus.Location = new System.Drawing.Point(0, 655);
+            this.PMSStatus.Location = new System.Drawing.Point(0, 855);
             this.PMSStatus.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.PMSStatus.Name = "PMSStatus";
             this.PMSStatus.Size = new System.Drawing.Size(1283, 27);
@@ -219,7 +219,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1283, 682);
+            this.ClientSize = new System.Drawing.Size(1283, 882);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gboxTools);
             this.Controls.Add(this.gboxMenus);

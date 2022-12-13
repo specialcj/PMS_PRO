@@ -583,6 +583,12 @@
     <Content Include="bin\Debug\runtimes\win-x86\native\WebView2Loader.dll" />
     <Content Include="bin\Debug\WinPMS.exe" />
     <Content Include="Config\issues.txt" />
+    <Content Include="Imgs\excel1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\pineapple.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="test1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -68,6 +68,13 @@ namespace WinPMS
 
             //define the output path of .jpg file
             FileHelper.sIniPMSLocalPath2 = IniHelper.ReadIni(FileHelper.INI_PMS_LOCAL_SECTION, "Path2", "NULL", FileHelper.sIniFilePathLocal);
+
+
+            //define the parameters of the Conformity Report
+            FileHelper.sIniPMS_Conformity_Report_TestEngineer = IniHelper.ReadIni(FileHelper.INI_PMS_CONFORMITY_REPORT_SECTION, "TestEngineer", "NULL", FileHelper.sIniFilePathLocal);
+            FileHelper.sIniPMS_Conformity_Report_PME = IniHelper.ReadIni(FileHelper.INI_PMS_CONFORMITY_REPORT_SECTION, "PME", "NULL", FileHelper.sIniFilePathLocal);
+            FileHelper.sIniPMS_Conformity_Report_TestManager = IniHelper.ReadIni(FileHelper.INI_PMS_CONFORMITY_REPORT_SECTION, "TestManager", "NULL", FileHelper.sIniFilePathLocal);
+            FileHelper.sIniPMS_Conformity_Report_PlantQualityManager = IniHelper.ReadIni(FileHelper.INI_PMS_CONFORMITY_REPORT_SECTION, "PlantQualityManager", "NULL", FileHelper.sIniFilePathLocal);
             #endregion
 
 

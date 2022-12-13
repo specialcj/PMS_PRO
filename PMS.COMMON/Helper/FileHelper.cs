@@ -73,6 +73,16 @@ namespace PMS.COMMON.Helper
         /// define the output path of .jpg file
         /// </summary>
         public static string sIniPMSLocalPath2 = "";
+
+        /// <summary>
+        /// define the parameters of Conformity Report
+        /// </summary>
+        public static string sIniPMS_Conformity_Report_TestEngineer = "";
+        public static string sIniPMS_Conformity_Report_PME = "";
+        public static string sIniPMS_Conformity_Report_TestManager = "";
+        public static string sIniPMS_Conformity_Report_PlantQualityManager = "";
+
+
         #endregion
 
 
@@ -83,6 +93,8 @@ namespace PMS.COMMON.Helper
         public const string INI_SECTION_PMS = "PMS";
 
         public const string INI_PMS_LOCAL_SECTION = "PMS_Local";
+
+        public const string INI_PMS_CONFORMITY_REPORT_SECTION = "PMS_Conformity_Report";
 
         public const string INI_SECTION_VEONEER = "Veoneer";
 

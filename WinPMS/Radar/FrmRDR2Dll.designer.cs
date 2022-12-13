@@ -264,7 +264,7 @@
             this.dgvDll.RowHeadersWidth = 51;
             this.dgvDll.RowTemplate.Height = 23;
             this.dgvDll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDll.Size = new System.Drawing.Size(1265, 320);
+            this.dgvDll.Size = new System.Drawing.Size(1265, 376);
             this.dgvDll.TabIndex = 3;
             this.dgvDll.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDll_CellClick);
             // 
@@ -364,13 +364,13 @@
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBox1.Location = new System.Drawing.Point(0, 465);
+            this.textBox1.Location = new System.Drawing.Point(0, 521);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(1265, 217);
+            this.textBox1.Size = new System.Drawing.Size(1265, 161);
             this.textBox1.TabIndex = 4;
             // 
             // tsMenus
