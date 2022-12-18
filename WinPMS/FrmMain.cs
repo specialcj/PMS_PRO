@@ -421,7 +421,6 @@ namespace WinPMS
                     f.ActAccountValid += new Action(() =>
                     {
                         CreateForm(mUrl, menuInfosModel.IsTop);
-
                     });
 
                     f.FuncMsgShowAccountEmpty = new Func<string>(() =>
@@ -557,7 +556,43 @@ namespace WinPMS
                     }
                     else if (menuInfosModel.MDesp == MenuInfosDesp.Debug.ToString())
                     {
-                        MsgBoxHelper.MsgBoxError("功能暂未开放！");
+                        MsgBoxHelper.MsgBoxError("NA!");
+                    }
+                    else if (menuInfosModel.MDesp == MenuInfosDesp.Internal.ToString())
+                    {
+                        FrmAdminAuthority f = new FrmAdminAuthority();
+
+                        f.FuncFormLabel = new Func<string>(() =>
+                        {
+                            return "Please input the admin account!";
+                        });
+
+                        f.ActAccountValidBySAdmin += new Action(() =>
+                        {
+                            CreateForm(mUrl, menuInfosModel.IsTop);
+                        });
+
+                        f.FuncMsgShowAccountEmpty = new Func<string>(() =>
+                        {
+                            return "Account can't be empty!";
+                        });
+
+                        f.FuncMsgShowAccountNotValid = new Func<string>(() =>
+                        {
+                            return "Account not valid!";
+                        });
+
+                        f.ActAccountNotValid += new Action(() =>
+                        {
+                            return;
+                        });
+
+                        f.ActFormClosing += new Action(() =>
+                        {
+                            return;
+                        });
+
+                        f.ShowDialog();
                     }
                 }
             }
@@ -644,7 +679,8 @@ namespace WinPMS
             ModifyPwd = 3,
             RefreshMenu = 4,
             IniConfiguration = 5,
-            Debug = 6
+            Debug = 6,
+            Internal = 7
         }
 
 

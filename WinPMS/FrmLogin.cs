@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using WinPMS.FModels;
+using System.Threading;
+using System.Globalization;
 
 namespace WinPMS
 {
@@ -14,6 +16,10 @@ namespace WinPMS
     {
         public FrmLogin()
         {
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh_Hans");
+            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
+
             InitializeComponent();
         }
 
@@ -48,10 +54,10 @@ namespace WinPMS
         {
             //获取已启动进程名
             string sProcessName = Process.GetCurrentProcess().ProcessName;
-            
+
             //获取版本号
             //string sProductVersion = Application.ProductVersion;
-            
+
             //检查进程是否已经启动，已经启动则显示报错信息退出程序。
             if (Process.GetProcessesByName(sProcessName).Length > 1)
             {
@@ -65,7 +71,7 @@ namespace WinPMS
             _iIsFrmFirstLoad = 1;
 
             cbUName.SelectedIndex = 0;
-            if(cbUName.SelectedIndex == 0)
+            if (cbUName.SelectedIndex == 0)
             {
                 txtUPwd.Text = _sUPwdOpr;
             }
@@ -111,12 +117,12 @@ namespace WinPMS
                     sEncryptPwd = sUserPwd;
                     sIniPwd = FileHelper.sIniPwdOpr;
                 }
-                else if(cbUName.SelectedIndex == 1)//admin
+                else if (cbUName.SelectedIndex == 1)//admin
                 {
                     sEncryptPwd = MD5Encrypt.Encrypt(sUserPwd);
                     sIniPwd = FileHelper.sIniPwdEncrypt;
                 }
-                
+
                 //判断结果
                 if (sEncryptPwd != sIniPwd)
                 {
@@ -191,7 +197,7 @@ namespace WinPMS
                 {
                     txtUPwd.Clear();
                 }
-                
+
                 _iIsFrmFirstLoad = 1;
             }
         }

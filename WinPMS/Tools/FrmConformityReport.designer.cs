@@ -45,7 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_FileNum = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox_Equ_FixtureNum = new System.Windows.Forms.TextBox();
+            this.textBox_EquipOrFixtureNum = new System.Windows.Forms.TextBox();
             this.label_Equip_Fixture = new System.Windows.Forms.Label();
             this.textBox_Line = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.comboBox_PlantQualityManager = new System.Windows.Forms.ComboBox();
             this.comboBox_TestManager = new System.Windows.Forms.ComboBox();
             this.comboBox_TestEngineer = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_FixtureName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.comboBox_PME = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -257,7 +257,7 @@
             this.textBox_FileNum.Name = "textBox_FileNum";
             this.textBox_FileNum.Size = new System.Drawing.Size(227, 20);
             this.textBox_FileNum.TabIndex = 5;
-            this.textBox_FileNum.Text = "CFM-PE-VRRD0702-08-04";
+            this.textBox_FileNum.Text = "CFM-PE-XXXXXX-XX";
             // 
             // listBox1
             // 
@@ -270,15 +270,15 @@
             this.listBox1.Size = new System.Drawing.Size(179, 56);
             this.listBox1.TabIndex = 7;
             // 
-            // textBox_Equ_FixtureNum
+            // textBox_EquipOrFixtureNum
             // 
-            this.textBox_Equ_FixtureNum.Location = new System.Drawing.Point(144, 57);
-            this.textBox_Equ_FixtureNum.Multiline = true;
-            this.textBox_Equ_FixtureNum.Name = "textBox_Equ_FixtureNum";
-            this.textBox_Equ_FixtureNum.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_Equ_FixtureNum.Size = new System.Drawing.Size(227, 130);
-            this.textBox_Equ_FixtureNum.TabIndex = 10;
-            this.textBox_Equ_FixtureNum.Text = "EPT-RDR07G1.3-01-02\r\nEPT-RDR07G1.3-01-02";
+            this.textBox_EquipOrFixtureNum.Location = new System.Drawing.Point(144, 57);
+            this.textBox_EquipOrFixtureNum.Multiline = true;
+            this.textBox_EquipOrFixtureNum.Name = "textBox_EquipOrFixtureNum";
+            this.textBox_EquipOrFixtureNum.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_EquipOrFixtureNum.Size = new System.Drawing.Size(227, 130);
+            this.textBox_EquipOrFixtureNum.TabIndex = 10;
+            this.textBox_EquipOrFixtureNum.Text = "EPT-RDR07G1.3-01-02\r\nEPT-RDR07G1.3-01-02";
             // 
             // label_Equip_Fixture
             // 
@@ -327,7 +327,7 @@
             this.groupBox_Info1.Controls.Add(this.comboBox_PlantQualityManager);
             this.groupBox_Info1.Controls.Add(this.comboBox_TestManager);
             this.groupBox_Info1.Controls.Add(this.comboBox_TestEngineer);
-            this.groupBox_Info1.Controls.Add(this.textBox1);
+            this.groupBox_Info1.Controls.Add(this.textBox_FixtureName);
             this.groupBox_Info1.Controls.Add(this.label13);
             this.groupBox_Info1.Controls.Add(this.comboBox_PME);
             this.groupBox_Info1.Controls.Add(this.label12);
@@ -345,7 +345,7 @@
             this.groupBox_Info1.Controls.Add(this.label_Equip_Fixture);
             this.groupBox_Info1.Controls.Add(this.dateTimePicker_ValidationDate);
             this.groupBox_Info1.Controls.Add(this.label4);
-            this.groupBox_Info1.Controls.Add(this.textBox_Equ_FixtureNum);
+            this.groupBox_Info1.Controls.Add(this.textBox_EquipOrFixtureNum);
             this.groupBox_Info1.Controls.Add(this.textBox_Line);
             this.groupBox_Info1.Controls.Add(this.label3);
             this.groupBox_Info1.Location = new System.Drawing.Point(172, 131);
@@ -382,13 +382,13 @@
             this.comboBox_TestEngineer.Size = new System.Drawing.Size(134, 21);
             this.comboBox_TestEngineer.TabIndex = 31;
             // 
-            // textBox1
+            // textBox_FixtureName
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 219);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(227, 20);
-            this.textBox1.TabIndex = 30;
-            this.textBox1.Text = "77 G1.3 Corner Fixture";
+            this.textBox_FixtureName.Location = new System.Drawing.Point(144, 219);
+            this.textBox_FixtureName.Name = "textBox_FixtureName";
+            this.textBox_FixtureName.Size = new System.Drawing.Size(227, 20);
+            this.textBox_FixtureName.TabIndex = 30;
+            this.textBox_FixtureName.Text = "77 G1.3 Corner Fixture";
             // 
             // label13
             // 
@@ -564,7 +564,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(23, 109);
+            this.button2.Location = new System.Drawing.Point(6, 6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(74, 29);
             this.button2.TabIndex = 0;
@@ -584,7 +584,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(22, 135);
+            this.button3.Location = new System.Drawing.Point(6, 6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(74, 29);
             this.button3.TabIndex = 22;
@@ -679,7 +679,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_FileNum;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox_Equ_FixtureNum;
+        private System.Windows.Forms.TextBox textBox_EquipOrFixtureNum;
         private System.Windows.Forms.Label label_Equip_Fixture;
         private System.Windows.Forms.TextBox textBox_Line;
         private System.Windows.Forms.Label label3;
@@ -710,7 +710,7 @@
         private System.Windows.Forms.Button btn_LoadPic;
         private System.Windows.Forms.TextBox textBox_LoadPic;
         private System.Windows.Forms.ComboBox comboBox_PME;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_FixtureName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox_PlantQualityManager;
         private System.Windows.Forms.ComboBox comboBox_TestManager;

@@ -37,7 +37,8 @@ namespace WinPMS.Tools
         private string _sSelectedStation = "";//定义所选择的站别
 
         private string _sFileNum = "";//文件编号
-        private string _sEquFixtureNum = "";//设备/夹具编号
+        private string _sEquipOrFixtureNum = "";//设备/夹具编号
+        private string _sFixtureName = "";//夹具名称
         private string _sLine = "";//线体
         private string _sValidationDate = "";//验证日期
         private string _sTestEngineer = "";
@@ -177,15 +178,15 @@ namespace WinPMS.Tools
             }
 
             //设备/夹具编号
-            if (string.IsNullOrEmpty(textBox_Equ_FixtureNum.Text.Trim()))
+            if (string.IsNullOrEmpty(textBox_EquipOrFixtureNum.Text.Trim()))
             {
                 MsgBoxHelper.MsgBoxError("please input Equipment/Fixture Num first!");
-                textBox_Equ_FixtureNum.Focus();
+                textBox_EquipOrFixtureNum.Focus();
                 return;
             }
             else
             {
-                _sEquFixtureNum = textBox_Equ_FixtureNum.Text.Trim();
+                _sEquipOrFixtureNum = textBox_EquipOrFixtureNum.Text.Trim();
             }
 
             //线体
@@ -420,8 +421,8 @@ namespace WinPMS.Tools
 
                 //replace text
                 doc.Replace("Radar XXX", _sLine, true, true);
-                //document.Replace("with 77 G1.3 Corner Fixture", "", true, true);
-                doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sEquFixtureNum, true, true);
+                doc.Replace("with 77 G1.3 Corner Fixture", _sFixtureName, true, true);
+                doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sEquipOrFixtureNum, true, true);
                 doc.Replace("Name1", _sTestEngineer, true, true);
                 doc.Replace("Name2", _sPME, true, true);
                 doc.Replace("Name3", _sTestManager, true, true);
@@ -430,8 +431,7 @@ namespace WinPMS.Tools
                 doc.Replace("2022/11/29", dateTimePicker_ValidationDate.Value.ToString("yyyy/MM/dd"), true, true);
 
                 Paragraph paragraph;
-                DocPicture docPicReplace;
-                DocPicture docPicAppend;
+                DocPicture docPicReplace, docPicAppend;
 
                 //遍历这个Section中的所有子元素
                 for (int i = 0, j = 0, k = 0; i < sec.Body.ChildObjects.Count; i++)

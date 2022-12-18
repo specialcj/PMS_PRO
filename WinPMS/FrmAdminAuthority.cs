@@ -19,6 +19,7 @@ namespace WinPMS
         }
 
         public event Action ActAccountValid;
+        public event Action ActAccountValidBySAdmin;
         public event Action ActAccountNotValid;
         public event Action ActFormClosing;
 
@@ -36,19 +37,37 @@ namespace WinPMS
         {
             if ("jason".Equals(txt_AdminAccount.Text.Trim()))
             {
-                ActAccountValid.Invoke();
+                if (ActAccountValid is null)
+                {
+                    MsgBoxHelper.MsgBoxError("Not support for this account!");
+                }
+                else
+                {
+                    ActAccountValid.Invoke();
+                }
+            }
+            else if ("sadmin".Equals(txt_AdminAccount.Text.Trim()))
+            {
+                if (ActAccountValidBySAdmin is null)
+                {
+                    MsgBoxHelper.MsgBoxError("Not support for this account!");
+                }
+                else
+                {
+                    ActAccountValidBySAdmin.Invoke();
+                }
             }
             else if (string.IsNullOrEmpty(txt_AdminAccount.Text.Trim()))
             {
                 string sMsg = FuncMsgShowAccountEmpty.Invoke();
                 MsgBoxHelper.MsgBoxError(sMsg);
-                ActAccountNotValid.Invoke();
+                ActAccountNotValid?.Invoke();
             }
             else
             {
                 string sMsg = FuncMsgShowAccountNotValid.Invoke();
                 MsgBoxHelper.MsgBoxError(sMsg);
-                ActAccountNotValid.Invoke();
+                ActAccountNotValid?.Invoke();
             }
         }
 

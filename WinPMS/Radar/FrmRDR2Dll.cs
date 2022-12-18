@@ -43,12 +43,12 @@ namespace WinPMS.Radar
                     LoadAlvCanCommsDll();
                 }
             };
-            act.TryCatchInvoke("Radar2 dll页面加载异常");
+            act.TryCatchInvoke("Loading Form error!\n\n页面加载异常！");
         }
 
 
         /// <summary>
-        /// 加载DLL信息
+        /// Load DLL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -58,7 +58,7 @@ namespace WinPMS.Radar
 
             if (dgvDll.RowCount == 0)
             {
-                MsgBoxHelper.MsgBoxShow("No Data！\n\n请确认配置文件是否正确！\n刷新并重新加载dll信息！", "提示");
+                MsgBoxHelper.MsgBoxShow("No Data!\nPlease conform the .ini file and then Reflash!\n\n请确认.ini配置文件是否正确，然后刷新并重新加载dll！", "Info");
             }
         }
 
@@ -73,7 +73,7 @@ namespace WinPMS.Radar
 
             if (null == dgvDll.DataSource || dgvDll.RowCount == 0)
             {
-                MessageBox.Show("No Data！\n请先加载Dll信息！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No Data！\nPlease Load dll first!\n\n请先加载Dll信息！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -82,7 +82,7 @@ namespace WinPMS.Radar
 
             if (alvCanCommsDllInfo.FolderPath.ToUpper().Substring(alvCanCommsDllInfo.FolderPath.ToUpper().LastIndexOf(@"\") + 1) == _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix)
             {
-                MessageBox.Show("当前dll为激活状态！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Current dll is Active, can't switch! \n\n当前dll为激活状态，不能切换！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace WinPMS.Radar
 
             if (bAdminAuthorityFlag)
             {
-                if (DialogResult.Yes == MessageBox.Show("确定要切换dll吗？\n\nNote：切换dll前请先关闭相关文件夹&文件！", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
+                if (DialogResult.Yes == MessageBox.Show("确定要切换dll吗？\n\nNote：切换dll前请先关闭相关文件夹&文件！", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2))
                 {
                     try
                     {
@@ -189,7 +189,7 @@ namespace WinPMS.Radar
                         if (dllActive)
                         {
                             //MessageBox.Show("dll切换成功！\n\n请打开TestSteps CVI并编译！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MessageBox.Show("dll切换成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("dll切换成功！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             if ("NULL" == alvCanCommsDllInfo.DllUsePro)
                             {
@@ -198,7 +198,7 @@ namespace WinPMS.Radar
                         }
                         else
                         {
-                            MessageBox.Show("dll切换失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("dll切换失败！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                     }
@@ -206,7 +206,7 @@ namespace WinPMS.Radar
                     {
                         if (ex.Message.StartsWith("Access to the path"))
                         {
-                            MessageBox.Show("dll切换失败！\n\n" + ex.Message + "\n\n目录中有文件在打开，请关闭后重试！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("dll切换失败！\n\n" + ex.Message + "\n\n目录中有文件在打开，请关闭后重试！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         else
                         {
@@ -231,7 +231,7 @@ namespace WinPMS.Radar
             btnSwitchDll.Enabled = true;
             try
             {
-                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开\n" + txtTestStepsCVI.Text + " ？", "提示", 2))
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Open\n" + txtTestStepsCVI.Text + " ？", "Info", 2))
                 {
                     Process.Start(txtTestStepsCVI.Text);
                 }
@@ -328,7 +328,7 @@ namespace WinPMS.Radar
 
             try
             {
-                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sDrive + " ？", "提示", 2))
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Open\n" + sDrive + " ？", "Info", 2))
                 {
                     Process.Start(sDrive);
                 }
@@ -359,7 +359,7 @@ namespace WinPMS.Radar
 
             try
             {
-                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sPath + " ？", "提示", 2))
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Open\n" + sPath + " ？", "Info", 2))
                 {
                     Process.Start(sPath);
                 }
@@ -382,9 +382,9 @@ namespace WinPMS.Radar
 
             string sButtonText = dgvDll.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue.ToString();
 
-            if (sButtonText == "打开")
+            if (sButtonText == "Open")
             {
-                MsgBoxHelper.MsgBoxShow("功能禁用", "NA");
+                MsgBoxHelper.MsgBoxShow("Not support", "NA");
                
                 //DataGridViewRow row = dgvDll.SelectedRows[0];//获取选中的行
                 //RDR2AlvCanCommsDll alvCanCommsDllInfo = row.DataBoundItem as RDR2AlvCanCommsDll;//将当前行绑定的数据转换为实体类
@@ -393,7 +393,7 @@ namespace WinPMS.Radar
                 //string sDrive = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "ALV_CAN_COMMS_FolderPath", "NULL", _sIniPathPMSUsed);
 
                 //string sPath = alvCanCommsDllInfo.FolderPath.Substring(alvCanCommsDllInfo.FolderPath.LastIndexOf("\\") + 1);
-                //if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("打开目录\n" + sDrive + "\\" + sPath + " ？", "提示", 2))
+                //if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Open\n" + sDrive + "\\" + sPath + " ？", "Info", 2))
                 //{
                 //    Process.Start(alvCanCommsDllInfo.FolderPath);
                 //}
@@ -426,7 +426,7 @@ namespace WinPMS.Radar
         {
             //MessageBox.Show("1. 加载Dll信息\n\n2. 切换对应的dll版本，提示切换成功/失败！（此时禁用切换dll按钮）\n\n3. 打开TestSteps CVI并重新编译！（此时会重新启用切换dll按钮）", "帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            MessageBox.Show("1. 加载Dll信息\n\n2. 切换对应的dll版本，提示切换成功/失败！", "帮助", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("1. Load dll\n\n2. Switch dll", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 

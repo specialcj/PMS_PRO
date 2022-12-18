@@ -38,7 +38,7 @@ namespace WinPMS.Debug
             // 
             // btn_DllCheckForRadar2
             // 
-            this.btn_DllCheckForRadar2.Location = new System.Drawing.Point(8, 8);
+            this.btn_DllCheckForRadar2.Location = new System.Drawing.Point(12, 11);
             this.btn_DllCheckForRadar2.Margin = new System.Windows.Forms.Padding(2);
             this.btn_DllCheckForRadar2.Name = "btn_DllCheckForRadar2";
             this.btn_DllCheckForRadar2.Size = new System.Drawing.Size(111, 40);
@@ -49,7 +49,7 @@ namespace WinPMS.Debug
             // 
             // btn_HEIC2jpg
             // 
-            this.btn_HEIC2jpg.Location = new System.Drawing.Point(8, 90);
+            this.btn_HEIC2jpg.Location = new System.Drawing.Point(12, 103);
             this.btn_HEIC2jpg.Margin = new System.Windows.Forms.Padding(2);
             this.btn_HEIC2jpg.Name = "btn_HEIC2jpg";
             this.btn_HEIC2jpg.Size = new System.Drawing.Size(111, 40);
@@ -60,7 +60,7 @@ namespace WinPMS.Debug
             // 
             // btn_Debug
             // 
-            this.btn_Debug.Location = new System.Drawing.Point(283, 8);
+            this.btn_Debug.Location = new System.Drawing.Point(218, 11);
             this.btn_Debug.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Debug.Name = "btn_Debug";
             this.btn_Debug.Size = new System.Drawing.Size(111, 40);
@@ -71,7 +71,7 @@ namespace WinPMS.Debug
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(8, 191);
+            this.button1.Location = new System.Drawing.Point(12, 195);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 40);
             this.button1.TabIndex = 3;
@@ -81,12 +81,14 @@ namespace WinPMS.Debug
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(738, 8);
+            this.btn_Close.BackColor = System.Drawing.Color.Red;
+            this.btn_Close.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btn_Close.Location = new System.Drawing.Point(12, 417);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(91, 38);
             this.btn_Close.TabIndex = 4;
             this.btn_Close.Text = "Close";
-            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // FrmDebug
