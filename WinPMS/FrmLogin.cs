@@ -9,15 +9,65 @@ using System.Windows.Forms;
 using WinPMS.FModels;
 using System.Threading;
 using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace WinPMS
 {
     public partial class FrmLogin : Form
     {
+        private bool _bChangeLanguage;
+        private string _sLanguageConfigPath = Path.Combine(FileHelper.sExeFolderPath, @"Config\LanguageConfig.txt");//定义LanguageConfig目录的路径
+
+        public static LanguageType Language { get; set; }
+
+        public static string LanguageName
+        {
+            get
+            {
+                switch (Language)
+                {
+                    case LanguageType.ZH_HANS:
+                        return "zh-Hans";
+                    case LanguageType.EN_US:
+                        return "en-US";
+                    default:
+                        return "zh-Hans";
+                }
+            }
+        }
+
         public FrmLogin()
         {
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh_Hans");
+            if (!File.Exists(_sLanguageConfigPath))
+            {
+                Language = LanguageType.ZH_HANS;
+            }
+            else
+            {
+                StreamReader sr = new StreamReader(_sLanguageConfigPath, Encoding.Default);
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    line = line.ToString();
+                    if (line == "zh-Hans")
+                    {
+                        Language = LanguageType.ZH_HANS;
+                    }
+                    else if (line == "en-US")
+                    {
+                        Language = LanguageType.EN_US;
+                    }
+                    else
+                    {
+                        Language = LanguageType.ZH_HANS;
+                    }
+                }
+
+                sr.Close();
+            }
+
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageName);
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 
             InitializeComponent();
@@ -52,6 +102,9 @@ namespace WinPMS
         /// <param name="e"></param>
         private void FrmLogin_Load(object sender, EventArgs e)
         {
+            btnCN.Enabled = false;
+            btnEN.Enabled = false;
+
             //获取已启动进程名
             string sProcessName = Process.GetCurrentProcess().ProcessName;
 
@@ -204,6 +257,56 @@ namespace WinPMS
 
 
         /// <summary>
+        /// 中文
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCN_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("你确定要切换成中文吗？\n\n点击确定，应用程序会自动重启！", "提示", 2))
+            {
+                _bChangeLanguage = true;
+
+                Language = LanguageType.ZH_HANS;
+                byte[] data = Encoding.Default.GetBytes(LanguageName);
+
+                FileStream fs = new FileStream(_sLanguageConfigPath, FileMode.Create);
+                fs.Write(data, 0, data.Length);
+
+                //清空缓冲区，关闭流
+                fs.Flush();
+                fs.Close();
+                Application.Restart();
+            }
+        }
+
+
+        /// <summary>
+        /// 英语
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEN_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Are you sure to change the language？\n\nClick ok and the application will restart!", "Info", 2))
+            {
+                _bChangeLanguage = true;
+
+                Language = LanguageType.EN_US;
+                byte[] data = Encoding.Default.GetBytes(LanguageName);
+
+                FileStream fs = new FileStream(_sLanguageConfigPath, FileMode.Create);
+                fs.Write(data, 0, data.Length);
+
+                //清空缓冲区，关闭流
+                fs.Flush();
+                fs.Close();
+                Application.Restart();
+            }
+        }
+
+
+        /// <summary>
         /// 退出系统
         /// </summary>
         /// <param name="sender"></param>
@@ -222,11 +325,26 @@ namespace WinPMS
             {
                 MsgBoxHelper.MsgBoxError("Exit not allowed！\nPlease login as admin！");
             }
-            else
+            else if(_bChangeLanguage == false)
             {
                 if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Are you sure to exit？", "Exit", 2))
                 {
                     Application.ExitThread();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else if (_bChangeLanguage == true)
+            {
+                if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Change Language？", "Exit", 2))
+                {
+                    Application.ExitThread();
+                }
+                else
+                {
+                    return;
                 }
             }
         }
@@ -251,11 +369,30 @@ namespace WinPMS
                 }
             }
         }
-        #endregion
+
 
         private void FrmLogin_FormClosed(object sender, FormClosedEventArgs e)
         {
 
         }
+
+        #endregion
+    }
+
+
+    /// <summary>
+    /// 各种语言的枚举
+    /// </summary>
+    public enum LanguageType : int
+    {
+        /// <summary>
+        /// 中文-简体
+        /// </summary>
+        ZH_HANS = 0,
+
+        /// <summary>
+        /// 英语-美国
+        /// </summary>
+        EN_US = 1
     }
 }

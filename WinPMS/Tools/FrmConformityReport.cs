@@ -21,6 +21,13 @@ namespace WinPMS.Tools
 
         private const string CONFORMITY_REPORT_RADAR_SENSOR_TEST = "CFM-File-Num Acceptance Conformity for Radar XXX Sensor Test.docx";
         private const string CONFORMITY_CRITERIA_RADAR_SENSOR_TEST = "List of the Acceptance Criteria for Radar XXX Sensor Test.xlsx";
+        
+        private const string CONFORMITY_REPORT_RADAR_PDI_VS412 = "CFM-File-Num Radar 2 77GHz G1.3 Nissan VS412 conformity validation report.docx";
+        private const string CONFORMITY_CRITERIA_RADAR_PDI_VS412 = "List of the Acceptance Criteria for Radar 2 77GHz G1.3 Nissan VS412.xlsx";
+
+        private const string CONFORMITY_REPORT_RADAR_PACKING = "";
+        private const string CONFORMITY_CRITERIA_RADAR_PACKING = "";
+
         private const string CONFORMITY_TEMPLATE_COPY = @"C:\PMS_ConformityReportGen";
 
         private string _sConformityReportTemplateFolderPath = Path.Combine(FileHelper.sExeFolderPath, @"Config\ConformityReportTemplate");//定义Conformity Report Template目录的路径
@@ -37,8 +44,9 @@ namespace WinPMS.Tools
         private string _sSelectedStation = "";//定义所选择的站别
 
         private string _sFileNum = "";//文件编号
-        private string _sEquipOrFixtureNum = "";//设备/夹具编号
-        private string _sFixtureName = "";//夹具名称
+        private string _sEquipNumST = "";//设备编号SensorTest
+        private string _sFixtureNumST = "";//夹具编号SensorTest
+        private string _sFixtureNameST = "";//夹具名称SensorTest
         private string _sLine = "";//线体
         private string _sValidationDate = "";//验证日期
         private string _sTestEngineer = "";
@@ -53,6 +61,10 @@ namespace WinPMS.Tools
         {
             //隐藏TabControl控件的标签
             tabControl1.Region = new Region(new RectangleF(Radar.Left, Radar.Top, Radar.Width, Radar.Height));
+            //tabControl2.Region = new Region(new RectangleF(Radar.Left, Radar.Top, Radar.Width, Radar.Height));
+            tabControl2.SizeMode = TabSizeMode.Fixed;
+            tabControl2.ItemSize = new Size(0, 1);
+            tabControl2.Appearance = TabAppearance.FlatButtons;
 
             //默认Station站别选择是Radar
             //comboBox_Station.SelectedItem = "Radar";
@@ -61,6 +73,16 @@ namespace WinPMS.Tools
             foreach (var item in FileHelper.sIniPMS_Conformity_Report_TestEngineer.Split(','))
             {
                 comboBox_TestEngineer.Items.Add(item.Trim());
+            }
+
+            //根据电脑用户名自动匹配选择TestEngineer
+            for (int i = 0; i < comboBox_TestEngineer.Items.Count; i++)
+            {
+                if (Environment.UserName.ToUpper() == comboBox_TestEngineer.Items[i].ToString().Replace(' ', '.').ToUpper())
+                {
+                    comboBox_TestEngineer.SelectedIndex = i;
+                    break;
+                }
             }
 
             //加载PME
@@ -122,20 +144,41 @@ namespace WinPMS.Tools
                 }
             }
 
-            //TODO 通过Action调用
-            //if (_sSelectedStation == "Radar")
-            //{
-            //    if (radioBtn_SensorTest.Checked)
-            //    {
-            //        label_Equip_Fixture.Text = "Fixture Num：";
-            //    }
-            //    else if (radioBtn_SEL.Checked)
-            //    {
-            //        label_Equip_Fixture.Text = "Fixture Num：";
-            //    }
-            //}
+            switch (_sSelectedStation)
+            {
+                case "Radar":
+                    if (radioBtn_SensorTest.Checked)
+                    {
+                        tabControl2.SelectedIndex = 1;
+                    }
+                    else if (radioBtn_SEL.Checked)
+                    {
+                        tabControl2.SelectedIndex = 2;
+                    }
+                    break;
+                case "Radar_PDI_VS412":
+                    tabControl2.SelectedIndex = 3;
+                    break;
+                case "Radar_Packing":
+                    tabControl2.SelectedIndex = 4;
+                    break;
+                default:
+                    tabControl2.SelectedIndex = 0;
+                    break;
+            }
         }
 
+
+        private void radioBtn_SensorTest_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControl2.SelectedIndex = 1;
+        }
+
+
+        private void radioBtn_SEL_CheckedChanged(object sender, EventArgs e)
+        {
+            tabControl2.SelectedIndex = 2;
+        }
 
 
         /// <summary>
@@ -177,16 +220,26 @@ namespace WinPMS.Tools
                 _sFileNum = textBox_FileNum.Text.Trim();
             }
 
-            //设备/夹具编号
-            if (string.IsNullOrEmpty(textBox_EquipOrFixtureNum.Text.Trim()))
+            //夹具编号
+            if (string.IsNullOrEmpty(textBox_FixtureNum_ST.Text.Trim()))
             {
                 MsgBoxHelper.MsgBoxError("please input Equipment/Fixture Num first!");
-                textBox_EquipOrFixtureNum.Focus();
+                textBox_FixtureNum_ST.Focus();
                 return;
             }
             else
             {
-                _sEquipOrFixtureNum = textBox_EquipOrFixtureNum.Text.Trim();
+                _sFixtureNumST = textBox_FixtureNum_ST.Text.Trim();
+            }
+
+            //夹具名称
+            _sFixtureNameST = comboBox_FixtureName_ST.GetItemText(comboBox_FixtureName_ST.SelectedItem).Trim();
+
+            if (string.IsNullOrEmpty(_sFixtureNameST))
+            {
+                MsgBoxHelper.MsgBoxError("please input Fixture Name first!");
+                comboBox_FixtureName_ST.Focus();
+                return;
             }
 
             //线体
@@ -200,7 +253,6 @@ namespace WinPMS.Tools
             {
                 _sLine = textBox_Line.Text.Trim();
             }
-
 
             //Validation Date
             string sDT1 = dateTimePicker_ValidationDate.Value.ToString("yyyy-MM-dd");
@@ -273,7 +325,6 @@ namespace WinPMS.Tools
                 textBox_LoadPic.Focus();
                 return;
             }
-
             #endregion
 
 
@@ -293,10 +344,12 @@ namespace WinPMS.Tools
                 }
             }
             //TODO 其他Station站别
-            if (_sSelectedStation == "Radar_PDI_VS412")
+            else if (_sSelectedStation == "Radar_PDI_VS412")
             {
-                MsgBoxHelper.MsgBoxError("NA");
-                return;
+                _sConformityReportTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\VS412"), CONFORMITY_REPORT_RADAR_PDI_VS412);
+                _sConformityCriteriaTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\VS412"), CONFORMITY_CRITERIA_RADAR_PDI_VS412);
+                //MsgBoxHelper.MsgBoxError("NA");
+                //return;
             }
             else if (_sSelectedStation == "Radar_Packing")
             {
@@ -304,6 +357,7 @@ namespace WinPMS.Tools
                 return;
             }
 
+            btn_GenConformityReport.Enabled = false;
 
             //TODO 以下定义一个方法来获取
             //根据Conformity Report Template文件的路径，获取文件名和文件后缀
@@ -331,40 +385,46 @@ namespace WinPMS.Tools
             _sConformityCriteriaTemplateFileCopyPath = Path.Combine(CONFORMITY_TEMPLATE_COPY, sConformityCriteriaFilePathFullName);
 
 
-            //重命名Conformity Report Template文件复制的名称
-            string sConformityReportTemplateFilePathFullNameRename = sConformityReportTemplateFilePathFullName.Replace("CFM-File-Num", _sFileNum).Replace("Radar XXX", _sLine);
-            //生成Conformity Report Template文件复制的重命名路径
-            _sConformityReportTemplateFileCopyPathRename = Path.Combine(CONFORMITY_TEMPLATE_COPY, sConformityReportTemplateFilePathFullNameRename);
-            //如果文件存在，则删除
-            if (File.Exists(_sConformityReportTemplateFileCopyPathRename))
+            try
             {
-                File.Delete(_sConformityReportTemplateFileCopyPathRename);
-            }
+                //重命名Conformity Report Template文件复制的名称
+                string sConformityReportTemplateFilePathFullNameRename = sConformityReportTemplateFilePathFullName.Replace("CFM-File-Num", _sFileNum).Replace("Radar XXX", _sLine);
+                //生成Conformity Report Template文件复制的重命名路径
+                _sConformityReportTemplateFileCopyPathRename = Path.Combine(CONFORMITY_TEMPLATE_COPY, sConformityReportTemplateFilePathFullNameRename);
+                //如果文件存在，则删除
+                if (File.Exists(_sConformityReportTemplateFileCopyPathRename))
+                {
+                    File.Delete(_sConformityReportTemplateFileCopyPathRename);
+                }
 
-            //重命名Conformity Criteria Template文件复制的名称
-            string sConformityCriteriaFilePathFullNameRename = sConformityCriteriaFilePathFullName.Replace("Radar XXX", _sLine);
-            //生成Conformity Criteria Template文件复制的重命名路径
-            _sConformityCriteriaTemplateFileCopyPathRename = Path.Combine(CONFORMITY_TEMPLATE_COPY, sConformityCriteriaFilePathFullNameRename);
-            if (File.Exists(_sConformityCriteriaTemplateFileCopyPathRename))
+                //重命名Conformity Criteria Template文件复制的名称
+                string sConformityCriteriaFilePathFullNameRename = sConformityCriteriaFilePathFullName.Replace("Radar XXX", _sLine);
+                //生成Conformity Criteria Template文件复制的重命名路径
+                _sConformityCriteriaTemplateFileCopyPathRename = Path.Combine(CONFORMITY_TEMPLATE_COPY, sConformityCriteriaFilePathFullNameRename);
+                if (File.Exists(_sConformityCriteriaTemplateFileCopyPathRename))
+                {
+                    File.Delete(_sConformityCriteriaTemplateFileCopyPathRename);
+                }
+
+
+                //复制Conformity Report Template到指定路径下
+                File.Copy(_sConformityReportTemplateFilePath, _sConformityReportTemplateFileCopyPath, true);
+
+                //复制Conformity Criteria Template到指定路径下
+                File.Copy(_sConformityCriteriaTemplateFilePath, _sConformityCriteriaTemplateFileCopyPath, true);
+
+
+                //重命名Conformity Report
+                Microsoft.VisualBasic.FileIO.FileSystem.RenameFile(_sConformityReportTemplateFileCopyPath, sConformityReportTemplateFilePathFullNameRename);
+
+                //重命名Conformity Criteria
+                Microsoft.VisualBasic.FileIO.FileSystem.RenameFile(_sConformityCriteriaTemplateFileCopyPath, sConformityCriteriaFilePathFullNameRename);
+            }
+            catch (Exception ex)
             {
-                File.Delete(_sConformityCriteriaTemplateFileCopyPathRename);
+                throw ex;
             }
-
-
-            //复制Conformity Report Template到指定路径下
-            File.Copy(_sConformityReportTemplateFilePath, _sConformityReportTemplateFileCopyPath, true);
-
-            //复制Conformity Criteria Template到指定路径下
-            File.Copy(_sConformityCriteriaTemplateFilePath, _sConformityCriteriaTemplateFileCopyPath, true);
-
-
-            //重命名Conformity Report
-            Microsoft.VisualBasic.FileIO.FileSystem.RenameFile(_sConformityReportTemplateFileCopyPath, sConformityReportTemplateFilePathFullNameRename);
-
-            //重命名Conformity Criteria
-            Microsoft.VisualBasic.FileIO.FileSystem.RenameFile(_sConformityCriteriaTemplateFileCopyPath, sConformityCriteriaFilePathFullNameRename);
-
-
+            
 
             //Generate Conformity Criteria
             await Task.Run(() =>
@@ -421,8 +481,8 @@ namespace WinPMS.Tools
 
                 //replace text
                 doc.Replace("Radar XXX", _sLine, true, true);
-                doc.Replace("with 77 G1.3 Corner Fixture", _sFixtureName, true, true);
-                doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sEquipOrFixtureNum, true, true);
+                doc.Replace("with 77 G1.3 Corner Fixture", "with " +  _sFixtureNameST, true, true);
+                doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sFixtureNumST, true, true);
                 doc.Replace("Name1", _sTestEngineer, true, true);
                 doc.Replace("Name2", _sPME, true, true);
                 doc.Replace("Name3", _sTestManager, true, true);
@@ -509,6 +569,8 @@ namespace WinPMS.Tools
                 doc.SaveToFile(_sConformityReportTemplateFileCopyPathRename);
                 Process.Start(_sConformityReportTemplateFileCopyPathRename);
             });
+
+            btn_GenConformityReport.Enabled = true;
         }
 
 
@@ -557,11 +619,13 @@ namespace WinPMS.Tools
             }
         }
 
+
+
+
+
+
+
         #endregion
-
-
-
-
 
         #region 方法
 

@@ -33,7 +33,8 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnEN = new System.Windows.Forms.Button();
+            this.btnCN = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.cbUName = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -73,7 +74,8 @@
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.btnEN);
+            this.groupBox1.Controls.Add(this.btnCN);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.cbUName);
             this.groupBox1.Controls.Add(this.label5);
@@ -85,15 +87,19 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // comboBox2
+            // btnEN
             // 
-            resources.ApplyResources(this.comboBox2, "comboBox2");
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            resources.GetString("comboBox2.Items"),
-            resources.GetString("comboBox2.Items1")});
-            this.comboBox2.Name = "comboBox2";
+            resources.ApplyResources(this.btnEN, "btnEN");
+            this.btnEN.Name = "btnEN";
+            this.btnEN.UseVisualStyleBackColor = true;
+            this.btnEN.Click += new System.EventHandler(this.btnEN_Click);
+            // 
+            // btnCN
+            // 
+            resources.ApplyResources(this.btnCN, "btnCN");
+            this.btnCN.Name = "btnCN";
+            this.btnCN.UseVisualStyleBackColor = true;
+            this.btnCN.Click += new System.EventHandler(this.btnCN_Click);
             // 
             // label7
             // 
@@ -188,8 +194,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbUName;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnEN;
+        private System.Windows.Forms.Button btnCN;
     }
 }
 

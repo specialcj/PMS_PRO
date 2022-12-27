@@ -25,11 +25,40 @@ namespace WinPMS.Debug
             DllCheck dllCheck = new DllCheck();
 
             List<string> sList = new List<string>();
-            
-            sList.Add("Radar 77GHZ G1.2 GM Global B LRR");
-            //sList.Add("Radar 77GHZ G1.3 Nissan J32V Epower");
 
-            //sList.Add("Radar 77GHz G1.3 BYD EKE RCR ");
+            //ALV_CAN_COMMS - gm#DLL_X_X_71_2
+            //sList.Add("Radar 77GHz G1.2 GM Global B LRR L233 MY23 FLR");
+
+            //DLL_X_X_71_17
+            //sList.Add("Radar 77GHz G1.2 Geea2.0 KX11 CR");
+
+            //DLL_X_X_80_5
+            //sList.Add("Radar 77GHz G1.2 Geea2.0 KX11 FLR");
+
+            //DLL_X_X_71_20
+            //sList.Add("Radar 77GHz G1.2 GAC A60 FLR");
+
+            //DLL_X_X_71_29
+            //sList.Add("Radar 77GHz G1.3 GWM ES13 RCR");
+
+            //DLL_X_X_80_3
+            //sList.Add("Radar 77GHz G1.3 GWM EC24 RCR");
+
+            //DLL_X_X_77_11
+            //sList.Add("Radar 77GHz G1.2 Chery T26 FLR");
+            //sList.Add("Radar 77GHz G1.2 BTET 290D FLR");
+            //sList.Add("Radar 77GHz G1.3 BTET 290D RCR");
+
+            //DLL_X_X_67_0
+            //sList.Add("Radar 77GHz G1.2 VCC FLR");
+
+            //ALV_CAN_COMMS - fft ghost v4#DLL_X_X_68_0
+            //sList.Add("Radar 77GHz G1.3 Nissan J32V E Power Rear Corner CR WithCS");
+
+            //0.0.71.2
+            //sList.Add("Radar 77GHz G1.2 BYD SC2E FLR");
+            //sList.Add("Radar 77GHz G1.3 GAC A55 RCR");
+
 
             foreach (string s in sList)
             {

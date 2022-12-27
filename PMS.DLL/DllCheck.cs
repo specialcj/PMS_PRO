@@ -17,6 +17,7 @@ namespace PMS.DLL
         //public string _sIniPath = new DirectoryInfo("../../../").FullName + @"WinPMS\Config\PMS.ini";
 
         private string _sPMSUsage = "";
+        private string _sIniPathPMSUsed = "";
         private string _sRDR2AlvCanCommsFolderPath = "";
         private string _sRDR2AlvCanCommsFolderNamePrefix = "";
         //private string _sRDR2AlvCanCommsFolderNamePrefixGM = "";
@@ -25,6 +26,9 @@ namespace PMS.DLL
         private string _sPMSSection = FileHelper.INI_SECTION_PMS;
         private string _sRDRSELSection = FileHelper.INI_RDR_SEL_SECTION;
         private string _sRDRAlvCanCommsDllSection = FileHelper.INI_SECTION_RDR_ALV_CAN_COMMS_DLL;
+
+
+
 
         /// <summary>
         /// 
@@ -56,24 +60,12 @@ namespace PMS.DLL
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
             string dir = Path.GetDirectoryName(path);
-            string _sIniPathPMS = new DirectoryInfo(string.Format(@"{0}..\..\", dir)).FullName + @"Config\PMS.ini";
-      
+            string sIniPathPMS = new DirectoryInfo(string.Format(@"{0}..\..\", dir)).FullName + @"Config\PMS.ini";
+
 
             //从ini配置文件中获取PMS的使用场景
-            _sPMSUsage = IniHelper.ReadIni(_sPMSSection, "PMS_Usage", "NULL", _sIniPathPMS);
-
-            string _sIniPathPMSUsed = _sIniPathPMS.Replace("PMS.ini", "PMS_" + _sPMSUsage + ".ini");
-
-            /*
-            if (recipeDescription.Contains("G1.3 GWM ES13 RCR"))
-            {
-                dllSwitchTemp = true;
-            }
-            else if (recipeDescription.Contains("G1.2 GAC A60 FLR"))
-            {
-                dllSwitchTemp = true;
-            }
-            */
+            _sPMSUsage = IniHelper.ReadIni(_sPMSSection, "PMS_Usage", "NULL", sIniPathPMS);
+            _sIniPathPMSUsed = sIniPathPMS.Replace("PMS.ini", "PMS_" + _sPMSUsage + ".ini");
 
 
             //根据PMS的使用场景, 加载对应的ini文件
@@ -83,7 +75,7 @@ namespace PMS.DLL
                     break;
                 case "Debug":
                     MessageBox.Show("dir:" + "\n" + dir);
-                    MessageBox.Show("_sIniPathPMS:" + "\n" + _sIniPathPMS);
+                    MessageBox.Show("_sIniPathPMS:" + "\n" + sIniPathPMS);
                     MessageBox.Show("_sIniPathPMSUsed:" + "\n" + _sIniPathPMSUsed);
                     break;
                 default:
@@ -112,37 +104,67 @@ namespace PMS.DLL
             string sDllDllSwitchSpecialIni = IniHelper.ReadIni(_sRDRAlvCanCommsDllSection, "DLL_SWITCH_SPECIAL", "NULL", _sIniPathPMSUsed);
             string sDllSwitchNormalIni = IniHelper.ReadIni(_sRDRAlvCanCommsDllSection, "DLL_SWITCH_NORMAL", "NULL", _sIniPathPMSUsed);
 
-            string[] sDllSwitchProIniList = sDllSwitchProIni.Split(',');//G1.2 GM Global B LRR, G1.2 Geea2.0#G1.3 Geea2.0, G1.2 GAC A60 FLR#G1.2 GAC A6V FLR, G1.3 GWM ES13 RCR
-            string[] sDllSwitchSpecialIniList = sDllDllSwitchSpecialIni.Split(',');//0_0_71_14, 0_0_71_17, 0_0_71_20, 0_0_71_29
-            
+            string[] sDllSwitchProIniList = sDllSwitchProIni.Split(',');//DLL_SWITCH_PRO = G1.2 GM, G1.2 Geea2.0#G1.3 Geea2.0#{CR-FCR-RCR}, G1.2 Geea2.0#G1.3 Geea2.0#{FLR}, ...
+            string[] sDllSwitchSpecialIniList = sDllDllSwitchSpecialIni.Split(',');//ALV_CAN_COMMS - gm#DLL_X_X_71_2, DLL_X_X_71_17, DLL_X_X_80_5, ...
+
             string sDllExpected = ""; //期望使用的ALV_CAN_COMMS.dll
 
             List<string> dllExpectedFolderListForFixed = new List<string>();//期望的dll固定文件夹目录
             string sDllExpectedFolderForFixed;
 
-
             List<string> dllExpectedFolderListForFixedNotExist = new List<string>();//期望的dll固定文件夹目录不存在
+
 
             //循环遍历Ini中定义的需要dll切换的项目，判断当前项目的名称是否包含该项目
             //如果包含，则获取对应的dll版本
-            int i;
-            for (i = 0; i < sDllSwitchProIniList.Length; i++)
+            bool bIsHasInRecipeDescri;
+            string sDllSwitchPro;
+            string sDllSwitchProIniListSubLast;
+
+            for (int i = 0; i < sDllSwitchProIniList.Length; i++)//sDllSwitchProIniList -> G1.2 GM, G1.2 Geea2.0#G1.3 Geea2.0#{CR-FCR-RCR}, G1.2 Geea2.0#G1.3 Geea2.0#{FLR}, ...
             {
-                string sDllSwitchPro = sDllSwitchProIniList[i].Trim();
+                sDllSwitchPro = sDllSwitchProIniList[i].Trim();
 
                 if (sDllSwitchPro.Contains('#'))
                 {
-                    string[] sDllSwitchProIniListSub = sDllSwitchPro.Split('#');
+                    string[] sDllSwitchProIniListSub = sDllSwitchPro.Split('#');//[G1.2 Geea2.0, G1.3 Geea2.0, {CR-FCR-RCR}]
 
-                    for (int j = 0; j < sDllSwitchProIniListSub.Length; j++)
+                    //获取最后一个#符号后面的特殊属性
+                    sDllSwitchProIniListSubLast = sDllSwitchProIniListSub[sDllSwitchProIniListSub.Length - 1];//{FLR} / {CR-FCR-RCR}
+                    string[] sDllSwitchProIniListSubLastList = sDllSwitchProIniListSubLast.Substring(1, sDllSwitchProIniListSubLast.Length - 2).Split('-');//FLR / CR-FCR-RCR
+
+                    //判断Description中是否包含其中某一个特殊属性
+                    bIsHasInRecipeDescri = false;
+                    if (sDllSwitchProIniListSubLast.StartsWith("{") && sDllSwitchProIniListSubLast.EndsWith("}") && !sDllSwitchProIniListSubLast.EndsWith("{Veh}"))
                     {
-                        string sDllSwithcProSub = sDllSwitchProIniListSub[j].Trim();
-
-                        if (recipeDescription.Contains(sDllSwithcProSub))
+                        foreach (string item in sDllSwitchProIniListSubLastList)
                         {
-                            //Console.WriteLine(recipeDescription + "," + "期望dll" + "," + sDllSwitchSpecialIniList[iDllSwitchIndex].Trim());
-                            sDllExpected = sDllSwitchSpecialIniList[i].Trim();
+                            bIsHasInRecipeDescri = recipeDescription.Contains(item);
+                            if (bIsHasInRecipeDescri)
+                            {
+                                break;
+                            }
                         }
+                    }
+
+                    //先判断上一步结果中是否包含其中某一个特殊属性？
+                    //如果包含了，则循环遍历当前这一组配置中由#符号分割的每一分组，并判断Description中是否包含当前分组；如果包含则获取期望的.dll
+                    //如果不包含，则continue，遍历下一组配置
+                    if (sDllSwitchProIniListSubLast.Equals("{Veh}") || bIsHasInRecipeDescri)
+                    {
+                        for (int j = 0; j < sDllSwitchProIniListSub.Length - 1; j++)
+                        {
+                            string sDllSwithcProSub = sDllSwitchProIniListSub[j].Trim();
+
+                            if (recipeDescription.Contains(sDllSwithcProSub))
+                            {
+                                sDllExpected = sDllSwitchSpecialIniList[i].Trim();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 else
@@ -254,7 +276,7 @@ namespace PMS.DLL
                 }
                 sDllExpectedFolderForFixed = string.Join(", ", dllExpectedFolderListForFixed.ToArray());
 
-                
+
                 if (string.IsNullOrEmpty(sDllExpectedSpecial))
                 {
                     dllSwitchTemp1 = false;

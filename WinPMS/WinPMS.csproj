@@ -285,6 +285,9 @@
     <EmbeddedResource Include="FrmAdminAuthority.resx">
       <DependentUpon>FrmAdminAuthority.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.en-US.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,6 +363,12 @@
     <None Include="Config\ConformityReportTemplate\Radar\SensorTest\List of the Acceptance Criteria for Radar XXX Sensor Test.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Config\ConformityReportTemplate\Radar\VS412\CFM-File-Num Radar 2 77GHz G1.3 Nissan VS412 conformity validation report.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\ConformityReportTemplate\Radar\VS412\List of the Acceptance Criteria for Radar 2 77GHz G1.3 Nissan VS412.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\PMS.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -401,7 +410,6 @@
     <Folder Include="bin\Release\" />
     <Folder Include="Config\ConformityReportTemplate\Radar\Packing\" />
     <Folder Include="Config\ConformityReportTemplate\Radar\SEL\" />
-    <Folder Include="Config\ConformityReportTemplate\Radar\VS412\" />
     <Folder Include="Resources\" />
     <Folder Include="Ver\" />
   </ItemGroup>
@@ -586,6 +594,9 @@
     <Content Include="bin\Debug\runtimes\win-x86\native\WebView2Loader.dll" />
     <Content Include="bin\Debug\WinPMS.exe" />
     <Content Include="Config\issues.txt" />
+    <Content Include="Config\LanguageConfig.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Imgs\excel1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

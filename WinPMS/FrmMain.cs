@@ -172,6 +172,7 @@ namespace WinPMS
                 _sUserName = frmLoginModel.UserName;
             }
 
+            lblUserNamePC.Text = Environment.UserName;
             lblUName.Text = _sUserName;
             lblLoginTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 

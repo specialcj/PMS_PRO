@@ -48,6 +48,9 @@
             this.lblCurrTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.tmrFrmPrompt = new System.Windows.Forms.Timer(this.components);
             this.tmrCurrTime = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUserNamePC = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
             this.gboxMenus.SuspendLayout();
             this.gboxTools.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -143,6 +146,9 @@
             this.toolStripStatusLabel1,
             this.lblUName,
             this.toolStripStatusLabel2,
+            this.toolStripStatusLabel6,
+            this.lblUserNamePC,
+            this.toolStripStatusLabel9,
             this.toolStripStatusLabel4,
             this.lblLoginTime,
             this.toolStripStatusLabel3,
@@ -214,6 +220,24 @@
             this.tmrCurrTime.Interval = 1000;
             this.tmrCurrTime.Tick += new System.EventHandler(this.tmrCurrTime_Tick);
             // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(98, 22);
+            this.toolStripStatusLabel6.Text = "UserName(PC)：";
+            // 
+            // lblUserNamePC
+            // 
+            this.lblUserNamePC.Name = "lblUserNamePC";
+            this.lblUserNamePC.Size = new System.Drawing.Size(37, 22);
+            this.lblUserNamePC.Text = "xxxxx";
+            // 
+            // toolStripStatusLabel9
+            // 
+            this.toolStripStatusLabel9.AutoSize = false;
+            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            this.toolStripStatusLabel9.Size = new System.Drawing.Size(50, 22);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,5 +286,8 @@
         private System.Windows.Forms.ToolStripStatusLabel lblCurrTime;
         private System.Windows.Forms.TabControl tcPages;
         private System.Windows.Forms.Button btn_Test;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserNamePC;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
     }
 }

@@ -124,6 +124,9 @@
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 29</value>
   </data>
+  <data name="btnExit.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnExit.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -134,6 +137,9 @@
   <data name="btnLogin.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 29</value>
   </data>
+  <data name="btnLogin.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
   <data name="btnEN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14.25pt</value>
   </data>
@@ -141,7 +147,7 @@
     <value>68, 34</value>
   </data>
   <data name="btnEN.Text" xml:space="preserve">
-    <value>英语</value>
+    <value>EN</value>
   </data>
   <data name="btnCN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 14.25pt</value>
@@ -150,9 +156,45 @@
     <value>68, 34</value>
   </data>
   <data name="btnCN.Text" xml:space="preserve">
-    <value>中文</value>
+    <value>CN</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 125</value>
+    <value>50, 125</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 16</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Language：</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 80</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 16</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Password：</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 38</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 16</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Account：</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>User Login</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 52</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 18</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>(Production Management System)</value>
   </data>
 </root>
