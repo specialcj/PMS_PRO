@@ -554,8 +554,12 @@ namespace WinPMS.Radar
 
                             alvCanCommsDll.DllUsePro = sDllUseProFromIni;
 
-                            textBox1.AppendText(alvCanCommsDll.FolderPath + " >>> " + alvCanCommsDll.DllName + " >>> " + alvCanCommsDll.DllVersion + " >>> " + alvCanCommsDll.DllUsePro + System.Environment.NewLine);
-                            textBox1.AppendText("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + System.Environment.NewLine);
+                            textBox1.AppendText(alvCanCommsDll.FolderPath + " >>> " + alvCanCommsDll.DllName + " >>> " + alvCanCommsDll.DllVersion + " >>> " + alvCanCommsDll.DllBuildDate + " >>> " + alvCanCommsDll.DllUsePro + Environment.NewLine);
+                            //textBox1.AppendText(alvCanCommsDll.FolderPath + UtilityHelper.PaddingAsStrByLen(alvCanCommsDll.FolderPath, 50, " ", false) + " >>> " + alvCanCommsDll.DllName + " >>> " + alvCanCommsDll.DllVersion + " >>> " + alvCanCommsDll.DllBuildDate + " >>> " + alvCanCommsDll.DllUsePro + Environment.NewLine);
+                            textBox1.AppendText("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" + Environment.NewLine);
+
+                            //string s = alvCanCommsDll.FolderPath + UtilityHelper.PaddingAsStrByLen(alvCanCommsDll.FolderPath, 50, "-", false) + " >>> " + alvCanCommsDll.DllName + " >>> " + alvCanCommsDll.DllVersion + " >>> " + alvCanCommsDll.DllBuildDate + " >>> " + alvCanCommsDll.DllUsePro;
+                            //listBox1.Items.Add(s);
 
                             if
                             (
@@ -579,6 +583,7 @@ namespace WinPMS.Radar
                     else
                     {
                         textBox1.BackColor = Color.LightGreen;
+                        //listBox1.BackColor = Color.LightGreen;
                     }
 
                     if (!bDllFixedFlag)

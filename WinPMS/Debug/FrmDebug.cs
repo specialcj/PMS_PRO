@@ -16,7 +16,7 @@ namespace WinPMS.Debug
             InitializeComponent();
         }
 
-        
+
 
 
         #region 事件
@@ -59,10 +59,12 @@ namespace WinPMS.Debug
             //sList.Add("Radar 77GHz G1.2 BYD SC2E FLR");
             //sList.Add("Radar 77GHz G1.3 GAC A55 RCR");
 
-
-            foreach (string s in sList)
+            //Veh
+            //sList.Add("6819808AAA");
+            sList.Add("6819808CCC");
+            foreach (string sDesc in sList)
             {
-                bool res = dllCheck.AlvCanCommsDllCheckForRadar("680927600K", s, out string dllSwitchPro, out bool dllSwitch);
+                bool res = dllCheck.AlvCanCommsDllCheckForRadar("Veh No", sDesc, out string dllSwitchPro, out bool dllSwitch);
             }
         }
 
@@ -112,18 +114,16 @@ namespace WinPMS.Debug
             List<string> sFileList1 = new List<string>();
             List<string> sFileList2 = new List<string>();
 
-            Task.Run(()=> {
+            Task.Run(() =>
+            {
                 RecursionDir(sFileList1, new DirectoryInfo(path), true);
                 RecursionDir(sFileList2, new DirectoryInfo(path), false);
 
                 Console.WriteLine(sFileList1.Count);
                 Console.WriteLine(sFileList2.Count);
             });
-            
+
         }
-
-
-
 
 
 
@@ -172,12 +172,52 @@ namespace WinPMS.Debug
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process.Start(@"A:\ALV_CAN_COMMS_0.0.71.2");
+            //Process.Start(@"A:\ALV_CAN_COMMS_0.0.71.2");
+
+            //string s2 = PaddingAsStrByLen("C:\\ALV_CAN_COMMS - fft ghost v4", 50, " ", true);
+            //string s3 = PaddingAsStrByLen("C:\\ALV_CAN_Comms - gm", 50, " ", true);
+
+            //listBox1.Items.Add(s2);
+            //listBox1.Items.Add(s3);
+
+            string s1 = "C:\\ALV_CAN_COMMS - fft ghost v4>>> ALV_CAN_Comms_fft.dll >>> 1.1.71.0 >>> Release Build - 2022-02-22 at 11:39:37 >>> G1.3 Nissan fft ghost";
+            listBox1.Items.Add(s1);
+
+            string s2 = "C:\\ALV_CAN_COMMS - gm          >>> ALV_CAN_Comms_gm.dll >>> 1.1.73.0 >>> Release Build - 2022-03-10 at 12:04:05 >>> G1.2 GM";
+            listBox1.Items.Add(s2);
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
         {
             this.CloseForm();
         }
+
+
+        #region 方法
+        /// <summary>
+        /// 根据期望长度，以特定的字符串填充源字符串
+        /// </summary>
+        /// <param name="source">源字符串</param>
+        /// <param name="len">期望字符串的长度</param>
+        /// <param name="padding">待填充的字符串</param>
+        /// <param name="isAppend">是否在源字符串后追加，true->追加，false->不追加</param>
+        private string PaddingAsStrByLen(string source, int len, string padding, bool isAppend)
+        {
+            int iSrcLen = source.Length;    //获取源字符串的长度
+            int iLenDiff = len - iSrcLen;   //获取期望字符串的长度和源字符串长度之间的差
+            string temp = isAppend ? source : "";
+
+            if (iLenDiff > 0)
+            {
+                for (int i = 0; i < iLenDiff; i++)
+                {
+                    temp += padding;
+                }
+            }
+
+            return temp;
+        }
+
+        #endregion
     }
 }

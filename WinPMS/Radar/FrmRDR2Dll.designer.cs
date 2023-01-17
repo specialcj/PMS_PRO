@@ -46,6 +46,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtAlvCanCommsFolderPath = new System.Windows.Forms.TextBox();
             this.dgvDll = new System.Windows.Forms.DataGridView();
+            this.FolderPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllExist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllBuildDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllUsePro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DllActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.DllOpen = new System.Windows.Forms.DataGridViewButtonColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tsMenus = new System.Windows.Forms.ToolStrip();
@@ -61,14 +69,6 @@
             this.tsbtnClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsBtnHelp = new System.Windows.Forms.ToolStripButton();
-            this.FolderPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllExist = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllBuildDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllUsePro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DllActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.DllOpen = new System.Windows.Forms.DataGridViewButtonColumn();
             panelWhere = new System.Windows.Forms.Panel();
             panelWhere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -268,6 +268,91 @@
             this.dgvDll.TabIndex = 3;
             this.dgvDll.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDll_CellClick);
             // 
+            // FolderPath
+            // 
+            this.FolderPath.DataPropertyName = "FolderPath";
+            this.FolderPath.FillWeight = 80F;
+            this.FolderPath.HeaderText = "ALV_CAN_COMMS Folder";
+            this.FolderPath.MinimumWidth = 6;
+            this.FolderPath.Name = "FolderPath";
+            this.FolderPath.ReadOnly = true;
+            this.FolderPath.Width = 155;
+            // 
+            // DllExist
+            // 
+            this.DllExist.DataPropertyName = "DllExist";
+            this.DllExist.FillWeight = 50F;
+            this.DllExist.HeaderText = "dll Exist";
+            this.DllExist.MinimumWidth = 6;
+            this.DllExist.Name = "DllExist";
+            this.DllExist.ReadOnly = true;
+            this.DllExist.Width = 86;
+            // 
+            // DllName
+            // 
+            this.DllName.DataPropertyName = "DllName";
+            this.DllName.FillWeight = 48.44789F;
+            this.DllName.HeaderText = "dll Name";
+            this.DllName.MinimumWidth = 6;
+            this.DllName.Name = "DllName";
+            this.DllName.ReadOnly = true;
+            this.DllName.Width = 79;
+            // 
+            // DllVersion
+            // 
+            this.DllVersion.DataPropertyName = "DllVersion";
+            this.DllVersion.FillWeight = 48.44789F;
+            this.DllVersion.HeaderText = "dll Version";
+            this.DllVersion.MinimumWidth = 6;
+            this.DllVersion.Name = "DllVersion";
+            this.DllVersion.ReadOnly = true;
+            this.DllVersion.Width = 98;
+            // 
+            // DllBuildDate
+            // 
+            this.DllBuildDate.DataPropertyName = "DllBuildDate";
+            this.DllBuildDate.HeaderText = "dll Build Date";
+            this.DllBuildDate.MinimumWidth = 8;
+            this.DllBuildDate.Name = "DllBuildDate";
+            this.DllBuildDate.ReadOnly = true;
+            this.DllBuildDate.Width = 117;
+            // 
+            // DllUsePro
+            // 
+            this.DllUsePro.DataPropertyName = "DllUsePro";
+            this.DllUsePro.FillWeight = 48.44789F;
+            this.DllUsePro.HeaderText = "dll Project";
+            this.DllUsePro.MinimumWidth = 6;
+            this.DllUsePro.Name = "DllUsePro";
+            this.DllUsePro.ReadOnly = true;
+            this.DllUsePro.Width = 98;
+            // 
+            // DllActive
+            // 
+            this.DllActive.DataPropertyName = "DllActive";
+            this.DllActive.FalseValue = "false";
+            this.DllActive.FillWeight = 110F;
+            this.DllActive.HeaderText = "Current Use";
+            this.DllActive.MinimumWidth = 8;
+            this.DllActive.Name = "DllActive";
+            this.DllActive.ReadOnly = true;
+            this.DllActive.TrueValue = "true";
+            this.DllActive.Width = 60;
+            // 
+            // DllOpen
+            // 
+            this.DllOpen.DataPropertyName = "DllOpen";
+            this.DllOpen.HeaderText = "Open";
+            this.DllOpen.MinimumWidth = 8;
+            this.DllOpen.Name = "DllOpen";
+            this.DllOpen.ReadOnly = true;
+            this.DllOpen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DllOpen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.DllOpen.Text = "Open";
+            this.DllOpen.UseColumnTextForButtonValue = true;
+            this.DllOpen.Visible = false;
+            this.DllOpen.Width = 58;
+            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -430,91 +515,6 @@
             this.tsBtnHelp.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsBtnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsBtnHelp.Click += new System.EventHandler(this.tsBtnHelp_Click);
-            // 
-            // FolderPath
-            // 
-            this.FolderPath.DataPropertyName = "FolderPath";
-            this.FolderPath.FillWeight = 80F;
-            this.FolderPath.HeaderText = "ALV_CAN_COMMS Folder";
-            this.FolderPath.MinimumWidth = 6;
-            this.FolderPath.Name = "FolderPath";
-            this.FolderPath.ReadOnly = true;
-            this.FolderPath.Width = 155;
-            // 
-            // DllExist
-            // 
-            this.DllExist.DataPropertyName = "DllExist";
-            this.DllExist.FillWeight = 50F;
-            this.DllExist.HeaderText = "dll Exist";
-            this.DllExist.MinimumWidth = 6;
-            this.DllExist.Name = "DllExist";
-            this.DllExist.ReadOnly = true;
-            this.DllExist.Width = 86;
-            // 
-            // DllName
-            // 
-            this.DllName.DataPropertyName = "DllName";
-            this.DllName.FillWeight = 48.44789F;
-            this.DllName.HeaderText = "dll Name";
-            this.DllName.MinimumWidth = 6;
-            this.DllName.Name = "DllName";
-            this.DllName.ReadOnly = true;
-            this.DllName.Width = 79;
-            // 
-            // DllVersion
-            // 
-            this.DllVersion.DataPropertyName = "DllVersion";
-            this.DllVersion.FillWeight = 48.44789F;
-            this.DllVersion.HeaderText = "dll Version";
-            this.DllVersion.MinimumWidth = 6;
-            this.DllVersion.Name = "DllVersion";
-            this.DllVersion.ReadOnly = true;
-            this.DllVersion.Width = 98;
-            // 
-            // DllBuildDate
-            // 
-            this.DllBuildDate.DataPropertyName = "DllBuildDate";
-            this.DllBuildDate.HeaderText = "dll Build Date";
-            this.DllBuildDate.MinimumWidth = 8;
-            this.DllBuildDate.Name = "DllBuildDate";
-            this.DllBuildDate.ReadOnly = true;
-            this.DllBuildDate.Width = 117;
-            // 
-            // DllUsePro
-            // 
-            this.DllUsePro.DataPropertyName = "DllUsePro";
-            this.DllUsePro.FillWeight = 48.44789F;
-            this.DllUsePro.HeaderText = "dll Project";
-            this.DllUsePro.MinimumWidth = 6;
-            this.DllUsePro.Name = "DllUsePro";
-            this.DllUsePro.ReadOnly = true;
-            this.DllUsePro.Width = 98;
-            // 
-            // DllActive
-            // 
-            this.DllActive.DataPropertyName = "DllActive";
-            this.DllActive.FalseValue = "false";
-            this.DllActive.FillWeight = 110F;
-            this.DllActive.HeaderText = "Current Use";
-            this.DllActive.MinimumWidth = 8;
-            this.DllActive.Name = "DllActive";
-            this.DllActive.ReadOnly = true;
-            this.DllActive.TrueValue = "true";
-            this.DllActive.Width = 60;
-            // 
-            // DllOpen
-            // 
-            this.DllOpen.DataPropertyName = "DllOpen";
-            this.DllOpen.HeaderText = "Open";
-            this.DllOpen.MinimumWidth = 8;
-            this.DllOpen.Name = "DllOpen";
-            this.DllOpen.ReadOnly = true;
-            this.DllOpen.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DllOpen.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DllOpen.Text = "Open";
-            this.DllOpen.UseColumnTextForButtonValue = true;
-            this.DllOpen.Visible = false;
-            this.DllOpen.Width = 58;
             // 
             // FrmRDR2Dll
             // 

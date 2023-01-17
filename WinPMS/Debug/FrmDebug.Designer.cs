@@ -34,6 +34,8 @@ namespace WinPMS.Debug
             this.btn_Debug = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btn_DllCheckForRadar2
@@ -83,7 +85,7 @@ namespace WinPMS.Debug
             // 
             this.btn_Close.BackColor = System.Drawing.Color.Red;
             this.btn_Close.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Close.Location = new System.Drawing.Point(12, 417);
+            this.btn_Close.Location = new System.Drawing.Point(738, 11);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(91, 38);
             this.btn_Close.TabIndex = 4;
@@ -91,11 +93,28 @@ namespace WinPMS.Debug
             this.btn_Close.UseVisualStyleBackColor = false;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 241);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(111, 20);
+            this.textBox1.TabIndex = 5;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 267);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(817, 160);
+            this.listBox1.TabIndex = 6;
+            // 
             // FrmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 547);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Debug);
@@ -105,6 +124,7 @@ namespace WinPMS.Debug
             this.Name = "FrmDebug";
             this.Text = "FrmDebug";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,5 +135,7 @@ namespace WinPMS.Debug
         private System.Windows.Forms.Button btn_Debug;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_Close;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

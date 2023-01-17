@@ -18,27 +18,58 @@ namespace WinPMS.Debug
             InitializeComponent();
         }
 
-        public delegate void MyDelegate1(int a, int b);
+        public delegate void MyDelegate1(int a);
 
         #region 事件
         private void button1_Click(object sender, EventArgs e)
         {
             MyDelegate1 delegate1 = new MyDelegate1(Test2);
-            delegate1.Invoke(1, 2);
+            delegate1.Invoke(1);
 
-            Action act1 = new Action(Test1);
-            Action act2 = Test1;
-            Action act11 = new Action(() => { });
-            Action act3 = () =>
+            Action act1_1 = Test1;
+            Action act1_2 = new Action(Test1);
+
+            Action<int> act2_1 = new Action<int>(Test2);
+
+            Action act3_1 = new Action(() => { });
+            Action act3_2 = () =>
             {
 
             };
 
+            Task.Run(Test1);
             Task.Run(new Action(Test1));
-            Task.Run(act1);
-            Task.Run(act2);
-            Task.Run(act3);
-            //Task.Run(async(await()=>{ }));
+            Task.Run(new Action(() => { }));
+
+            Task.Run(act1_1);
+            Task.Run(act1_2);
+
+            Task.Run(act3_1);
+            Task.Run(act3_2);
+            Task.Run(() =>
+            {
+
+            });
+
+
+
+            Task.Run(() =>
+            {
+                Test3(new Action<int>(Test2), 1, 2);
+            });
+
+
+
+
+
+
+
+            //Task.Run(async (await ()=> { }));
+        }
+
+        private void Test3(Action<int> action)
+        {
+            throw new NotImplementedException();
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -49,7 +80,7 @@ namespace WinPMS.Debug
             textBox1.Text = await Task.Run(() =>
             {
                 Thread.Sleep(5000);
-                
+
                 return "await async";
             });
 
@@ -64,20 +95,18 @@ namespace WinPMS.Debug
 
         }
 
-        private void Test2(int a, int b)
+        private void Test2(int a)
         {
 
         }
 
-        private int Test3()
+        private void Test3(Action<int> act, int a, int b)
         {
-            return new Random().Next(1, 10);
+            act.Invoke(0);
         }
 
-        private int Test4(int a, int b)
-        {
-            return new Random().Next(1, 10);
-        }
+
+
         #endregion
 
     }

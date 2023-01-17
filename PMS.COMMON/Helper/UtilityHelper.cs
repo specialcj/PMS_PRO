@@ -98,5 +98,30 @@ namespace PMS.COMMON.Helper
 
             return counter;
         }
+
+
+        /// <summary>
+        /// 根据期望长度，以特定的字符串填充源字符串
+        /// </summary>
+        /// <param name="source">源字符串</param>
+        /// <param name="len">期望字符串的长度</param>
+        /// <param name="padding">待填充的字符串</param>
+        /// <param name="isAppend">是否在源字符串后追加，true->追加，false->不追加</param>
+        public static string PaddingAsStrByLen(string source, int len, string padding, bool isAppend)
+        {
+            int iSrcLen = source.Length;    //获取源字符串的长度
+            int iLenDiff = len - iSrcLen;   //获取期望字符串的长度和源字符串长度之间的差
+            string temp = isAppend ? source : "";
+
+            if (iLenDiff > 0)
+            {
+                for (int i = 0; i < iLenDiff; i++)
+                {
+                    temp += padding;
+                }
+            }
+
+            return temp;
+        }
     }
 }

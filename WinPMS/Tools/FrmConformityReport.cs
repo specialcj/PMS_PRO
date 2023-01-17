@@ -429,6 +429,8 @@ namespace WinPMS.Tools
             //Generate Conformity Criteria
             await Task.Run(() =>
             {
+                //act.Invoke();
+
                 Workbook workbook = new Workbook();
                 workbook.LoadFromFile(_sConformityCriteriaTemplateFileCopyPathRename);
 
@@ -624,7 +626,6 @@ namespace WinPMS.Tools
 
 
 
-
         #endregion
 
         #region 方法
@@ -634,7 +635,10 @@ namespace WinPMS.Tools
 
         #endregion
 
-        
+        private void btn_ApplyFileNum_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 
 }
