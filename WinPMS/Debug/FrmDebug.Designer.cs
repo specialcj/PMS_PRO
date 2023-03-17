@@ -36,6 +36,8 @@ namespace WinPMS.Debug
             this.btn_Close = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btn_SendMail = new System.Windows.Forms.Button();
+            this.btn_ImgToPDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_DllCheckForRadar2
@@ -108,11 +110,35 @@ namespace WinPMS.Debug
             this.listBox1.Size = new System.Drawing.Size(817, 160);
             this.listBox1.TabIndex = 6;
             // 
+            // btn_SendMail
+            // 
+            this.btn_SendMail.Location = new System.Drawing.Point(218, 103);
+            this.btn_SendMail.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_SendMail.Name = "btn_SendMail";
+            this.btn_SendMail.Size = new System.Drawing.Size(111, 40);
+            this.btn_SendMail.TabIndex = 7;
+            this.btn_SendMail.Text = "Send Mail";
+            this.btn_SendMail.UseVisualStyleBackColor = true;
+            this.btn_SendMail.Click += new System.EventHandler(this.btn_SendMail_Click);
+            // 
+            // btn_ImgToPDF
+            // 
+            this.btn_ImgToPDF.Location = new System.Drawing.Point(218, 195);
+            this.btn_ImgToPDF.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ImgToPDF.Name = "btn_ImgToPDF";
+            this.btn_ImgToPDF.Size = new System.Drawing.Size(111, 40);
+            this.btn_ImgToPDF.TabIndex = 8;
+            this.btn_ImgToPDF.Text = "ImgToPDF";
+            this.btn_ImgToPDF.UseVisualStyleBackColor = true;
+            this.btn_ImgToPDF.Click += new System.EventHandler(this.btn_ImgToPDF_Click);
+            // 
             // FrmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 547);
+            this.ClientSize = new System.Drawing.Size(1100, 581);
+            this.Controls.Add(this.btn_ImgToPDF);
+            this.Controls.Add(this.btn_SendMail);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btn_Close);
@@ -137,5 +163,7 @@ namespace WinPMS.Debug
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btn_SendMail;
+        private System.Windows.Forms.Button btn_ImgToPDF;
     }
 }

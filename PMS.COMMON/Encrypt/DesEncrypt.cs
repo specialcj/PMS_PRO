@@ -14,12 +14,12 @@ namespace PMS.COMMON.Encrypt
     public class DesEncrypt
     {
         //8位长度
-        private static readonly string KEY = "Hirata";
+        private static readonly string KEY = "com.pms";
         private static readonly byte[] key = ASCIIEncoding.ASCII.GetBytes(KEY.Substring(0, 8));
         private static readonly byte[] iv = ASCIIEncoding.ASCII.GetBytes(KEY.Insert(0, "w").Substring(0, 8));
 
         /// <summary>
-        /// DES 加密
+        /// DES加密
         /// </summary>
         /// <param name="strValue"></param>
         /// <returns></returns>

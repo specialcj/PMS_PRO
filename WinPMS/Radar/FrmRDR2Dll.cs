@@ -290,8 +290,6 @@ namespace WinPMS.Radar
                     {
                         row.Cells["DllActive"].Value = "true";
                     }
-
-
                 }
 
                 if ((string)dgvDll.Rows[0].Cells["DllActive"].Value == "true" && (string)dgvDll.Rows[0].Cells["DllUsePro"].Value == "NULL")

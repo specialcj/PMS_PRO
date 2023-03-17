@@ -180,14 +180,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Debug\FrmDemo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debug\FrmDemo.designer.cs">
-      <DependentUpon>FrmDemo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FModels\FrmLoginModel.cs" />
-    <Compile Include="FModels\FrmProgressBarModel.cs" />
     <Compile Include="Debug\FrmDebug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,17 +192,43 @@
     <Compile Include="Debug\FrmDebugModeWarning.Designer.cs">
       <DependentUpon>FrmDebugModeWarning.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Debug\FrmDebugRadar2SELRecipe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Debug\FrmDebugRadar2SELRecipe.designer.cs">
+      <DependentUpon>FrmDebugRadar2SELRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Debug\FrmDebugTaskDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\FrmDebugTaskDemo.Designer.cs">
+      <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Debug\FrmDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\FrmDemo.designer.cs">
+      <DependentUpon>FrmDemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FModels\FrmLoginModel.cs" />
+    <Compile Include="FModels\FrmProgressBarModel.cs" />
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmAboutPMS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmAboutPMS.Designer.cs">
       <DependentUpon>FrmAboutPMS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegister.Designer.cs">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmAdminAuthority.cs">
       <SubType>Form</SubType>
@@ -230,12 +248,6 @@
     <Compile Include="FrmMain.designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug\FrmDebugTaskDemo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debug\FrmDebugTaskDemo.Designer.cs">
-      <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmUtility.cs" />
     <Compile Include="FrmProgressBar.cs">
       <SubType>Form</SubType>
@@ -253,11 +265,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Debug\FrmDebugRadar2SELRecipe.cs">
+    <Compile Include="Radar\FrmRadarRecipeConvert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debug\FrmDebugRadar2SELRecipe.designer.cs">
-      <DependentUpon>FrmDebugRadar2SELRecipe.cs</DependentUpon>
+    <Compile Include="Radar\FrmRadarRecipeConvert.designer.cs">
+      <DependentUpon>FrmRadarRecipeConvert.cs</DependentUpon>
     </Compile>
     <Compile Include="Radar\FrmRDR2Dll.cs">
       <SubType>Form</SubType>
@@ -319,20 +331,26 @@
     <Compile Include="Tools\FrmSeparateST2PF.designer.cs">
       <DependentUpon>FrmSeparateST2PF.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Debug\FrmDemo.resx">
-      <DependentUpon>FrmDemo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Debug\FrmDebug.resx">
       <DependentUpon>FrmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Debug\FrmDebugModeWarning.resx">
       <DependentUpon>FrmDebugModeWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Debug\FrmDebugRadar2SELRecipe.resx">
+      <DependentUpon>FrmDebugRadar2SELRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debug\FrmDebugTaskDemo.resx">
+      <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debug\FrmDemo.resx">
+      <DependentUpon>FrmDemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAboutPMS.resx">
       <DependentUpon>FrmAboutPMS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegister.resx">
+      <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAdminAuthority.resx">
       <DependentUpon>FrmAdminAuthority.cs</DependentUpon>
@@ -352,16 +370,13 @@
     <EmbeddedResource Include="FrmProgressBar.resx">
       <DependentUpon>FrmProgressBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debug\FrmDebugTaskDemo.resx">
-      <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debug\FrmDebugRadar2SELRecipe.resx">
-      <DependentUpon>FrmDebugRadar2SELRecipe.cs</DependentUpon>
+    <EmbeddedResource Include="Radar\FrmRadarRecipeConvert.resx">
+      <DependentUpon>FrmRadarRecipeConvert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Radar\FrmRDR2Dll.resx">
       <DependentUpon>FrmRDR2Dll.cs</DependentUpon>
@@ -442,6 +457,7 @@
     <None Include="Config\RecipeTemplate\Temp.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Doc\PMS_Doc.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

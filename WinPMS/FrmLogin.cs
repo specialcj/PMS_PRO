@@ -168,12 +168,14 @@ namespace WinPMS
                 if (cbUName.SelectedIndex == 0)//opr
                 {
                     sEncryptPwd = sUserPwd;
-                    sIniPwd = FileHelper.sIniPwdOpr;
+                    //sIniPwd = FileHelper.sIniPwdOpr;
+                    sIniPwd = "opr";
                 }
                 else if (cbUName.SelectedIndex == 1)//admin
                 {
                     sEncryptPwd = MD5Encrypt.Encrypt(sUserPwd);
-                    sIniPwd = FileHelper.sIniPwdEncrypt;
+                    //sIniPwd = FileHelper.sIniPwdEncrypt;
+                    sIniPwd = "21232f297a57a5a743894a0e4a801fc3";
                 }
 
                 //判断结果

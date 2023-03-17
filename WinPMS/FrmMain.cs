@@ -1,4 +1,5 @@
 ﻿using PMS.COMMON.Helper;
+using PMS.COMMON.Util;
 using PMS.MODELS.DModels;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinPMS.Debug;
 using WinPMS.FModels;
+using static PMS.COMMON.Util.EncryptionHelper;
 
 namespace WinPMS
 {
@@ -26,6 +30,17 @@ namespace WinPMS
         private const UInt32 SC_CLOSE = 0x0000F060;
         private const UInt32 MF_BYCOMMAND = 0x00000000;
 
+        private FrmLogin _frmLogin = null;
+        private FrmProgressBar _frmProgressBar = null;
+        private FrmProgressBarModel _frmProgressBarModel = null;
+
+        private string _sUserName = "";//当前登录用户信息
+        private int _iIsFrmFirstLoad = 0;//是否是第一次加载
+
+        private string encryptComputer = "";
+        private bool isRegister = false;
+        private const int TIME_COUNT = 10 * 60;//PMS未注册，剩余时间计数值，单位s
+
         public FrmMain()
         {
             InitializeComponent();
@@ -33,16 +48,9 @@ namespace WinPMS
             //禁用关闭按钮
             //IntPtr hMenu = GetSystemMenu(this.Handle, 0);
             //RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
+
+            //Control.CheckForIllegalCrossThreadCalls = false;
         }
-
-        private FrmLogin _frmLogin = null;
-        private FrmProgressBar _frmProgressBar = null;
-        private FrmProgressBarModel _frmProgressBarModel = null;
-
-        private string _sUserName = "";//当前登录用户信息
-
-        private int _iIsFrmFirstLoad = 0;//是否是第一次加载
-
 
         #region 事件
         /// <summary>
@@ -59,6 +67,25 @@ namespace WinPMS
                 if (null != this.Tag)
                 {
                     _frmProgressBarModel = this.Tag as FrmProgressBarModel;
+
+                    #region 检查注册信息
+                    string computerInfo = ComputerInfo.GetComputerInfo();
+                    encryptComputer = new EncryptionHelper().EncryptString(computerInfo);
+                    if (CheckRegister() == true)
+                    {
+                        lblRegisterTimeRemaining.Text = "OK";
+                    }
+                    else
+                    {
+                        MsgBoxHelper.MsgBoxShow("Not Registed!\n\n" + "PMS will be aborted after: " + (TIME_COUNT / 60) + "mins", "Register");
+                        RegisterFileHelper.WriteComputerInfoFile(encryptComputer);
+                        Task.Run(new Action(() =>
+                        {
+                            ClosePMSWithoutRegister();
+                        }));
+                    }
+                    #endregion
+
                     InitMainInfo();
                 }
             };
@@ -88,7 +115,7 @@ namespace WinPMS
         /// <param name="e"></param>
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_sUserName == "admin" || Environment.UserName.ToUpper() == "JASON.CAI")
+            if (_sUserName == "admin")
             {
                 if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Are you sure to exit？", "Exit", 2))
                 {
@@ -121,6 +148,86 @@ namespace WinPMS
 
 
         #region 方法
+        private bool CheckRegister()
+        {
+            EncryptionHelper helper = new EncryptionHelper();
+            string md5String = helper.GetMD5String(encryptComputer);
+            return CheckRegisterData(md5String);
+
+            //return false;
+        }
+
+        private bool CheckRegisterData(string key)
+        {
+            if (RegisterFileHelper.ExistRegisterInfofile() == false)//不存在RegisterInfo.key文件
+            {
+                isRegister = false;
+                return false;
+            }
+            else//存在RegisterInfo.key文件
+            {
+                //return false;
+
+                string registerInfo = RegisterFileHelper.ReadRegisterInfoFile();
+                EncryptionHelper help = new EncryptionHelper(EncryptionKeyEnum.KeyB);
+                string registerData = help.DecryptString(registerInfo);
+                if (key == registerData)
+                {
+                    isRegister = true;
+                    return true;
+                }
+                else
+                {
+                    isRegister = false;
+                    return false;
+                }
+            }
+        }
+
+        private void ClosePMSWithoutRegister()
+        {
+            //int count = 0;
+            //while (count > TIME_COUNT && isRegist == false)
+            //{
+            //    if (isRegist == true)
+            //    {
+            //        return;
+            //    }
+            //    Thread.Sleep(1 * 1000);
+            //    count--;
+            //    lblRegistTimeRemaining.Text = count.ToString();
+            //}
+
+            int count = TIME_COUNT;
+            do
+            {
+                if (isRegister == true)
+                {
+                    return;
+                }
+                Thread.Sleep(1 * 1000);
+                count--;
+                lblRegisterTimeRemaining.Text = count.ToString();
+            } while (count > 0 && isRegister == false);
+
+            if (isRegister == true)
+            {
+                return;
+            }
+            else
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        //this.Close();
+                        Process[] p = Process.GetProcessesByName("WinPMS");
+                        p[0].Kill();
+                    }));
+                }
+            }
+        }
+
         /// <summary>
         /// 初始化信息
         /// </summary>
@@ -172,7 +279,7 @@ namespace WinPMS
                 _sUserName = frmLoginModel.UserName;
             }
 
-            lblUserNamePC.Text = Environment.UserName;
+            lblUserName.Text = Environment.UserName;
             lblUName.Text = _sUserName;
             lblLoginTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 

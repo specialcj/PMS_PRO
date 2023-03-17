@@ -16,6 +16,8 @@ namespace PMS.DLL
         //public string _sIniPath = ConfigurationManager.AppSettings["PMSIniPath"].ToString();//ini配置文件
         //public string _sIniPath = new DirectoryInfo("../../../").FullName + @"WinPMS\Config\PMS.ini";
 
+        private int _iPMSDllCheckOnOff = 0;
+
         private string _sPMSUsage = "";
         private string _sIniPathPMSUsed = "";
         private string _sRDR2AlvCanCommsFolderPath = "";
@@ -28,17 +30,16 @@ namespace PMS.DLL
         private string _sRDRAlvCanCommsDllSection = FileHelper.INI_SECTION_RDR_ALV_CAN_COMMS_DLL;
 
 
-
-
         /// <summary>
-        /// 
+        /// 动态匹配ALV_CAN_Comms.dll
         /// </summary>
         /// <param name="name">recipe中的Veh号</param>
-        /// <param name="recipeDescription">recipe中的项目描述</param>
+        /// <param name="recipeDescCompare">recipe中的Description，用于匹配</param>
+        /// <param name="recipeDescShow">recipe中的Description，用于显示</param>
         /// <param name="dllSwitchPro">切换dll的项目信息</param>
         /// <param name="dllSwitch">是否切换dll的标识, Ture: 需要切换, False: 不需要切换</param>
         /// <returns></returns>
-        public bool AlvCanCommsDllCheckForRadar(string name, string recipeDescription, out string dllSwitchPro, out bool dllSwitch)
+        public bool AlvCanCommsDllCheckForRadar(string name, string recipeDescCompare, string recipeDescShow, out string dllSwitchPro, out bool dllSwitch)
         {
             /*
             FileHelper.sExeFilePath = Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName;//..\..\.dll, 获取该文件的路径
@@ -67,6 +68,16 @@ namespace PMS.DLL
             _sPMSUsage = IniHelper.ReadIni(_sPMSSection, "PMS_Usage", "NULL", sIniPathPMS);
             _sIniPathPMSUsed = sIniPathPMS.Replace("PMS.ini", "PMS_" + _sPMSUsage + ".ini");
 
+            //从ini配置文件中获取PMS的Check状态
+            _iPMSDllCheckOnOff = int.Parse(IniHelper.ReadIni(_sPMSSection, "PMS_DllCheckOnOff", "NULL", sIniPathPMS));
+
+            if (_iPMSDllCheckOnOff == 0)
+            {
+                MessageBox.Show("PMS DLL Chek is Off", "PMS", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                dllSwitchPro = "";
+                dllSwitch = false;
+                return true;
+            }
 
             //根据PMS的使用场景, 加载对应的ini文件
             switch (_sPMSUsage)
@@ -139,7 +150,7 @@ namespace PMS.DLL
                     {
                         foreach (string item in sDllSwitchProIniListSubLastList)
                         {
-                            bIsHasInRecipeDescri = recipeDescription.Contains(item);
+                            bIsHasInRecipeDescri = recipeDescCompare.Contains(item);
                             if (bIsHasInRecipeDescri)
                             {
                                 break;
@@ -156,7 +167,7 @@ namespace PMS.DLL
                         {
                             string sDllSwithcProSub = sDllSwitchProIniListSub[j].Trim();
 
-                            if (recipeDescription.Contains(sDllSwithcProSub))
+                            if (recipeDescCompare.Contains(sDllSwithcProSub))
                             {
                                 sDllExpected = sDllSwitchSpecialIniList[i].Trim();
                             }
@@ -169,7 +180,7 @@ namespace PMS.DLL
                 }
                 else
                 {
-                    if (recipeDescription.Contains(sDllSwitchPro))
+                    if (recipeDescCompare.Contains(sDllSwitchPro))
                     {
                         //Console.WriteLine(recipeDescription + "," + "期望dll" + "," + sDllSwitchSpecialIniList[iDllSwitchIndex].Trim());
                         sDllExpected = sDllSwitchSpecialIniList[i].Trim();
@@ -212,17 +223,17 @@ namespace PMS.DLL
                 {
                     dllSwitchTemp = true;//不存在
 
-                    //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n" + "Expected dll folder: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "Current dll folder: folder not exist";
+                    //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescShow + "\n\n" + "Expected dll folder: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "Current dll folder: folder not exist";
 
-                    dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescription + "\n\n" + "期望dll目录: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "当前dll目录: 目录不存在" + "\n";
+                    dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescShow + "\n\n" + "期望dll目录: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "当前dll目录: 目录不存在" + "\n";
                 }
                 else
                 {
                     dllSwitchTemp = false;
 
-                    //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n" + "Expected dll folder: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "Current dll folder: folder exist";
+                    //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescShow + "\n\n" + "Expected dll folder: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "Current dll folder: folder exist";
 
-                    dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescription + "\n\n" + "期望dll目录: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "当前dll目录: 目录存在" + "\n";
+                    dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescShow + "\n\n" + "期望dll目录: " + Path.Combine(_sRDR2AlvCanCommsFolderPath, sDllExpected) + "\n\n" + "当前dll目录: 目录存在" + "\n";
                 }
 
                 //Console.WriteLine(dllSwitchPro);
@@ -263,8 +274,8 @@ namespace PMS.DLL
                 //[1]" ALV_CAN_COMMS - fft ghost v4"
                 string[] sArrDllExpectedFolderReplace = sDllExpectedFolder.Split(',');
 
-                //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n";
-                dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescription + "\n\n";
+                //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescShow + "\n\n";
+                dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescShow + "\n\n";
 
 
                 //获取期望的文件夹目录: C:\ALV_CAN_Comms - sweet400, C:\ALV_CAN_COMMS - fft ghost v4
@@ -400,9 +411,9 @@ namespace PMS.DLL
                     dllSwitchTemp = false;
                 }
 
-                //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescription + "\n\n" + "Expected dll: " + sDllExpected + "\n\n" + "Current dll: " + sDllVersionCurrent;
+                //dllSwitchPro = "Veh: " + name + "\n\n" + "Des: " + recipeDescShow + "\n\n" + "Expected dll: " + sDllExpected + "\n\n" + "Current dll: " + sDllVersionCurrent;
 
-                dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescription + "\n\n" + "期望dll: " + sDllExpected + "\n\n" + "当前dll: " + sDllVersionCurrent + "\n\n" + "dll匹配结果：" + (dllSwitchTemp ? "dll匹配错误" : "dll匹配正确") + "\n";
+                dllSwitchPro = "Veh号: " + name + "\n\n" + "描述: " + recipeDescShow + "\n\n" + "期望dll: " + sDllExpected + "\n\n" + "当前dll: " + sDllVersionCurrent + "\n\n" + "dll匹配结果：" + (dllSwitchTemp ? "dll匹配错误" : "dll匹配正确") + "\n";
 
 
                 //Console.WriteLine(dllSwitchPro);

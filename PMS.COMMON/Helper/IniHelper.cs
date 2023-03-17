@@ -27,6 +27,10 @@ namespace PMS.COMMON.Helper
         [DllImport("kernel32", CharSet = CharSet.Auto)]
         private static extern uint GetPrivateProfileStringA(string lpAppName, string lpKeyName, string lpDefault, Byte[] retVal, int nSize, string lpFileName);
 
+        //private static extern int GetPrivateProfileStringB(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+
+        //private static extern int GetPrivateProfileSectionNamesA(byte[] buffer, int iLen, string fileName);
+
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         private static extern bool WritePrivateProfileSection(string lpAppName, string lpString, string lpFileName);
         /// <summary>
@@ -72,7 +76,7 @@ namespace PMS.COMMON.Helper
         public static List<string> ReadSections(string iniFileName)
         {
             List<string> sections = new List<string>();
-            Byte[] buf = new byte[65536];
+            Byte[] buf = new byte[65535];
             uint len = GetPrivateProfileStringA(null, null, null, buf, buf.Length, iniFileName);
             int j = 0;
             for (int i = 0; i < len; i++)
@@ -86,11 +90,38 @@ namespace PMS.COMMON.Helper
             return sections;
         }
 
+        public static List<string> ReadSectionsEx(string iniFileName)
+        {
+            byte[] buffer = new byte[65535];
+            int rel = 0;//GetPrivateProfileSectionNamesA(buffer, buffer.GetUpperBound(0), iniFileName);
+            int iCnt, iPos;
+            List<string> sections = new List<string>();
+            string tmp;
+            if (rel > 0)
+            {
+                iCnt = 0;
+                iPos = 0;
+                for (iCnt = 0;  iCnt < rel; iCnt++)
+                {
+                    if (buffer[iCnt] == 0x00)
+                    {
+                        tmp = ASCIIEncoding.Default.GetString(buffer, iPos, iCnt - iPos).Trim();
+                        iPos = iCnt + 1;
+                        if (tmp != "")
+                        {
+                            sections.Add(tmp);
+                        }
+                    }
+                }
+            }
+
+            return sections;
+        }
 
         public static List<string> ReadKeys(string sectionName, string iniFileName)
         {
             List<string> keys = new List<string>();
-            Byte[] buf = new byte[65536];
+            Byte[] buf = new byte[65535];
             uint len = GetPrivateProfileStringA(sectionName, null, null, buf, buf.Length, iniFileName);
             int j = 0;
             for (int i = 0; i < len; i++)

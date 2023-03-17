@@ -183,6 +183,7 @@ namespace WinPMS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmLogin());
+            
             //Application.Run(new FrmDebug());
             //Application.Run(new FrmTaskDemo());
             //Application.Run(new FrmFileZilla());
@@ -191,7 +192,7 @@ namespace WinPMS
             //Application.Run(new FrmDebugRadar2SELRecipe());
 
             //Application.Run(new FrmConformityReport());
-
+            //Application.Run(new FrmRadarRecipeConvert());
         }
 
         

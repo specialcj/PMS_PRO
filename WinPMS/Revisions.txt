@@ -6,10 +6,22 @@ V1.1.8.1
 
 V1.1.8.2
 -> support generate conformity report (beta version)
-   -> Radar - SensorTest
+   -> Radar 77GHz
+      -> SensorTest
 
+V1.1.8.3
+-> add "PMS_DllCheckOnOff"
+-> optimize DllCheck.cs
+
+V1.1.8.4
+-> support generate conformity report
+   -> Radar 77GHz
+      -> SensorTest -> ok
+      -> SEL
+      -> PDI
+      -> PACKING
 
 
 TBD
--> generate Recipe.ini for SEL
+-> generate Recipe.ini for Radar 77GHz SEL
 

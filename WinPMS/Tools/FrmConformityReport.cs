@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace WinPMS.Tools
 {
@@ -21,7 +22,10 @@ namespace WinPMS.Tools
 
         private const string CONFORMITY_REPORT_RADAR_SENSOR_TEST = "CFM-File-Num Acceptance Conformity for Radar XXX Sensor Test.docx";
         private const string CONFORMITY_CRITERIA_RADAR_SENSOR_TEST = "List of the Acceptance Criteria for Radar XXX Sensor Test.xlsx";
-        
+
+        private const string CONFORMITY_REPORT_RADAR_SEL = "CFM-PE-VRRD0502-07-03 Acceptance Conformity for Radar 5 SEL.docx";
+        private const string CONFORMITY_CRITERIA_RADAR_SEL = "List of the Acceptance Criteria for Radar 5 SEL.xlsx";
+
         private const string CONFORMITY_REPORT_RADAR_PDI_VS412 = "CFM-File-Num Radar 2 77GHz G1.3 Nissan VS412 conformity validation report.docx";
         private const string CONFORMITY_CRITERIA_RADAR_PDI_VS412 = "List of the Acceptance Criteria for Radar 2 77GHz G1.3 Nissan VS412.xlsx";
 
@@ -54,6 +58,8 @@ namespace WinPMS.Tools
         private string _sTestManager = "";
         private string _sPlantQualityManager = "";
         private string _sLoadPic = "";
+
+        private List<FixtureNumSensorTest> _listFixtureNumST = new List<FixtureNumSensorTest>();
 
         #region 事件
 
@@ -104,6 +110,16 @@ namespace WinPMS.Tools
                 comboBox_PlantQualityManager.Items.Add(item.Trim());
             }
             comboBox_PlantQualityManager.SelectedIndex = 0;
+
+            //加载dgv_Fixture_Num_ST_Example
+            //dgv_Fixture_Num_ST_Example.Rows.Add("EPT-RDR05G1.3-01-01", "");
+            //dgv_Fixture_Num_ST_Example.Rows.Add("EPT-RDR05G1.3-01-02", "");
+
+            //禁用DataGridView排序
+            for (int i = 0; i < dgv_Fixture_Num_ST.Columns.Count; i++)
+            {
+                dgv_Fixture_Num_ST.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         /// <summary>
@@ -221,15 +237,43 @@ namespace WinPMS.Tools
             }
 
             //夹具编号
-            if (string.IsNullOrEmpty(textBox_FixtureNum_ST.Text.Trim()))
+            //if (string.IsNullOrEmpty(textBox_FixtureNum_ST.Text.Trim()))
+            //{
+            //    MsgBoxHelper.MsgBoxError("please input Equipment/Fixture Num first!");
+            //    textBox_FixtureNum_ST.Focus();
+            //    return;
+            //}
+            //else
+            //{
+            //    _sFixtureNumST = textBox_FixtureNum_ST.Text.Trim();
+            //}
+
+            if (dgv_Fixture_Num_ST.Rows.Count == 0)
             {
-                MsgBoxHelper.MsgBoxError("please input Equipment/Fixture Num first!");
-                textBox_FixtureNum_ST.Focus();
+                //提示新增夹具编号
+                MsgBoxHelper.MsgBoxError("please add the Fixture Num first!");
                 return;
             }
-            else
+            else if (dgv_Fixture_Num_ST.Rows.Count == 1)
             {
-                _sFixtureNumST = textBox_FixtureNum_ST.Text.Trim();
+                //提示输入夹具编号
+                if (string.IsNullOrEmpty(dgv_Fixture_Num_ST.Rows[0].Cells[0].FormattedValue.ToString().Trim()))
+                {
+                    MsgBoxHelper.MsgBoxError("please input the Fixture Num first!");
+                    return;
+                }
+            }
+            else if(dgv_Fixture_Num_ST.Rows.Count > 1)
+            {
+                //提示删除空白夹具编号
+                for (int i = 0; i < dgv_Fixture_Num_ST.Rows.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(dgv_Fixture_Num_ST.Rows[i].Cells[0].FormattedValue.ToString().Trim()))
+                    {
+                        MsgBoxHelper.MsgBoxError("please delete the empty one in the view first!");
+                        return;
+                    }
+                }
             }
 
             //夹具名称
@@ -317,13 +361,24 @@ namespace WinPMS.Tools
             {
                 _sPlantQualityManager = comboBox_PlantQualityManager.Text.Trim();
             }
-            
+
             //Pic
             if (string.IsNullOrEmpty(_sLoadPic))
             {
                 MsgBoxHelper.MsgBoxError("please load pic first!");
                 textBox_LoadPic.Focus();
                 return;
+            }
+
+
+            //获取夹具编号
+            _listFixtureNumST.Clear();
+            for (int i = 0; i < dgv_Fixture_Num_ST.Rows.Count; i++)
+            {
+                FixtureNumSensorTest fixtureSensorTest = new FixtureNumSensorTest();
+                fixtureSensorTest.fixtureNum = dgv_Fixture_Num_ST.Rows[i].Cells[0]?.FormattedValue.ToString();
+                fixtureSensorTest.fixtureNumComment = dgv_Fixture_Num_ST.Rows[i].Cells[1]?.FormattedValue.ToString();
+                _listFixtureNumST.Add(fixtureSensorTest);
             }
             #endregion
 
@@ -334,13 +389,16 @@ namespace WinPMS.Tools
             {
                 if (radioBtn_SensorTest.Checked)
                 {
+                    //获取SensorTest Conformity Report File的路径和Conformity Criteria File的路径
                     _sConformityReportTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\SensorTest"), CONFORMITY_REPORT_RADAR_SENSOR_TEST);
                     _sConformityCriteriaTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\SensorTest"), CONFORMITY_CRITERIA_RADAR_SENSOR_TEST);
                 }
                 else if (radioBtn_SEL.Checked)
                 {
-                    //TODO
-                    //获取SEL Conformity Report File的路径 和 Conformity Criteria File的路径
+                    //获取SEL Conformity Report File的路径和Conformity Criteria File的路径
+                    _sConformityReportTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\SEL"), CONFORMITY_REPORT_RADAR_SEL);
+                    _sConformityCriteriaTemplateFilePath = Path.Combine(Path.Combine(_sConformityReportTemplateFolderPath, @"Radar\SEL"), CONFORMITY_CRITERIA_RADAR_SEL);
+
                 }
             }
             //TODO 其他Station站别
@@ -424,7 +482,7 @@ namespace WinPMS.Tools
             {
                 throw ex;
             }
-            
+
 
             //Generate Conformity Criteria
             await Task.Run(() =>
@@ -483,8 +541,8 @@ namespace WinPMS.Tools
 
                 //replace text
                 doc.Replace("Radar XXX", _sLine, true, true);
-                doc.Replace("with 77 G1.3 Corner Fixture", "with " +  _sFixtureNameST, true, true);
-                doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sFixtureNumST, true, true);
+                doc.Replace("with 77GHz Gen1.3 Corner Fixture", "with " + _sFixtureNameST, true, true);
+                //doc.Replace("EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02", _sFixtureNumST, true, true);
                 doc.Replace("Name1", _sTestEngineer, true, true);
                 doc.Replace("Name2", _sPME, true, true);
                 doc.Replace("Name3", _sTestManager, true, true);
@@ -493,10 +551,10 @@ namespace WinPMS.Tools
                 doc.Replace("2022/11/29", dateTimePicker_ValidationDate.Value.ToString("yyyy/MM/dd"), true, true);
 
                 Paragraph paragraph;
-                DocPicture docPicReplace, docPicAppend;
+                DocPicture docPicReplace, docPicAppendPic, docPicExcelAdd;
 
                 //遍历这个Section中的所有子元素
-                for (int i = 0, j = 0, k = 0; i < sec.Body.ChildObjects.Count; i++)
+                for (int i = 0, j = 0, k = 0, m = 0; i < sec.Body.ChildObjects.Count; i++)
                 {
                     DocumentObject docObj = sec.Body.ChildObjects[i];
 
@@ -519,6 +577,7 @@ namespace WinPMS.Tools
                         }
                         */
 
+
                         //找到段落下的对应插入图片的文本位置
                         if (paragraph.Text.ToUpper().Trim() == "OBJECTIVE")
                         {
@@ -531,11 +590,11 @@ namespace WinPMS.Tools
 
                         if (j == 3)
                         {
-                            docPicAppend = paragraph.AppendPicture(Image.FromFile(_sLoadPic));
+                            docPicAppendPic = paragraph.AppendPicture(Image.FromFile(_sLoadPic));
 
                             //resize the image
-                            docPicAppend.Height = docPicAppend.Height * 0.5f;
-                            docPicAppend.Width = docPicAppend.Width * 0.5f;
+                            docPicAppendPic.Height = docPicAppendPic.Height * 0.5f;
+                            docPicAppendPic.Width = docPicAppendPic.Width * 0.5f;
                         }
 
 
@@ -552,7 +611,7 @@ namespace WinPMS.Tools
                         if (k == 6)
                         {
                             //实例化一个DocPicture类对象，加载图片
-                            DocPicture docPicExcelAdd = new DocPicture(doc);
+                            docPicExcelAdd = new DocPicture(doc);
                             Image image = Image.FromFile(Path.Combine(new DirectoryInfo(FileHelper.sExeFolderPath).Parent.Parent.FullName, @"Imgs\excel1.png"));
                             docPicExcelAdd.LoadImage(image);
                             docPicExcelAdd.Width = 77.25f;
@@ -564,8 +623,41 @@ namespace WinPMS.Tools
                             //docOldObj.DisplayAsIcon = true;
                             //break;
                         }
+
+
+                        //找到段落下的对应插入Fixture的文本位置
+                        if (paragraph.Text.Trim() == "Fixture :")
+                        {
+                            m++;
+                        }
+                        else if (m != 0)
+                        {
+                            m++;
+                        }
+
+                        if (m == 2)
+                        {
+                            //Section section = docObj.Document.AddSection();
+                            //Table table = section.AddTable(true);
+                            //TableRow row1 = table.AddRow();
+                            //TableCell cell1 = row1.AddCell();
+                            //cell1.AddParagraph().AppendText("Fixture Num");
+
+                            foreach (FixtureNumSensorTest fixtureNumST in _listFixtureNumST)
+                            {
+                                paragraph.AppendText(fixtureNumST.fixtureNum);
+                                if (!string.IsNullOrEmpty(fixtureNumST.fixtureNumComment))
+                                {
+                                    paragraph.AppendText(" " + "(" + fixtureNumST.fixtureNumComment + ")");
+                                }
+                                paragraph.AppendText("\n");
+                            }
+                        }
                     }
                 }
+
+                //更新目录
+                doc.UpdateTableOfContents();
 
                 //保存并打开文档
                 doc.SaveToFile(_sConformityReportTemplateFileCopyPathRename);
@@ -573,6 +665,26 @@ namespace WinPMS.Tools
             });
 
             btn_GenConformityReport.Enabled = true;
+        }
+
+
+        private void btn_Fixture_Num_ST_Add_Click(object sender, EventArgs e)
+        {
+            dgv_Fixture_Num_ST.Rows.Add();
+        }
+
+        private void btn_Fixture_Num_ST_Del_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("确定要删除列表中所选的一行吗？", "删除提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (res == DialogResult.OK)  //按确定才进行下一步删除
+            {
+                if (dgv_Fixture_Num_ST.Rows.Count >= 1)  //是否空表，不加判断遇到空表将出错
+                {
+                    dgv_Fixture_Num_ST.Rows.Remove(dgv_Fixture_Num_ST.SelectedRows[0]);  //删除一行
+                    dgv_Fixture_Num_ST.Refresh();  //刷新显示
+                }
+
+            }
         }
 
 
@@ -611,6 +723,15 @@ namespace WinPMS.Tools
             }
         }
 
+        /// <summary>
+        /// 申请文件编号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_ApplyFileNum_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
         private void tsbtnClose_Click(object sender, EventArgs e)
@@ -628,6 +749,8 @@ namespace WinPMS.Tools
 
         #endregion
 
+
+
         #region 方法
 
 
@@ -635,11 +758,15 @@ namespace WinPMS.Tools
 
         #endregion
 
-        private void btn_ApplyFileNum_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
     }
+
+    public class FixtureNumSensorTest
+    {
+        public string fixtureNum { get; set; }
+        public string fixtureNumComment { get; set; }
+    }
+
 
 }
 

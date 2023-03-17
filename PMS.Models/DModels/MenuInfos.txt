@@ -25,4 +25,5 @@ MId,		MName,						ParenetId,	ParentName,	MKey,				MUrl,							IsTop,	MOrder,	IsD
 501,		FrmDebugRadar2SELRecipe,	130,		NULL,		NoShortcuts,		Debug.FrmDebugRadar2SELRecipe,	0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 9000,		View Help,					900,		NULL,		NoShortcuts,		NULL,							1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-9001,		About PMS,					900,		NULL,		NoShortcuts,		FrmAboutPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+9001,		Register PMS,				900,		NULL,		NoShortcuts,		FrmRegisterPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+9005,		About PMS,					900,		NULL,		NoShortcuts,		FrmAboutPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL

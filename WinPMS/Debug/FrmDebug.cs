@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,8 +14,6 @@ namespace WinPMS.Debug
         {
             InitializeComponent();
         }
-
-
 
 
         #region 事件
@@ -60,11 +57,11 @@ namespace WinPMS.Debug
             //sList.Add("Radar 77GHz G1.3 GAC A55 RCR");
 
             //Veh
-            //sList.Add("6819808AAA");
-            sList.Add("6819808CCC");
-            foreach (string sDesc in sList)
+            sList.Add("6819808AAA");
+            //sList.Add("6819808CCC");
+            foreach (string sDescCompare in sList)
             {
-                bool res = dllCheck.AlvCanCommsDllCheckForRadar("Veh No", sDesc, out string dllSwitchPro, out bool dllSwitch);
+                bool res = dllCheck.AlvCanCommsDllCheckForRadar("Veh No", sDescCompare, "Description Show", out string dllSwitchPro, out bool dllSwitch);
             }
         }
 
@@ -79,32 +76,25 @@ namespace WinPMS.Debug
                 image.Write(@"D:\_VNE_Work\_SendAnywhere\IMG_7432.jpg");
             }
         }
-        #endregion
 
-        #region 方法
-        public List<string> AddSource()
+
+        private void button1_Click(object sender, EventArgs e)
         {
-            List<string> sSource = new List<string>();
-            {
-                sSource.Add("681532300000001496");
-                sSource.Add("681532300000001495");
-                sSource.Add("681532300000001494");
-                sSource.Add("681532300000001497");
-                sSource.Add("681532300000001498");
-                sSource.Add("681532300000001499");
-                sSource.Add("681532300000001502");
-                sSource.Add("681532300000001501");
-                sSource.Add("681532300000001500");
-                sSource.Add("681532300000001469");
-            }
+            //Process.Start(@"A:\ALV_CAN_COMMS_0.0.71.2");
 
-            return sSource;
+            //string s2 = PaddingAsStrByLen("C:\\ALV_CAN_COMMS - fft ghost v4", 50, " ", true);
+            //string s3 = PaddingAsStrByLen("C:\\ALV_CAN_Comms - gm", 50, " ", true);
+
+            //listBox1.Items.Add(s2);
+            //listBox1.Items.Add(s3);
+
+            string s1 = "C:\\ALV_CAN_COMMS - fft ghost v4>>> ALV_CAN_Comms_fft.dll >>> 1.1.71.0 >>> Release Build - 2022-02-22 at 11:39:37 >>> G1.3 Nissan fft ghost";
+            listBox1.Items.Add(s1);
+
+            string s2 = "C:\\ALV_CAN_COMMS - gm          >>> ALV_CAN_Comms_gm.dll >>> 1.1.73.0 >>> Release Build - 2022-03-10 at 12:04:05 >>> G1.2 GM";
+            listBox1.Items.Add(s2);
         }
 
-
-
-
-        #endregion
 
         private void btn_Debug_Click(object sender, EventArgs e)
         {
@@ -126,7 +116,27 @@ namespace WinPMS.Debug
         }
 
 
+        private void btn_SendMail_Click(object sender, EventArgs e)
+        {
 
+        }
+
+
+        private void btn_ImgToPDF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void btn_Close_Click(object sender, EventArgs e)
+        {
+            this.CloseForm();
+        }
+        #endregion
+
+
+
+        #region 方法
         /// <summary>
         /// 递归目录，添加目录下所有文件的FullName到List<string>中
         /// </summary>
@@ -170,30 +180,27 @@ namespace WinPMS.Debug
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        public List<string> AddSource()
         {
-            //Process.Start(@"A:\ALV_CAN_COMMS_0.0.71.2");
+            List<string> sSource = new List<string>();
+            {
+                sSource.Add("681532300000001496");
+                sSource.Add("681532300000001495");
+                sSource.Add("681532300000001494");
+                sSource.Add("681532300000001497");
+                sSource.Add("681532300000001498");
+                sSource.Add("681532300000001499");
+                sSource.Add("681532300000001502");
+                sSource.Add("681532300000001501");
+                sSource.Add("681532300000001500");
+                sSource.Add("681532300000001469");
+            }
 
-            //string s2 = PaddingAsStrByLen("C:\\ALV_CAN_COMMS - fft ghost v4", 50, " ", true);
-            //string s3 = PaddingAsStrByLen("C:\\ALV_CAN_Comms - gm", 50, " ", true);
-
-            //listBox1.Items.Add(s2);
-            //listBox1.Items.Add(s3);
-
-            string s1 = "C:\\ALV_CAN_COMMS - fft ghost v4>>> ALV_CAN_Comms_fft.dll >>> 1.1.71.0 >>> Release Build - 2022-02-22 at 11:39:37 >>> G1.3 Nissan fft ghost";
-            listBox1.Items.Add(s1);
-
-            string s2 = "C:\\ALV_CAN_COMMS - gm          >>> ALV_CAN_Comms_gm.dll >>> 1.1.73.0 >>> Release Build - 2022-03-10 at 12:04:05 >>> G1.2 GM";
-            listBox1.Items.Add(s2);
+            return sSource;
         }
 
-        private void btn_Close_Click(object sender, EventArgs e)
-        {
-            this.CloseForm();
-        }
 
-
-        #region 方法
         /// <summary>
         /// 根据期望长度，以特定的字符串填充源字符串
         /// </summary>
@@ -217,7 +224,8 @@ namespace WinPMS.Debug
 
             return temp;
         }
-
         #endregion
+
+
     }
 }

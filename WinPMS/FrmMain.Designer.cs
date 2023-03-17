@@ -41,16 +41,21 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUName = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblUserName = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblLoginTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel7 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCurrTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel11 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblRegisterTimeRemaining = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel10 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tmrFrmPrompt = new System.Windows.Forms.Timer(this.components);
             this.tmrCurrTime = new System.Windows.Forms.Timer(this.components);
-            this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblUserNamePC = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel9 = new System.Windows.Forms.ToolStripStatusLabel();
             this.gboxMenus.SuspendLayout();
             this.gboxTools.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -146,14 +151,19 @@
             this.toolStripStatusLabel1,
             this.lblUName,
             this.toolStripStatusLabel2,
-            this.toolStripStatusLabel6,
-            this.lblUserNamePC,
+            this.toolStripStatusLabel8,
+            this.lblUserName,
             this.toolStripStatusLabel9,
             this.toolStripStatusLabel4,
             this.lblLoginTime,
-            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel7,
             this.toolStripStatusLabel5,
-            this.lblCurrTime});
+            this.lblCurrTime,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabel11,
+            this.lblRegisterTimeRemaining,
+            this.toolStripStatusLabel10});
             this.PMSStatus.Location = new System.Drawing.Point(0, 855);
             this.PMSStatus.Margin = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.PMSStatus.Name = "PMSStatus";
@@ -179,6 +189,24 @@
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 22);
             // 
+            // toolStripStatusLabel8
+            // 
+            this.toolStripStatusLabel8.Name = "toolStripStatusLabel8";
+            this.toolStripStatusLabel8.Size = new System.Drawing.Size(101, 22);
+            this.toolStripStatusLabel8.Text = "UserName (PC)：";
+            // 
+            // lblUserName
+            // 
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(37, 22);
+            this.lblUserName.Text = "xxxxx";
+            // 
+            // toolStripStatusLabel9
+            // 
+            this.toolStripStatusLabel9.AutoSize = false;
+            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            this.toolStripStatusLabel9.Size = new System.Drawing.Size(50, 22);
+            // 
             // toolStripStatusLabel4
             // 
             this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
@@ -191,11 +219,11 @@
             this.lblLoginTime.Size = new System.Drawing.Size(110, 22);
             this.lblLoginTime.Text = "xxxx-xx-xx xx:xx:xx";
             // 
-            // toolStripStatusLabel3
+            // toolStripStatusLabel7
             // 
-            this.toolStripStatusLabel3.AutoSize = false;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 22);
+            this.toolStripStatusLabel7.AutoSize = false;
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(50, 22);
             // 
             // toolStripStatusLabel5
             // 
@@ -209,6 +237,36 @@
             this.lblCurrTime.Size = new System.Drawing.Size(110, 22);
             this.lblCurrTime.Text = "xxxx-xx-xx xx:xx:xx";
             // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.AutoSize = false;
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(50, 22);
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(62, 22);
+            this.toolStripStatusLabel6.Text = "Register：";
+            // 
+            // toolStripStatusLabel11
+            // 
+            this.toolStripStatusLabel11.Name = "toolStripStatusLabel11";
+            this.toolStripStatusLabel11.Size = new System.Drawing.Size(11, 22);
+            this.toolStripStatusLabel11.Text = "{";
+            // 
+            // lblRegisterTimeRemaining
+            // 
+            this.lblRegisterTimeRemaining.Name = "lblRegisterTimeRemaining";
+            this.lblRegisterTimeRemaining.Size = new System.Drawing.Size(17, 22);
+            this.lblRegisterTimeRemaining.Text = "--";
+            // 
+            // toolStripStatusLabel10
+            // 
+            this.toolStripStatusLabel10.Name = "toolStripStatusLabel10";
+            this.toolStripStatusLabel10.Size = new System.Drawing.Size(11, 22);
+            this.toolStripStatusLabel10.Text = "}";
+            // 
             // tmrFrmPrompt
             // 
             this.tmrFrmPrompt.Enabled = true;
@@ -219,24 +277,6 @@
             this.tmrCurrTime.Enabled = true;
             this.tmrCurrTime.Interval = 1000;
             this.tmrCurrTime.Tick += new System.EventHandler(this.tmrCurrTime_Tick);
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(98, 22);
-            this.toolStripStatusLabel6.Text = "UserName(PC)：";
-            // 
-            // lblUserNamePC
-            // 
-            this.lblUserNamePC.Name = "lblUserNamePC";
-            this.lblUserNamePC.Size = new System.Drawing.Size(37, 22);
-            this.lblUserNamePC.Text = "xxxxx";
-            // 
-            // toolStripStatusLabel9
-            // 
-            this.toolStripStatusLabel9.AutoSize = false;
-            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
-            this.toolStripStatusLabel9.Size = new System.Drawing.Size(50, 22);
             // 
             // FrmMain
             // 
@@ -287,7 +327,12 @@
         private System.Windows.Forms.TabControl tcPages;
         private System.Windows.Forms.Button btn_Test;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
-        private System.Windows.Forms.ToolStripStatusLabel lblUserNamePC;
+        private System.Windows.Forms.ToolStripStatusLabel lblUserName;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel9;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel11;
+        private System.Windows.Forms.ToolStripStatusLabel lblRegisterTimeRemaining;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel10;
     }
 }

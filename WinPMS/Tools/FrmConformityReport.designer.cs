@@ -55,15 +55,18 @@
             this.Null2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.Radar_ST_Info = new System.Windows.Forms.TabPage();
+            this.dgv_Fixture_Num_ST = new System.Windows.Forms.DataGridView();
             this.comboBox_FixtureName_ST = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox_FixtureNum_ST_Example = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label_FixtureNum_ST = new System.Windows.Forms.Label();
-            this.textBox_FixtureNum_ST = new System.Windows.Forms.TextBox();
             this.Radar_SEL_Info = new System.Windows.Forms.TabPage();
-            this.label17 = new System.Windows.Forms.Label();
+            this.comboBox_FixtureName_SEL = new System.Windows.Forms.ComboBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBox_FixtureNum_SEL_Example = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBox_FixtureNum_SEL = new System.Windows.Forms.TextBox();
             this.Radar_PDI_VS412_Info = new System.Windows.Forms.TabPage();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -84,6 +87,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.dgv_Fixture_Num_ST_Example = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox_FixtureNum_ST_Example = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox_FixtureNum_ST = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Null1 = new System.Windows.Forms.TabPage();
             this.Radar = new System.Windows.Forms.TabPage();
@@ -97,6 +106,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_LoadPic = new System.Windows.Forms.Button();
             this.textBox_LoadPic = new System.Windows.Forms.TextBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Fixture_Num_ST_Add = new System.Windows.Forms.Button();
+            this.btn_Fixture_Num_ST_Del = new System.Windows.Forms.Button();
             panelWhere = new System.Windows.Forms.Panel();
             panelWhere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -105,9 +118,11 @@
             this.tabControl2.SuspendLayout();
             this.Null2.SuspendLayout();
             this.Radar_ST_Info.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Fixture_Num_ST)).BeginInit();
             this.Radar_SEL_Info.SuspendLayout();
             this.Radar_PDI_VS412_Info.SuspendLayout();
             this.Radar_Packing_Info.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Fixture_Num_ST_Example)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Radar.SuspendLayout();
             this.Radar_PDI_VS412.SuspendLayout();
@@ -300,7 +315,7 @@
             this.textBox_FileNum.Name = "textBox_FileNum";
             this.textBox_FileNum.Size = new System.Drawing.Size(227, 20);
             this.textBox_FileNum.TabIndex = 5;
-            this.textBox_FileNum.Text = "CFM-PE-XXXXXX-XX";
+            this.textBox_FileNum.Text = "CFM-PE-XXXXXX";
             // 
             // textBox_Line
             // 
@@ -356,7 +371,7 @@
             this.groupBox_Info1.Controls.Add(this.label3);
             this.groupBox_Info1.Location = new System.Drawing.Point(161, 131);
             this.groupBox_Info1.Name = "groupBox_Info1";
-            this.groupBox_Info1.Size = new System.Drawing.Size(666, 492);
+            this.groupBox_Info1.Size = new System.Drawing.Size(766, 492);
             this.groupBox_Info1.TabIndex = 19;
             this.groupBox_Info1.TabStop = false;
             this.groupBox_Info1.Text = "Info1";
@@ -372,7 +387,7 @@
             this.tabControl2.Location = new System.Drawing.Point(6, 43);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(643, 218);
+            this.tabControl2.Size = new System.Drawing.Size(754, 218);
             this.tabControl2.TabIndex = 34;
             // 
             // Null2
@@ -381,7 +396,7 @@
             this.Null2.Location = new System.Drawing.Point(4, 25);
             this.Null2.Name = "Null2";
             this.Null2.Padding = new System.Windows.Forms.Padding(3);
-            this.Null2.Size = new System.Drawing.Size(635, 189);
+            this.Null2.Size = new System.Drawing.Size(746, 189);
             this.Null2.TabIndex = 3;
             this.Null2.Text = "Null2";
             this.Null2.UseVisualStyleBackColor = true;
@@ -399,29 +414,47 @@
             // 
             // Radar_ST_Info
             // 
+            this.Radar_ST_Info.Controls.Add(this.btn_Fixture_Num_ST_Del);
+            this.Radar_ST_Info.Controls.Add(this.btn_Fixture_Num_ST_Add);
+            this.Radar_ST_Info.Controls.Add(this.dgv_Fixture_Num_ST);
             this.Radar_ST_Info.Controls.Add(this.comboBox_FixtureName_ST);
             this.Radar_ST_Info.Controls.Add(this.label13);
-            this.Radar_ST_Info.Controls.Add(this.label8);
-            this.Radar_ST_Info.Controls.Add(this.textBox_FixtureNum_ST_Example);
-            this.Radar_ST_Info.Controls.Add(this.label7);
             this.Radar_ST_Info.Controls.Add(this.label_FixtureNum_ST);
-            this.Radar_ST_Info.Controls.Add(this.textBox_FixtureNum_ST);
             this.Radar_ST_Info.Location = new System.Drawing.Point(4, 25);
             this.Radar_ST_Info.Name = "Radar_ST_Info";
             this.Radar_ST_Info.Padding = new System.Windows.Forms.Padding(3);
-            this.Radar_ST_Info.Size = new System.Drawing.Size(635, 189);
+            this.Radar_ST_Info.Size = new System.Drawing.Size(746, 189);
             this.Radar_ST_Info.TabIndex = 0;
             this.Radar_ST_Info.Text = "Radar_ST_Info";
             this.Radar_ST_Info.UseVisualStyleBackColor = true;
+            // 
+            // dgv_Fixture_Num_ST
+            // 
+            this.dgv_Fixture_Num_ST.AllowUserToAddRows = false;
+            this.dgv_Fixture_Num_ST.AllowUserToOrderColumns = true;
+            this.dgv_Fixture_Num_ST.AllowUserToResizeColumns = false;
+            this.dgv_Fixture_Num_ST.AllowUserToResizeRows = false;
+            this.dgv_Fixture_Num_ST.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv_Fixture_Num_ST.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Fixture_Num_ST.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.dgv_Fixture_Num_ST.Location = new System.Drawing.Point(134, 6);
+            this.dgv_Fixture_Num_ST.MultiSelect = false;
+            this.dgv_Fixture_Num_ST.Name = "dgv_Fixture_Num_ST";
+            this.dgv_Fixture_Num_ST.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Fixture_Num_ST.Size = new System.Drawing.Size(606, 148);
+            this.dgv_Fixture_Num_ST.TabIndex = 35;
             // 
             // comboBox_FixtureName_ST
             // 
             this.comboBox_FixtureName_ST.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_FixtureName_ST.FormattingEnabled = true;
             this.comboBox_FixtureName_ST.Items.AddRange(new object[] {
-            "77 G1.2 FLR Fixture",
-            "77 G1.3 FLR Fixture",
-            "77 G1.3 Corner Fixture"});
+            "77GHz Gen1.2 FLR Fixture",
+            "77GHz Gen1.2 Corner Fixture",
+            "77GHz Gen1.3 FLR Fixture",
+            "77GHz Gen1.3 Corner Fixture"});
             this.comboBox_FixtureName_ST.Location = new System.Drawing.Point(134, 160);
             this.comboBox_FixtureName_ST.Name = "comboBox_FixtureName_ST";
             this.comboBox_FixtureName_ST.Size = new System.Drawing.Size(227, 21);
@@ -436,37 +469,6 @@
             this.label13.TabIndex = 36;
             this.label13.Text = "Fixture Name：";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(368, 28);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(143, 13);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "(Enter single line one by one)";
-            // 
-            // textBox_FixtureNum_ST_Example
-            // 
-            this.textBox_FixtureNum_ST_Example.Enabled = false;
-            this.textBox_FixtureNum_ST_Example.Location = new System.Drawing.Point(372, 44);
-            this.textBox_FixtureNum_ST_Example.Multiline = true;
-            this.textBox_FixtureNum_ST_Example.Name = "textBox_FixtureNum_ST_Example";
-            this.textBox_FixtureNum_ST_Example.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_FixtureNum_ST_Example.Size = new System.Drawing.Size(261, 92);
-            this.textBox_FixtureNum_ST_Example.TabIndex = 34;
-            this.textBox_FixtureNum_ST_Example.Text = "EPT-RDR05G1.3-01-01\r\nEPT-RDR05G1.3-01-02";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Location = new System.Drawing.Point(368, 6);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(265, 13);
-            this.label7.TabIndex = 33;
-            this.label7.Text = "(e.g: EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02)";
-            // 
             // label_FixtureNum_ST
             // 
             this.label_FixtureNum_ST.AutoSize = true;
@@ -476,37 +478,94 @@
             this.label_FixtureNum_ST.TabIndex = 31;
             this.label_FixtureNum_ST.Text = " Fixture Num：";
             // 
-            // textBox_FixtureNum_ST
-            // 
-            this.textBox_FixtureNum_ST.Location = new System.Drawing.Point(134, 6);
-            this.textBox_FixtureNum_ST.Multiline = true;
-            this.textBox_FixtureNum_ST.Name = "textBox_FixtureNum_ST";
-            this.textBox_FixtureNum_ST.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_FixtureNum_ST.Size = new System.Drawing.Size(227, 130);
-            this.textBox_FixtureNum_ST.TabIndex = 32;
-            this.textBox_FixtureNum_ST.Text = "EPT-RDR07G1.3-01-02\r\nEPT-RDR07G1.3-01-02";
-            // 
             // Radar_SEL_Info
             // 
-            this.Radar_SEL_Info.Controls.Add(this.label17);
+            this.Radar_SEL_Info.Controls.Add(this.comboBox_FixtureName_SEL);
+            this.Radar_SEL_Info.Controls.Add(this.label19);
+            this.Radar_SEL_Info.Controls.Add(this.label24);
+            this.Radar_SEL_Info.Controls.Add(this.textBox_FixtureNum_SEL_Example);
+            this.Radar_SEL_Info.Controls.Add(this.label25);
+            this.Radar_SEL_Info.Controls.Add(this.label26);
+            this.Radar_SEL_Info.Controls.Add(this.textBox_FixtureNum_SEL);
             this.Radar_SEL_Info.Location = new System.Drawing.Point(4, 25);
             this.Radar_SEL_Info.Name = "Radar_SEL_Info";
             this.Radar_SEL_Info.Padding = new System.Windows.Forms.Padding(3);
-            this.Radar_SEL_Info.Size = new System.Drawing.Size(635, 189);
+            this.Radar_SEL_Info.Size = new System.Drawing.Size(746, 189);
             this.Radar_SEL_Info.TabIndex = 1;
             this.Radar_SEL_Info.Text = "Radar_SEL_Info";
             this.Radar_SEL_Info.UseVisualStyleBackColor = true;
             // 
-            // label17
+            // comboBox_FixtureName_SEL
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(9, 17);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(141, 16);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "Station Not Applicable";
+            this.comboBox_FixtureName_SEL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_FixtureName_SEL.FormattingEnabled = true;
+            this.comboBox_FixtureName_SEL.Items.AddRange(new object[] {
+            "77 G1.2 FLR Fixture",
+            "77 G1.3 FLR Fixture",
+            "77 G1.3 Corner Fixture"});
+            this.comboBox_FixtureName_SEL.Location = new System.Drawing.Point(134, 160);
+            this.comboBox_FixtureName_SEL.Name = "comboBox_FixtureName_SEL";
+            this.comboBox_FixtureName_SEL.Size = new System.Drawing.Size(227, 21);
+            this.comboBox_FixtureName_SEL.TabIndex = 45;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(47, 163);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 13);
+            this.label19.TabIndex = 44;
+            this.label19.Text = "Fixture Name：";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.ForeColor = System.Drawing.Color.Red;
+            this.label24.Location = new System.Drawing.Point(368, 28);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(143, 13);
+            this.label24.TabIndex = 43;
+            this.label24.Text = "(Enter single line one by one)";
+            // 
+            // textBox_FixtureNum_SEL_Example
+            // 
+            this.textBox_FixtureNum_SEL_Example.Enabled = false;
+            this.textBox_FixtureNum_SEL_Example.Location = new System.Drawing.Point(372, 44);
+            this.textBox_FixtureNum_SEL_Example.Multiline = true;
+            this.textBox_FixtureNum_SEL_Example.Name = "textBox_FixtureNum_SEL_Example";
+            this.textBox_FixtureNum_SEL_Example.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_FixtureNum_SEL_Example.Size = new System.Drawing.Size(261, 92);
+            this.textBox_FixtureNum_SEL_Example.TabIndex = 42;
+            this.textBox_FixtureNum_SEL_Example.Text = "EPT-RDR05G1.3-01-01\r\nEPT-RDR05G1.3-01-02";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label25.Location = new System.Drawing.Point(368, 6);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(265, 13);
+            this.label25.TabIndex = 41;
+            this.label25.Text = "(e.g: EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02)";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(50, 6);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(78, 13);
+            this.label26.TabIndex = 39;
+            this.label26.Text = " Fixture Num：";
+            // 
+            // textBox_FixtureNum_SEL
+            // 
+            this.textBox_FixtureNum_SEL.Location = new System.Drawing.Point(134, 6);
+            this.textBox_FixtureNum_SEL.Multiline = true;
+            this.textBox_FixtureNum_SEL.Name = "textBox_FixtureNum_SEL";
+            this.textBox_FixtureNum_SEL.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_FixtureNum_SEL.Size = new System.Drawing.Size(227, 130);
+            this.textBox_FixtureNum_SEL.TabIndex = 40;
+            this.textBox_FixtureNum_SEL.Text = "EPT-RDR07G1.3-01-01\r\nEPT-RDR07G1.3-01-02";
             // 
             // Radar_PDI_VS412_Info
             // 
@@ -520,7 +579,7 @@
             this.Radar_PDI_VS412_Info.Location = new System.Drawing.Point(4, 25);
             this.Radar_PDI_VS412_Info.Name = "Radar_PDI_VS412_Info";
             this.Radar_PDI_VS412_Info.Padding = new System.Windows.Forms.Padding(3);
-            this.Radar_PDI_VS412_Info.Size = new System.Drawing.Size(635, 189);
+            this.Radar_PDI_VS412_Info.Size = new System.Drawing.Size(746, 189);
             this.Radar_PDI_VS412_Info.TabIndex = 2;
             this.Radar_PDI_VS412_Info.Text = "Radar_PDI_VS412_Info";
             this.Radar_PDI_VS412_Info.UseVisualStyleBackColor = true;
@@ -596,7 +655,7 @@
             this.Radar_Packing_Info.Controls.Add(this.label16);
             this.Radar_Packing_Info.Location = new System.Drawing.Point(4, 25);
             this.Radar_Packing_Info.Name = "Radar_Packing_Info";
-            this.Radar_Packing_Info.Size = new System.Drawing.Size(635, 189);
+            this.Radar_Packing_Info.Size = new System.Drawing.Size(746, 189);
             this.Radar_Packing_Info.TabIndex = 4;
             this.Radar_Packing_Info.Text = "Radar_Packing_Info";
             this.Radar_Packing_Info.UseVisualStyleBackColor = true;
@@ -703,6 +762,65 @@
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 15;
             this.label5.Text = "(e.g: Radar 5)";
+            // 
+            // dgv_Fixture_Num_ST_Example
+            // 
+            this.dgv_Fixture_Num_ST_Example.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Fixture_Num_ST_Example.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            this.dgv_Fixture_Num_ST_Example.Enabled = false;
+            this.dgv_Fixture_Num_ST_Example.Location = new System.Drawing.Point(161, 639);
+            this.dgv_Fixture_Num_ST_Example.Name = "dgv_Fixture_Num_ST_Example";
+            this.dgv_Fixture_Num_ST_Example.Size = new System.Drawing.Size(223, 33);
+            this.dgv_Fixture_Num_ST_Example.TabIndex = 36;
+            this.dgv_Fixture_Num_ST_Example.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Fixture Num";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Comment";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 200;
+            // 
+            // textBox_FixtureNum_ST_Example
+            // 
+            this.textBox_FixtureNum_ST_Example.Enabled = false;
+            this.textBox_FixtureNum_ST_Example.Location = new System.Drawing.Point(394, 678);
+            this.textBox_FixtureNum_ST_Example.Multiline = true;
+            this.textBox_FixtureNum_ST_Example.Name = "textBox_FixtureNum_ST_Example";
+            this.textBox_FixtureNum_ST_Example.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_FixtureNum_ST_Example.Size = new System.Drawing.Size(244, 92);
+            this.textBox_FixtureNum_ST_Example.TabIndex = 34;
+            this.textBox_FixtureNum_ST_Example.Text = "EPT-RDR05G1.3-01-01\r\nEPT-RDR05G1.3-01-02";
+            this.textBox_FixtureNum_ST_Example.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label7.Location = new System.Drawing.Point(390, 639);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(265, 13);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "(e.g: EPT-RDR05G1.3-01-01/EPT-RDR05G1.3-01-02)";
+            this.label7.Visible = false;
+            // 
+            // textBox_FixtureNum_ST
+            // 
+            this.textBox_FixtureNum_ST.Location = new System.Drawing.Point(161, 678);
+            this.textBox_FixtureNum_ST.Multiline = true;
+            this.textBox_FixtureNum_ST.Name = "textBox_FixtureNum_ST";
+            this.textBox_FixtureNum_ST.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_FixtureNum_ST.Size = new System.Drawing.Size(227, 92);
+            this.textBox_FixtureNum_ST.TabIndex = 32;
+            this.textBox_FixtureNum_ST.Text = "EPT-RDR07G1.3-01-01\r\nEPT-RDR07G1.3-01-02";
+            this.textBox_FixtureNum_ST.Visible = false;
             // 
             // tabControl1
             // 
@@ -817,7 +935,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(833, 189);
+            this.pictureBox1.Location = new System.Drawing.Point(933, 189);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(438, 434);
             this.pictureBox1.TabIndex = 22;
@@ -825,7 +943,7 @@
             // 
             // btn_LoadPic
             // 
-            this.btn_LoadPic.Location = new System.Drawing.Point(833, 136);
+            this.btn_LoadPic.Location = new System.Drawing.Point(933, 136);
             this.btn_LoadPic.Name = "btn_LoadPic";
             this.btn_LoadPic.Size = new System.Drawing.Size(100, 21);
             this.btn_LoadPic.TabIndex = 16;
@@ -836,10 +954,42 @@
             // textBox_LoadPic
             // 
             this.textBox_LoadPic.Enabled = false;
-            this.textBox_LoadPic.Location = new System.Drawing.Point(833, 163);
+            this.textBox_LoadPic.Location = new System.Drawing.Point(933, 163);
             this.textBox_LoadPic.Name = "textBox_LoadPic";
             this.textBox_LoadPic.Size = new System.Drawing.Size(438, 20);
             this.textBox_LoadPic.TabIndex = 23;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fixture Num";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 88;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Comment";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 76;
+            // 
+            // btn_Fixture_Num_ST_Add
+            // 
+            this.btn_Fixture_Num_ST_Add.Location = new System.Drawing.Point(68, 37);
+            this.btn_Fixture_Num_ST_Add.Name = "btn_Fixture_Num_ST_Add";
+            this.btn_Fixture_Num_ST_Add.Size = new System.Drawing.Size(60, 26);
+            this.btn_Fixture_Num_ST_Add.TabIndex = 39;
+            this.btn_Fixture_Num_ST_Add.Text = "+";
+            this.btn_Fixture_Num_ST_Add.UseVisualStyleBackColor = true;
+            this.btn_Fixture_Num_ST_Add.Click += new System.EventHandler(this.btn_Fixture_Num_ST_Add_Click);
+            // 
+            // btn_Fixture_Num_ST_Del
+            // 
+            this.btn_Fixture_Num_ST_Del.Location = new System.Drawing.Point(68, 82);
+            this.btn_Fixture_Num_ST_Del.Name = "btn_Fixture_Num_ST_Del";
+            this.btn_Fixture_Num_ST_Del.Size = new System.Drawing.Size(60, 26);
+            this.btn_Fixture_Num_ST_Del.TabIndex = 40;
+            this.btn_Fixture_Num_ST_Del.Text = "-";
+            this.btn_Fixture_Num_ST_Del.UseVisualStyleBackColor = true;
+            this.btn_Fixture_Num_ST_Del.Click += new System.EventHandler(this.btn_Fixture_Num_ST_Del_Click);
             // 
             // FrmConformityReport
             // 
@@ -849,10 +999,14 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1383, 775);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.dgv_Fixture_Num_ST_Example);
             this.Controls.Add(this.textBox_LoadPic);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_LoadPic);
+            this.Controls.Add(this.textBox_FixtureNum_ST_Example);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox_TS);
+            this.Controls.Add(this.textBox_FixtureNum_ST);
             this.Controls.Add(this.groupBox_Info1);
             this.Controls.Add(panelWhere);
             this.Controls.Add(this.tsMenus);
@@ -871,12 +1025,14 @@
             this.Null2.PerformLayout();
             this.Radar_ST_Info.ResumeLayout(false);
             this.Radar_ST_Info.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Fixture_Num_ST)).EndInit();
             this.Radar_SEL_Info.ResumeLayout(false);
             this.Radar_SEL_Info.PerformLayout();
             this.Radar_PDI_VS412_Info.ResumeLayout(false);
             this.Radar_PDI_VS412_Info.PerformLayout();
             this.Radar_Packing_Info.ResumeLayout(false);
             this.Radar_Packing_Info.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Fixture_Num_ST_Example)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.Radar.ResumeLayout(false);
             this.Radar.PerformLayout();
@@ -938,7 +1094,6 @@
         private System.Windows.Forms.TabPage Radar_SEL_Info;
         private System.Windows.Forms.TabPage Radar_PDI_VS412_Info;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox_FixtureNum_ST_Example;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_FixtureNum_ST;
@@ -948,7 +1103,6 @@
         private System.Windows.Forms.ComboBox comboBox_FixtureName_ST;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btn_ApplyFileNum;
@@ -959,5 +1113,20 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox comboBox_FixtureName_SEL;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox textBox_FixtureNum_SEL_Example;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBox_FixtureNum_SEL;
+        private System.Windows.Forms.DataGridView dgv_Fixture_Num_ST;
+        private System.Windows.Forms.DataGridView dgv_Fixture_Num_ST_Example;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button btn_Fixture_Num_ST_Del;
+        private System.Windows.Forms.Button btn_Fixture_Num_ST_Add;
     }
 }

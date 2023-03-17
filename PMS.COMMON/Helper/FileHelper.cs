@@ -53,6 +53,8 @@ namespace PMS.COMMON.Helper
 
         public static string sIniPMSFtpUpdate = "";
 
+        public static string sIniPMSDllCheckOnOff = "";
+
         //public static string sIniPMSVersion = "";
 
         public static string sIniPwdOpr = "";
