@@ -204,11 +204,11 @@
     <Compile Include="Debug\FrmDebugTaskDemo.Designer.cs">
       <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug\FrmDemo.cs">
+    <Compile Include="Debug\FrmDebugConfigTransfer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Debug\FrmDemo.designer.cs">
-      <DependentUpon>FrmDemo.cs</DependentUpon>
+    <Compile Include="Debug\FrmDebugConfigTransfer.designer.cs">
+      <DependentUpon>FrmDebugConfigTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="FModels\FrmLoginModel.cs" />
     <Compile Include="FModels\FrmProgressBarModel.cs" />
@@ -343,8 +343,8 @@
     <EmbeddedResource Include="Debug\FrmDebugTaskDemo.resx">
       <DependentUpon>FrmDebugTaskDemo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Debug\FrmDemo.resx">
-      <DependentUpon>FrmDemo.cs</DependentUpon>
+    <EmbeddedResource Include="Debug\FrmDebugConfigTransfer.resx">
+      <DependentUpon>FrmDebugConfigTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAboutPMS.resx">
       <DependentUpon>FrmAboutPMS.cs</DependentUpon>

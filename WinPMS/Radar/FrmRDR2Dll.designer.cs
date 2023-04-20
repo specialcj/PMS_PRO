@@ -34,7 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRDR2Dll));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chk_ShowDllBuildDate = new System.Windows.Forms.CheckBox();
-            this.btnOpenCVI = new System.Windows.Forms.Button();
+            this.btnOpenTestStepsCVI = new System.Windows.Forms.Button();
             this.txtTestStepsCVI = new System.Windows.Forms.TextBox();
             this.btnSwitchDll = new System.Windows.Forms.Button();
             this.btnLoadDll = new System.Windows.Forms.Button();
@@ -88,7 +88,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chk_ShowDllBuildDate);
-            this.groupBox1.Controls.Add(this.btnOpenCVI);
+            this.groupBox1.Controls.Add(this.btnOpenTestStepsCVI);
             this.groupBox1.Controls.Add(this.txtTestStepsCVI);
             this.groupBox1.Controls.Add(this.btnSwitchDll);
             this.groupBox1.Controls.Add(this.btnLoadDll);
@@ -121,16 +121,16 @@
             this.chk_ShowDllBuildDate.UseVisualStyleBackColor = true;
             this.chk_ShowDllBuildDate.CheckedChanged += new System.EventHandler(this.chk_ShowDllBuildDate_CheckedChanged);
             // 
-            // btnOpenCVI
+            // btnOpenTestStepsCVI
             // 
-            this.btnOpenCVI.Location = new System.Drawing.Point(534, 55);
-            this.btnOpenCVI.Margin = new System.Windows.Forms.Padding(2);
-            this.btnOpenCVI.Name = "btnOpenCVI";
-            this.btnOpenCVI.Size = new System.Drawing.Size(123, 30);
-            this.btnOpenCVI.TabIndex = 6;
-            this.btnOpenCVI.Text = "Open TestSteps CVI";
-            this.btnOpenCVI.UseVisualStyleBackColor = true;
-            this.btnOpenCVI.Click += new System.EventHandler(this.btnOpenTestStepsCVI_Click);
+            this.btnOpenTestStepsCVI.Location = new System.Drawing.Point(534, 55);
+            this.btnOpenTestStepsCVI.Margin = new System.Windows.Forms.Padding(2);
+            this.btnOpenTestStepsCVI.Name = "btnOpenTestStepsCVI";
+            this.btnOpenTestStepsCVI.Size = new System.Drawing.Size(123, 30);
+            this.btnOpenTestStepsCVI.TabIndex = 6;
+            this.btnOpenTestStepsCVI.Text = "Open TestSteps CVI";
+            this.btnOpenTestStepsCVI.UseVisualStyleBackColor = true;
+            this.btnOpenTestStepsCVI.Click += new System.EventHandler(this.btnOpenTestStepsCVI_Click);
             // 
             // txtTestStepsCVI
             // 
@@ -560,7 +560,7 @@
         private System.Windows.Forms.TextBox txtAlvCanCommsDllFileName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSwitchDll;
-        private System.Windows.Forms.Button btnOpenCVI;
+        private System.Windows.Forms.Button btnOpenTestStepsCVI;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox txtTestStepsCVI;
         private System.Windows.Forms.Label label4;

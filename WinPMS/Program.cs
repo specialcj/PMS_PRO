@@ -56,6 +56,10 @@ namespace WinPMS
 
             FileHelper.sIniPMSFtpUpdate = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_FtpUpdate", "NULL", FileHelper.sIniFilePathPMS);
 
+            //FileHelper.sIniPMSDllCheckOnOff = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_DllCheckOnOff", "NULL", FileHelper.sIniFilePathPMS);
+
+            FileHelper.sIniPMSOpenTestStepsCVI = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_OpenTestStepsCVI", "NULL", FileHelper.sIniFilePathPMS);
+
             FileHelper.sIniPwdOpr = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Opr", "NULL", FileHelper.sIniFilePathPMS);
 
             FileHelper.sIniPwdEncrypt = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Encrypt", "NULL", FileHelper.sIniFilePathPMS);

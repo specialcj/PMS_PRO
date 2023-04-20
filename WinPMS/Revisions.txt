@@ -17,9 +17,11 @@ V1.1.8.4
 -> support generate conformity report
    -> Radar 77GHz
       -> SensorTest -> ok
-      -> SEL
-      -> PDI
-      -> PACKING
+      -> SEL -> ongoing
+      -> PDI -> ongoing
+      -> PACKING -> ongoing
+-> Add #PMS_OpenTestStepsCVI in PMS.ini
+
 
 
 TBD

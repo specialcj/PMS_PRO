@@ -22,6 +22,8 @@ namespace WinPMS.Radar
         private FrmProgressBarModel _frmProgressBarModel = null;
         private string _sIniPathPMSUsed = "";
 
+        private int _iPMSOpenTestStepsCVI = 0;
+
         #region 事件
         /// <summary>
         /// 页面加载
@@ -459,6 +461,17 @@ namespace WinPMS.Radar
             }
 
             txtTestStepsCVI.Text = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "TestSteps_CVI", "NULL", _sIniPathPMSUsed);
+
+            //根据PMS.ini中的配置，是否显示"Open TestSteps CVI"按钮
+            _iPMSOpenTestStepsCVI = int.Parse(FileHelper.sIniPMSOpenTestStepsCVI);
+            if (_iPMSOpenTestStepsCVI == 1)
+            {
+                btnOpenTestStepsCVI.Visible = true;
+            }
+            else
+            {
+                btnOpenTestStepsCVI.Visible = false;
+            }
         }
 
 

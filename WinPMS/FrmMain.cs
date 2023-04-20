@@ -295,6 +295,12 @@ namespace WinPMS
             {
                 CreateForm(form.Trim(), 0);
             }
+
+            //仅当首次启动PMS时弹出
+            if (_iIsFrmFirstLoad == 1)
+            {
+                CreateForm("FrmAboutPMS", 1);
+            }
         }
 
 

@@ -16,5 +16,15 @@ namespace WinPMS
         {
             InitializeComponent();
         }
+
+
+        #region 事件
+
+        private void btn_OK_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
     }
 }
