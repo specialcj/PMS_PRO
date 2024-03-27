@@ -13,7 +13,7 @@ namespace WinPMS.FModels
         public FrmLoginModel FrmLoginModel { get; set; }
         public string PMSVersion { get; set; }
         public RDRAlvCanComms RdrAlvCanComms { get; set; }
-        public Action LoadIni { get; set; }
+        public Action LoadAction { get; set; }
 
     }
 }

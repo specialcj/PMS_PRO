@@ -10,18 +10,20 @@ using WinPMS.FModels;
 
 namespace WinPMS.Radar
 {
-    public partial class FrmRDR2PDI : Form
+    public partial class FrmRadarDemo : Form
     {
-        public FrmRDR2PDI()
+        public FrmRadarDemo()
         {
             InitializeComponent();
         }
 
         #region 事件
-        private void FrmRDR2PDI_Load(object sender, EventArgs e)
+
+        private void FrmRadarDemo_Load(object sender, EventArgs e)
         {
 
         }
+
 
         private void tsbtnClose_Click(object sender, EventArgs e)
         {
@@ -29,5 +31,6 @@ namespace WinPMS.Radar
         }
         #endregion
 
+        
     }
 }

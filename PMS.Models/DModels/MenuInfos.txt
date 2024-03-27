@@ -1,30 +1,38 @@
 MId,		MName,						ParenetId,	ParentName,	MKey,				MUrl,							IsTop,	MOrder,	IsDeleted,	Creator,	CreateTime,				MDesp,				MPic
 100, 		RDR,						0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+101, 		GM,							0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 110, 		Setting,					0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 120, 		Tools,						0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+121, 		iTAC Check,					0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 130, 		Debug,						0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 900, 		Help,						0,			NULL,		NoShortcuts,		NULL,							0,		1,		0, 			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 200,		RDR ALV CAN DLL [SEL],		100,		NULL,		NoShortcuts,		Radar.FrmRDR2Dll,				0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\dll_1.png
 201,		RDR SystemConfig,			100,		NULL,		NoShortcuts,		Radar.FrmRDR2SystemConfig,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				Imgs\R32x32\SystemConfig_3.png
+202,		RDR Packing Config,			100,		NULL,		NoShortcuts,		Radar.FrmRadarPacking,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32X32\packing_3.png
+
+211,		Combine KeyGen_Output.ini,	101,		NULL,		NoShortcuts,		Radar.FrmRadarGM,				0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
 300,		Switch User,				110,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	SwitchUser,			Imgs\R32x32\switch_user3.png
 301,		ini Configuration,			110,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	IniConfiguration,	Imgs\R32x32\ini_1.png
+302,		ini Configuration GUI,		110,		NULL,		NoShortcuts,		Radar.FrmRDR2DllConfig,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\ini_1.png
 
 400,		S/T Log,					120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 40001,		Fetch By SN / PCBA,			400,		NULL,		NoShortcuts,		Tools.FrmFetchSTBySN,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 40002,		Separate To PF,				400,		NULL,		NoShortcuts,		Tools.FrmSeparateST2PF,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-401,		ImgConvert,					120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+401,		ImgConvert,					120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\image_1.png
 40101,		Convert To .jpg,			401,		NULL,		NoShortcuts,		Tools.FrmConvertToJPG,			0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 40102,		Convert To .ico,			401,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Debug,				NULL
-402,		Report,						120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+402,		Report,						120,		NULL,		NoShortcuts,		NULL,							0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\report_1.png
 40201,		Conformity Report,			402,		NULL,		NoShortcuts,		Tools.FrmConformityReport,		0,		1,		0,			admin,		2022-1-1 00:00:00.000,	Internal,			NULL
-
 
 500,		FrmDebug,					130,		NULL,		NoShortcuts,		Debug.FrmDebug,					0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 501,		FrmDebugRadar2SELRecipe,	130,		NULL,		NoShortcuts,		Debug.FrmDebugRadar2SELRecipe,	0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 502,		FrmDebugConfigTransfer,		130,		NULL,		NoShortcuts,		Debug.FrmDebugConfigTransfer,	0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
 
-9000,		View Help,					900,		NULL,		NoShortcuts,		NULL,							1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-9001,		Register PMS,				900,		NULL,		NoShortcuts,		FrmRegisterPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
-9005,		About PMS,					900,		NULL,		NoShortcuts,		FrmAboutPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+600,		iTAC <----> PLM,			121,		NULL,		NoShortcuts,		Tools.FrmiTacCheck,				0,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				NULL
+
+9000,		View Help,					900,		NULL,		NoShortcuts,		NULL,							1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\help_2.png
+9001,		Register PMS,				900,		NULL,		NoShortcuts,		FrmRegisterPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\regist_1.png
+9002,		Sync PMS,					900,		NULL,		NoShortcuts,		FrmSyncPMS,						1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\sync_2.png
+9005,		About PMS,					900,		NULL,		NoShortcuts,		FrmAboutPMS,					1,		1,		0,			admin,		2022-1-1 00:00:00.000,	NULL,				Imgs\R32x32\about_1.png

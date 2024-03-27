@@ -1,4 +1,5 @@
 ﻿using PMS.COMMON.Helper;
+using PMS.COMMON.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +10,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinPMS.Debug;
 using WinPMS.Radar;
 using WinPMS.Tools;
 
@@ -60,6 +62,8 @@ namespace WinPMS
 
             FileHelper.sIniPMSOpenTestStepsCVI = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_OpenTestStepsCVI", "NULL", FileHelper.sIniFilePathPMS);
 
+            FileHelper.sIniPMSRebuildTestStepsCVI = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_RebuildTestStepsCVI", "NULL", FileHelper.sIniFilePathPMS);
+
             FileHelper.sIniPwdOpr = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Opr", "NULL", FileHelper.sIniFilePathPMS);
 
             FileHelper.sIniPwdEncrypt = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_Encrypt", "NULL", FileHelper.sIniFilePathPMS);
@@ -82,17 +86,28 @@ namespace WinPMS
             #endregion
 
 
+            #region 加载注册信息参数
+            FileHelper.sComputerInfo = ComputerInfo.GetComputerInfo();
+            for (int i = FileHelper.sComputerInfo.Length - 1; i >= 0; i--)
+            {
+                FileHelper.sComputerInfoDisplay += FileHelper.sComputerInfo[i];
+            }
+            #endregion
+
             #region 是否在本机C盘启动程序
             string user = Environment.UserName;
             string path = Application.StartupPath;
             //MessageBox.Show(path);
 
-            if (!path.StartsWith(@"C:\") && Environment.UserName.ToUpper() != "JASON.CAI")
+            //if (!path.StartsWith(@"C:\") && Environment.UserName.ToUpper() != "JASON.CAI")
+            /*
+            if (path != @"C:\PMS" && Environment.UserName.ToUpper() != "JASON.CAI")
             {
                 MessageBox.Show("Please copy PMS to [C:\\] to start [" + Application.ProductName + ".exe" + "]!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //Environment.Exit(0);
                 return;
             }
+            */
             #endregion
 
 
@@ -184,22 +199,30 @@ namespace WinPMS
             }
 
 
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmLogin());
-            
-            //Application.Run(new FrmDebug());
-            //Application.Run(new FrmTaskDemo());
-            //Application.Run(new FrmFileZilla());
-            //Application.Run(new FrmRDR2SystemConfig());
-            //Application.Run(new FrmQRCodeScan());
-            //Application.Run(new FrmDebugRadar2SELRecipe());
 
             //Application.Run(new FrmConformityReport());
+
+            //Application.Run(new FrmDebug());
+            //Application.Run(new FrmDebugRadar2SELRecipe());
+
+            //Application.Run(new FrmFileZilla());
+
+            //Application.Run(new FrmRDR2DllConfig());
+            //Application.Run(new FrmRDR2SystemConfig());
+
+            //Application.Run(new FrmQRCodeScan());
+
             //Application.Run(new FrmRadarRecipeConvert());
+            //Application.Run(new FrmRadarBypassSetting());
+            //Application.Run(new FrmRadarPacking());
+
+            //Application.Run(new FrmTaskDemo());
+
+            //Application.Run(new FrmRadarGM());
         }
-
-        
-
     }
 }

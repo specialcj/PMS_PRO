@@ -1,6 +1,6 @@
 ﻿namespace WinPMS.Radar
 {
-    partial class FrmRadarRecipeConvert
+    partial class FrmRadarPDI
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Panel panelWhere;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRadarRecipeConvert));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRadarPDI));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tsMenus = new System.Windows.Forms.ToolStrip();
             this.tsbtnDelete = new System.Windows.Forms.ToolStripButton();
@@ -40,7 +40,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnClose = new System.Windows.Forms.ToolStripButton();
             this.tsBtnHelp = new System.Windows.Forms.ToolStripButton();
-            this.button1 = new System.Windows.Forms.Button();
             panelWhere = new System.Windows.Forms.Panel();
             panelWhere.SuspendLayout();
             this.tsMenus.SuspendLayout();
@@ -50,22 +49,21 @@
             // 
             panelWhere.Controls.Add(this.groupBox1);
             panelWhere.Dock = System.Windows.Forms.DockStyle.Top;
-            panelWhere.Location = new System.Drawing.Point(0, 45);
+            panelWhere.Location = new System.Drawing.Point(0, 70);
+            panelWhere.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             panelWhere.Name = "panelWhere";
-            panelWhere.Size = new System.Drawing.Size(1265, 47);
+            panelWhere.Size = new System.Drawing.Size(1898, 154);
             panelWhere.TabIndex = 2;
             // 
             // groupBox1
             // 
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(1265, 47);
+            this.groupBox1.Size = new System.Drawing.Size(1898, 154);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Reserved Area";
+            this.groupBox1.Text = "Configuration";
             // 
             // tsMenus
             // 
@@ -85,8 +83,8 @@
             this.tsBtnHelp});
             this.tsMenus.Location = new System.Drawing.Point(0, 0);
             this.tsMenus.Name = "tsMenus";
-            this.tsMenus.Padding = new System.Windows.Forms.Padding(0, 0, 1, 2);
-            this.tsMenus.Size = new System.Drawing.Size(1265, 45);
+            this.tsMenus.Padding = new System.Windows.Forms.Padding(0, 0, 1, 3);
+            this.tsMenus.Size = new System.Drawing.Size(1898, 70);
             this.tsMenus.TabIndex = 1;
             this.tsMenus.Text = "toolStrip1";
             // 
@@ -98,7 +96,7 @@
             this.tsbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnDelete.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnDelete.Name = "tsbtnDelete";
-            this.tsbtnDelete.Size = new System.Drawing.Size(31, 37);
+            this.tsbtnDelete.Size = new System.Drawing.Size(47, 61);
             this.tsbtnDelete.Text = " Del";
             this.tsbtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -106,7 +104,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 43);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 67);
             // 
             // tsbtnInfo
             // 
@@ -116,7 +114,7 @@
             this.tsbtnInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnInfo.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnInfo.Name = "tsbtnInfo";
-            this.tsbtnInfo.Size = new System.Drawing.Size(44, 37);
+            this.tsbtnInfo.Size = new System.Drawing.Size(66, 61);
             this.tsbtnInfo.Text = " Detail";
             this.tsbtnInfo.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -124,25 +122,24 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 43);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 67);
             // 
             // tsbtnRefresh
             // 
-            this.tsbtnRefresh.Enabled = false;
             this.tsbtnRefresh.Image = global::WinPMS.Properties.Resources.refresh;
             this.tsbtnRefresh.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.tsbtnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnRefresh.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnRefresh.Name = "tsbtnRefresh";
-            this.tsbtnRefresh.Size = new System.Drawing.Size(49, 37);
-            this.tsbtnRefresh.Text = "Reflash";
+            this.tsbtnRefresh.Size = new System.Drawing.Size(77, 61);
+            this.tsbtnRefresh.Text = " Reflash";
             this.tsbtnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 43);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 67);
             // 
             // tsbtnClose
             // 
@@ -151,8 +148,8 @@
             this.tsbtnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnClose.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsbtnClose.Name = "tsbtnClose";
-            this.tsbtnClose.Size = new System.Drawing.Size(40, 37);
-            this.tsbtnClose.Text = "Close";
+            this.tsbtnClose.Size = new System.Drawing.Size(64, 61);
+            this.tsbtnClose.Text = " Close";
             this.tsbtnClose.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsbtnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbtnClose.Click += new System.EventHandler(this.tsbtnClose_Click);
@@ -164,35 +161,23 @@
             this.tsBtnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsBtnHelp.Margin = new System.Windows.Forms.Padding(0, 1, 0, 5);
             this.tsBtnHelp.Name = "tsBtnHelp";
-            this.tsBtnHelp.Size = new System.Drawing.Size(36, 37);
+            this.tsBtnHelp.Size = new System.Drawing.Size(53, 61);
             this.tsBtnHelp.Text = "Help";
             this.tsBtnHelp.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsBtnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // button1
+            // FrmRDR2PDI
             // 
-            this.button1.Location = new System.Drawing.Point(140, 194);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 50);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // FrmRadarRecipeConvert
-            // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1265, 682);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1898, 1050);
             this.Controls.Add(panelWhere);
             this.Controls.Add(this.tsMenus);
-            this.Name = "FrmRadarRecipeConvert";
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "FrmRDR2PDI";
             this.ShowIcon = false;
-            this.Text = "FrmDemo";
-            this.Load += new System.EventHandler(this.FrmRadarRecipeConvert_Load);
+            this.Text = "RDR2 PDI";
+            this.Load += new System.EventHandler(this.FrmRDR2PDI_Load);
             panelWhere.ResumeLayout(false);
             this.tsMenus.ResumeLayout(false);
             this.tsMenus.PerformLayout();
@@ -212,6 +197,5 @@
         private System.Windows.Forms.ToolStripButton tsbtnRefresh;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripButton tsBtnHelp;
-        private System.Windows.Forms.Button button1;
     }
 }

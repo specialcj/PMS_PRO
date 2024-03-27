@@ -504,6 +504,7 @@ namespace WinPMS.Debug
             catch (Exception ex)
             {
                 MessageBox.Show("Error！" + "\n" + ex.Message);
+                throw ex;
             }
         }
 

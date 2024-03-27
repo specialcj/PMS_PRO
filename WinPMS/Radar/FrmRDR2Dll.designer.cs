@@ -30,9 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Panel panelWhere;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRDR2Dll));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBypassSet = new System.Windows.Forms.Button();
             this.chk_ShowDllBuildDate = new System.Windows.Forms.CheckBox();
             this.btnOpenTestStepsCVI = new System.Windows.Forms.Button();
             this.txtTestStepsCVI = new System.Windows.Forms.TextBox();
@@ -69,6 +70,7 @@
             this.tsbtnClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsBtnHelp = new System.Windows.Forms.ToolStripButton();
+            this.timerIsBypass = new System.Windows.Forms.Timer(this.components);
             panelWhere = new System.Windows.Forms.Panel();
             panelWhere.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -87,6 +89,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBypassSet);
             this.groupBox1.Controls.Add(this.chk_ShowDllBuildDate);
             this.groupBox1.Controls.Add(this.btnOpenTestStepsCVI);
             this.groupBox1.Controls.Add(this.txtTestStepsCVI);
@@ -109,10 +112,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ini Configuration";
             // 
+            // btnBypassSet
+            // 
+            this.btnBypassSet.Location = new System.Drawing.Point(741, 55);
+            this.btnBypassSet.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBypassSet.Name = "btnBypassSet";
+            this.btnBypassSet.Size = new System.Drawing.Size(123, 30);
+            this.btnBypassSet.TabIndex = 9;
+            this.btnBypassSet.Text = "Bypass Setting";
+            this.btnBypassSet.UseVisualStyleBackColor = true;
+            this.btnBypassSet.Click += new System.EventHandler(this.btnBypassSet_Click);
+            // 
             // chk_ShowDllBuildDate
             // 
             this.chk_ShowDllBuildDate.AutoSize = true;
-            this.chk_ShowDllBuildDate.Location = new System.Drawing.Point(676, 68);
+            this.chk_ShowDllBuildDate.Location = new System.Drawing.Point(1048, 61);
             this.chk_ShowDllBuildDate.Margin = new System.Windows.Forms.Padding(2);
             this.chk_ShowDllBuildDate.Name = "chk_ShowDllBuildDate";
             this.chk_ShowDllBuildDate.Size = new System.Drawing.Size(90, 17);
@@ -188,9 +202,9 @@
             this.label1.Location = new System.Drawing.Point(4, 70);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 13);
+            this.label1.Size = new System.Drawing.Size(152, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "ALV_CAN_COMMS .dll name：";
+            this.label1.Text = "ALV_CAN_Comms .dll name：";
             // 
             // txtAlvCanCommsFolderNamePrefix
             // 
@@ -207,9 +221,9 @@
             this.label2.Location = new System.Drawing.Point(4, 46);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(169, 13);
+            this.label2.Size = new System.Drawing.Size(163, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "ALV_CAN_COMMS folder suffix：";
+            this.label2.Text = "ALV_CAN_Comms folder suffix：";
             // 
             // label3
             // 
@@ -217,9 +231,9 @@
             this.label3.Location = new System.Drawing.Point(4, 21);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(168, 13);
+            this.label3.Size = new System.Drawing.Size(162, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "ALV_CAN_COMMS folder drive：";
+            this.label3.Text = "ALV_CAN_Comms folder drive：";
             // 
             // txtAlvCanCommsFolderPath
             // 
@@ -237,14 +251,14 @@
             this.dgvDll.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvDll.BackgroundColor = System.Drawing.Color.White;
             this.dgvDll.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDll.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDll.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDll.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FolderPath,
@@ -272,7 +286,7 @@
             // 
             this.FolderPath.DataPropertyName = "FolderPath";
             this.FolderPath.FillWeight = 80F;
-            this.FolderPath.HeaderText = "ALV_CAN_COMMS Folder";
+            this.FolderPath.HeaderText = "ALV_CAN_Comms Folder";
             this.FolderPath.MinimumWidth = 6;
             this.FolderPath.Name = "FolderPath";
             this.FolderPath.ReadOnly = true;
@@ -516,6 +530,12 @@
             this.tsBtnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsBtnHelp.Click += new System.EventHandler(this.tsBtnHelp_Click);
             // 
+            // timerIsBypass
+            // 
+            this.timerIsBypass.Enabled = true;
+            this.timerIsBypass.Interval = 500;
+            this.timerIsBypass.Tick += new System.EventHandler(this.timerIsBypass_Tick);
+            // 
             // FrmRDR2Dll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,5 +599,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DllUsePro;
         private System.Windows.Forms.DataGridViewCheckBoxColumn DllActive;
         private System.Windows.Forms.DataGridViewButtonColumn DllOpen;
+        private System.Windows.Forms.Button btnBypassSet;
+        private System.Windows.Forms.Timer timerIsBypass;
     }
 }

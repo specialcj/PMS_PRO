@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PMS.COMMON.Helper;
+using System;
 using System.IO;
 
 namespace PMS.COMMON.Util
@@ -43,6 +44,8 @@ namespace PMS.COMMON.Util
             }
             catch (Exception ex)
             {
+                MsgBoxHelper.MsgBoxError("Exception:" + "\n" + "RegisterFileHelper - WriteFile()");
+                throw ex;
             }
         }
         private static string ReadFile(string fileName)
@@ -58,6 +61,8 @@ namespace PMS.COMMON.Util
             }
             catch (Exception ex)
             {
+                MsgBoxHelper.MsgBoxError("Exception:" + "\n" + "RegisterFileHelper - ReadFile()");
+                throw ex;
             }
             return info;
         }

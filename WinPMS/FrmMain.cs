@@ -21,6 +21,11 @@ namespace WinPMS
 {
     public partial class FrmMain : Form
     {
+        private const int INTERNET_CONNECTION_MODEM = 1;
+        private const int INTERNET_CONNECTION_LAN = 2;
+        [DllImport("winInet.dll")]
+        private static extern bool InternetGetConnectedState(ref int dwFlag, int dwReserved);
+
         //屏蔽右上角的X关闭按钮
         [DllImport("USER32.DLL")]
         private static extern IntPtr GetSystemMenu(IntPtr hWnd, UInt32 bRevert);
@@ -38,8 +43,21 @@ namespace WinPMS
         private int _iIsFrmFirstLoad = 0;//是否是第一次加载
 
         private string encryptComputer = "";
-        private bool isRegister = false;
-        private const int TIME_COUNT = 10 * 60;//PMS未注册，剩余时间计数值，单位s
+        private bool _bIsRegister = false;
+        private const int PMS_TIME_COUNT = 10 * 60;
+
+        private string _sAuthorityFile = FileHelper.sExeFolderPath + @"\dll\" + FileHelper.PMS_AUTHORITY;
+        private string _sDate1Read = "";
+        private string _sDate2Read = "";
+        private string _sExpiredDays = "";
+
+        private static string _sDate2Init = "date2-0000-00-00";
+        private char[] _chDate2Init = _sDate2Init.ToCharArray();
+
+        private static string _sDate2Set = "date2-0000-00-00";
+        private char[] _chDate2Set = _sDate2Set.ToCharArray();
+
+        private List<string> _lstAuthorityInfos = new List<string>();//授权文件信息列表
 
         public FrmMain()
         {
@@ -69,22 +87,121 @@ namespace WinPMS
                     _frmProgressBarModel = this.Tag as FrmProgressBarModel;
 
                     #region 检查注册信息
-                    string computerInfo = ComputerInfo.GetComputerInfo();
-                    encryptComputer = new EncryptionHelper().EncryptString(computerInfo);
+                    encryptComputer = new EncryptionHelper().EncryptString(FileHelper.sComputerInfo);
                     if (CheckRegister() == true)
                     {
                         lblRegisterTimeRemaining.Text = "OK";
                     }
-                    else
+                    else//Not Registed
                     {
-                        MsgBoxHelper.MsgBoxShow("Not Registed!\n\n" + "PMS will be aborted after: " + (TIME_COUNT / 60) + "mins", "Register");
-                        RegisterFileHelper.WriteComputerInfoFile(encryptComputer);
-                        Task.Run(new Action(() =>
+                        //软件未注册，提示
+                        //MsgBoxHelper.MsgBoxShow("PMS Not Registed!\n\n" + "PMS will be aborted after: " + (TIME_COUNT / 60) + "mins", "Register");
+                        //_lstAuthorityInfos = ReadInfosFromAuthorityFile(_sAuthorityFile);
+                        //_sDate1Read = _lstAuthorityInfos[0];
+                        //_sDate2Read = _lstAuthorityInfos[1];
+                        //_sExpiredDays = _lstAuthorityInfos[2];
+
+                        /*
+                        string[] lines = File.ReadAllLines(_sAuthorityFile);
+
+                        //date1-yyyy-mm-dd
+                        _sDate1Read =
+                            lines[3019].Substring(4, 1) +
+                            lines[131].Substring(64, 1) +
+                            lines[85].Substring(14, 1) +
+                            lines[1358].Substring(10, 1) +
+                            lines[29].Substring(69, 1) +
+                            lines[287].Substring(63, 1) +
+                            lines[110].Substring(35, 1) +
+                            lines[4].Substring(80, 1) +
+                            lines[119].Substring(37, 1) +
+                            lines[7].Substring(73, 1) +
+                            lines[299].Substring(53, 1) +
+                            lines[6].Substring(12, 1) +
+                            lines[2020].Substring(30, 1) +
+                            lines[308].Substring(36, 1) +
+                            lines[8].Substring(48, 1) +
+                            lines[2035].Substring(41, 1);
+
+                        //date2-yyyy-mm-dd
+                        _sDate2Read =
+                            lines[335].Substring(88, 1) +
+                            lines[386].Substring(3, 1) +
+                            lines[155].Substring(14, 1) +
+                            lines[1641].Substring(3, 1) +
+                            lines[147].Substring(57, 1) +
+                            lines[331].Substring(67, 1) +
+                            lines[214].Substring(41, 1) +
+                            lines[11].Substring(14, 1) +
+                            lines[266].Substring(5, 1) +
+                            lines[30].Substring(61, 1) +
+                            lines[342].Substring(85, 1) +
+                            lines[12].Substring(34, 1) +
+                            lines[2036].Substring(7, 1) +
+                            lines[424].Substring(67, 1) +
+                            lines[671].Substring(87, 1) +
+                            lines[2039].Substring(51, 1);
+                        */
+
+                        //if date2 is the initial value，it means the PMS has not been used，so write the date2 immediately
+                        //if (_sDate2Read == _sDate2Init)
+                        //{
+                        WriteDate2ToAuthorityFile(_sAuthorityFile);
+
+                        //读取Authority Date
+                        _lstAuthorityInfos = ReadInfosFromAuthorityFile(_sAuthorityFile);
+                        _sDate1Read = _lstAuthorityInfos[0];
+                        _sDate2Read = _lstAuthorityInfos[1];
+                        _sExpiredDays = _lstAuthorityInfos[2];
+                        //}
+
+                        DateTime dt1 = Convert.ToDateTime(_sDate1Read.Substring(6));
+                        DateTime dt2 = Convert.ToDateTime(_sDate2Read.Substring(6));
+
+                        //Authority Date invalide, K PMS
+                        if ((dt2 - dt1).Days < 0)
                         {
-                            ClosePMSWithoutRegister();
-                        }));
+                            MessageBox.Show("PMS Not Registed!\n\nPMS date invalid!\n\nPMS will be exited immediately!", "PMS", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+
+                            Process[] p = Process.GetProcessesByName("WinPMS");
+                            p[0].Kill();
+                        }
+
+                        if (CheckIsExpire(_sDate1Read, _sDate2Read))
+                        {
+                            MessageBox.Show("PMS Not Registed!\n\nPMS has been expired!\n\nPMS will be exited immediately!", "PMS", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+
+                            Process[] p = Process.GetProcessesByName("WinPMS");
+                            p[0].Kill();
+
+                            //Task.Run(new Action(() =>
+                            //{
+                            //    ClosePMSWithoutRegister();
+                            //}));
+                        }
+                        else
+                        {
+                            tmrAuthority.Enabled = true;
+                            MessageBox.Show("PMS Not Registed!\n\nPMS will expired on" + " " + dt1.AddDays(int.Parse(_sExpiredDays)).ToString("yyyy-MM-dd") + ".", "PMS", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                        }
+
+                        RegisterFileHelper.WriteComputerInfoFile(encryptComputer);
                     }
                     #endregion
+
+                    //如果联网的情况下，调用Outlook发送登录PMS通知
+                    System.Int32 dwFlag = new int();
+                    if (InternetGetConnectedState(ref dwFlag, 0))//已联网
+                    {
+                        string sMailContent =
+                            Environment.UserName + " login PMS at " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " | " +
+                            "Register: " + lblRegisterTimeRemaining.Text + " | " +
+                            "dateCurrent: " + DateTime.Now.ToString("yyyy-MM-dd") + " | " +
+                            _sDate1Read + " | " +
+                            _sDate2Read + " | " +
+                            "Remaining Days: " + (Convert.ToDateTime(_sDate2Read.Substring(6)) - Convert.ToDateTime(_sDate1Read.Substring(6))).Days;
+                        EmailHelper.OutlookSend("specialcj@163.com", "PMS Login Notification", sMailContent);
+                    }
 
                     InitMainInfo();
                 }
@@ -143,11 +260,394 @@ namespace WinPMS
         {
             lblCurrTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
+
+        /// <summary>
+        /// 周期写入软件使用的时间
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tmrAuthority_Tick(object sender, EventArgs e)
+        {
+            WriteDate2ToAuthorityFile(_sAuthorityFile);
+
+            /*
+            string[] lines = File.ReadAllLines(_sAuthorityFile);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string sDateNow = DateTime.Now.ToString("yyyy-MM-dd");
+                char[] chDateNowYear = sDateNow.Substring(0, 4).ToCharArray();
+                char[] chDateNowMonth = sDateNow.Substring(5, 2).ToCharArray();
+                char[] chDateNowDay = sDateNow.Substring(8, 2).ToCharArray();
+
+                //设置Date2
+                //lines[335] = lines[335].Replace(_chDate2Init[0], _chDate2Set[0]);
+                //lines[386] = lines[386].Replace(_chDate2Init[1], _chDate2Set[1]);
+                //lines[155] = lines[155].Replace(_chDate2Init[2], _chDate2Set[2]);
+                //lines[1641] = lines[1641].Replace(_chDate2Init[3], _chDate2Set[3]);
+                //lines[147] = lines[147].Replace(_chDate2Init[4], _chDate2Set[4]);
+                //lines[331] = lines[331].Replace(_chDate2Init[5], _chDate2Set[5]);
+
+                lines[214] = lines[214].Replace('0', chDateNowYear[0]);//y
+                lines[214] = lines[214].Replace('1', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('2', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('3', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('4', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('5', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('6', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('7', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('8', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('9', chDateNowYear[0]);
+
+                lines[11] = lines[11].Replace('0', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('1', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('2', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('3', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('4', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('5', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('6', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('7', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('8', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('9', chDateNowYear[1]);
+
+                lines[266] = lines[266].Replace('0', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('1', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('2', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('3', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('4', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('5', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('6', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('7', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('8', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('9', chDateNowYear[2]);
+
+                lines[30] = lines[30].Replace('0', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('1', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('2', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('3', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('4', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('5', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('6', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('7', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('8', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('9', chDateNowYear[3]);
+
+                //lines[342] = lines[342].Replace(_chDate2Init[10], _chDate2Set[10]);
+
+                lines[12] = lines[12].Replace('0', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('1', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('2', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('3', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('4', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('5', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('6', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('7', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('8', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('9', chDateNowMonth[0]);//m
+
+                lines[2036] = lines[2036].Replace('0', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('1', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('2', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('3', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('4', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('5', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('6', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('7', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('8', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('9', chDateNowMonth[1]);
+
+                //lines[424] = lines[424].Replace(_chDate2Init[13], _chDate2Set[13]);
+
+                lines[671] = lines[671].Replace('0', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('1', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('2', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('3', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('4', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('5', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('6', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('7', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('8', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('9', chDateNowDay[0]);//d
+
+                lines[2039] = lines[2039].Replace('0', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('1', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('2', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('3', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('4', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('5', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('6', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('7', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('8', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('9', chDateNowDay[1]);
+            }
+            File.WriteAllLines(_sAuthorityFile, lines);
+            */
+
+            string[] lines = File.ReadAllLines(_sAuthorityFile);
+
+            //date1-yyyy-mm-dd
+            _sDate1Read =
+                lines[3019].Substring(4, 1) +
+                lines[131].Substring(64, 1) +
+                lines[85].Substring(14, 1) +
+                lines[1358].Substring(10, 1) +
+                lines[29].Substring(69, 1) +
+                lines[287].Substring(63, 1) +
+                lines[110].Substring(35, 1) +
+                lines[4].Substring(80, 1) +
+                lines[119].Substring(37, 1) +
+                lines[7].Substring(73, 1) +
+                lines[299].Substring(53, 1) +
+                lines[6].Substring(12, 1) +
+                lines[2020].Substring(30, 1) +
+                lines[308].Substring(36, 1) +
+                lines[8].Substring(48, 1) +
+                lines[2035].Substring(41, 1);
+
+            //date2-yyyy-mm-dd
+            _sDate2Read =
+                lines[335].Substring(88, 1) +
+                lines[386].Substring(3, 1) +
+                lines[155].Substring(14, 1) +
+                lines[1641].Substring(3, 1) +
+                lines[147].Substring(57, 1) +
+                lines[331].Substring(67, 1) +
+                lines[214].Substring(41, 1) +
+                lines[11].Substring(14, 1) +
+                lines[266].Substring(5, 1) +
+                lines[30].Substring(61, 1) +
+                lines[342].Substring(85, 1) +
+                lines[12].Substring(34, 1) +
+                lines[2036].Substring(7, 1) +
+                lines[424].Substring(67, 1) +
+                lines[671].Substring(87, 1) +
+                lines[2039].Substring(51, 1);
+
+            if (CheckIsExpire(_sDate1Read, _sDate2Read))
+            {
+                //MsgBoxHelper.MsgBoxError("PMS has been expired！");
+                Task.Run(new Action(() =>
+                {
+                    ClosePMSWithoutRegister();
+                }));
+            }
+        }
+
+        private void btn_Test_Click(object sender, EventArgs e)
+        {
+            ShowFrm(0, new FrmDebugModeWarning());
+        }
+
         #endregion
 
 
 
         #region 方法
+        /// <summary>
+        /// 从授权文件中读取日期
+        /// </summary>
+        /// <param name="authorityFile"></param>
+        /// <returns></returns>
+        private List<string> ReadInfosFromAuthorityFile(string authorityFile)
+        {
+            List<string> lstAuthorityInfosRead = new List<string>();
+            lstAuthorityInfosRead.Clear();
+
+            string[] lines = File.ReadAllLines(authorityFile);
+
+            //date1-yyyy-mm-dd
+            _sDate1Read =
+                lines[3019].Substring(4, 1) +
+                lines[131].Substring(64, 1) +
+                lines[85].Substring(14, 1) +
+                lines[1358].Substring(10, 1) +
+                lines[29].Substring(69, 1) +
+                lines[287].Substring(63, 1) +
+                lines[110].Substring(35, 1) +
+                lines[4].Substring(80, 1) +
+                lines[119].Substring(37, 1) +
+                lines[7].Substring(73, 1) +
+                lines[299].Substring(53, 1) +
+                lines[6].Substring(12, 1) +
+                lines[2020].Substring(30, 1) +
+                lines[308].Substring(36, 1) +
+                lines[8].Substring(48, 1) +
+                lines[2035].Substring(41, 1);
+            lstAuthorityInfosRead.Add(_sDate1Read);
+
+            //date2-yyyy-mm-dd
+            _sDate2Read =
+                lines[335].Substring(88, 1) +
+                lines[386].Substring(3, 1) +
+                lines[155].Substring(14, 1) +
+                lines[1641].Substring(3, 1) +
+                lines[147].Substring(57, 1) +
+                lines[331].Substring(67, 1) +
+                lines[214].Substring(41, 1) +
+                lines[11].Substring(14, 1) +
+                lines[266].Substring(5, 1) +
+                lines[30].Substring(61, 1) +
+                lines[342].Substring(85, 1) +
+                lines[12].Substring(34, 1) +
+                lines[2036].Substring(7, 1) +
+                lines[424].Substring(67, 1) +
+                lines[671].Substring(87, 1) +
+                lines[2039].Substring(51, 1);
+            lstAuthorityInfosRead.Add(_sDate2Read);
+
+            _sExpiredDays =
+                lines[163].Substring(49, 1) +
+                lines[775].Substring(72, 1) +
+                lines[817].Substring(53, 1) +
+                lines[1147].Substring(19, 1);
+            lstAuthorityInfosRead.Add(_sExpiredDays);
+
+            return lstAuthorityInfosRead;
+        }
+
+
+        /// <summary>
+        /// 将date2写入Authority文件
+        /// </summary>
+        /// <param name="authorityFile"></param>
+        private void WriteDate2ToAuthorityFile(string authorityFile)
+        {
+            string[] lines = File.ReadAllLines(authorityFile);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string sDateNow = DateTime.Now.ToString("yyyy-MM-dd");
+                char[] chDateNowYear = sDateNow.Substring(0, 4).ToCharArray();
+                char[] chDateNowMonth = sDateNow.Substring(5, 2).ToCharArray();
+                char[] chDateNowDay = sDateNow.Substring(8, 2).ToCharArray();
+
+                //设置Date2
+                //lines[335] = lines[335].Replace(_chDate2Init[0], _chDate2Set[0]);
+                //lines[386] = lines[386].Replace(_chDate2Init[1], _chDate2Set[1]);
+                //lines[155] = lines[155].Replace(_chDate2Init[2], _chDate2Set[2]);
+                //lines[1641] = lines[1641].Replace(_chDate2Init[3], _chDate2Set[3]);
+                //lines[147] = lines[147].Replace(_chDate2Init[4], _chDate2Set[4]);
+                //lines[331] = lines[331].Replace(_chDate2Init[5], _chDate2Set[5]);
+
+                lines[214] = lines[214].Replace('0', chDateNowYear[0]);//y
+                lines[214] = lines[214].Replace('1', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('2', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('3', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('4', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('5', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('6', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('7', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('8', chDateNowYear[0]);
+                lines[214] = lines[214].Replace('9', chDateNowYear[0]);
+
+                lines[11] = lines[11].Replace('0', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('1', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('2', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('3', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('4', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('5', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('6', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('7', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('8', chDateNowYear[1]);
+                lines[11] = lines[11].Replace('9', chDateNowYear[1]);
+
+                lines[266] = lines[266].Replace('0', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('1', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('2', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('3', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('4', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('5', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('6', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('7', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('8', chDateNowYear[2]);
+                lines[266] = lines[266].Replace('9', chDateNowYear[2]);
+
+                lines[30] = lines[30].Replace('0', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('1', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('2', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('3', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('4', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('5', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('6', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('7', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('8', chDateNowYear[3]);
+                lines[30] = lines[30].Replace('9', chDateNowYear[3]);
+
+                //lines[342] = lines[342].Replace(_chDate2Init[10], _chDate2Set[10]);
+
+                lines[12] = lines[12].Replace('0', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('1', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('2', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('3', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('4', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('5', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('6', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('7', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('8', chDateNowMonth[0]);//m
+                lines[12] = lines[12].Replace('9', chDateNowMonth[0]);//m
+
+                lines[2036] = lines[2036].Replace('0', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('1', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('2', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('3', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('4', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('5', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('6', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('7', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('8', chDateNowMonth[1]);
+                lines[2036] = lines[2036].Replace('9', chDateNowMonth[1]);
+
+                //lines[424] = lines[424].Replace(_chDate2Init[13], _chDate2Set[13]);
+
+                lines[671] = lines[671].Replace('0', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('1', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('2', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('3', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('4', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('5', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('6', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('7', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('8', chDateNowDay[0]);//d
+                lines[671] = lines[671].Replace('9', chDateNowDay[0]);//d
+
+                lines[2039] = lines[2039].Replace('0', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('1', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('2', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('3', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('4', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('5', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('6', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('7', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('8', chDateNowDay[1]);
+                lines[2039] = lines[2039].Replace('9', chDateNowDay[1]);
+            }
+            File.WriteAllLines(_sAuthorityFile, lines);
+        }
+
+
+        /// <summary>
+        /// 检查PMS是否已过期
+        /// </summary>
+        /// <param name="sDatetime1">date1-2023-11-23</param>
+        /// <param name="sDatetime2">date2-2023-11-25</param>
+        /// <returns></returns>
+        private bool CheckIsExpire(string sDatetime1, string sDatetime2)
+        {
+            DateTime d1 = Convert.ToDateTime(sDatetime1.Substring(6));
+            DateTime d2 = Convert.ToDateTime(sDatetime2.Substring(6));
+            DateTime d3 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d1.Year, d1.Month, d1.Day));
+            DateTime d4 = Convert.ToDateTime(string.Format("{0}-{1}-{2}", d2.Year, d2.Month, d2.Day));
+
+            //检查PMS是否已过期的逻辑
+            if ((d4 - d3).Days >= int.Parse(_sExpiredDays))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private bool CheckRegister()
         {
             EncryptionHelper helper = new EncryptionHelper();
@@ -161,7 +661,7 @@ namespace WinPMS
         {
             if (RegisterFileHelper.ExistRegisterInfofile() == false)//不存在RegisterInfo.key文件
             {
-                isRegister = false;
+                _bIsRegister = false;
                 return false;
             }
             else//存在RegisterInfo.key文件
@@ -173,12 +673,12 @@ namespace WinPMS
                 string registerData = help.DecryptString(registerInfo);
                 if (key == registerData)
                 {
-                    isRegister = true;
+                    _bIsRegister = true;
                     return true;
                 }
                 else
                 {
-                    isRegister = false;
+                    _bIsRegister = false;
                     return false;
                 }
             }
@@ -198,19 +698,20 @@ namespace WinPMS
             //    lblRegistTimeRemaining.Text = count.ToString();
             //}
 
-            int count = TIME_COUNT;
+            //int count = TIME_COUNT;
+            int count = 3;
             do
             {
-                if (isRegister == true)
+                if (_bIsRegister == true)
                 {
                     return;
                 }
                 Thread.Sleep(1 * 1000);
                 count--;
                 lblRegisterTimeRemaining.Text = count.ToString();
-            } while (count > 0 && isRegister == false);
+            } while (count > 0 && _bIsRegister == false);
 
-            if (isRegister == true)
+            if (_bIsRegister == true)
             {
                 return;
             }
@@ -800,9 +1301,5 @@ namespace WinPMS
 
         #endregion
 
-        private void btn_Test_Click(object sender, EventArgs e)
-        {
-            ShowFrm(0, new FrmDebugModeWarning());
-        }
     }
 }

@@ -10,15 +10,15 @@ using WinPMS.FModels;
 
 namespace WinPMS.Radar
 {
-    public partial class FrmRDR2Packing : Form
+    public partial class FrmRadarPDI : Form
     {
-        public FrmRDR2Packing()
+        public FrmRadarPDI()
         {
             InitializeComponent();
         }
 
         #region 事件
-        private void FrmRDR2Packing_Load(object sender, EventArgs e)
+        private void FrmRDR2PDI_Load(object sender, EventArgs e)
         {
 
         }

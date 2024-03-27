@@ -29,6 +29,17 @@ namespace PMS.DLL
         private string _sRDRSELSection = FileHelper.INI_RDR_SEL_SECTION;
         private string _sRDRAlvCanCommsDllSection = FileHelper.INI_SECTION_RDR_ALV_CAN_COMMS_DLL;
 
+        private string _sIniPathPMS = "";
+
+        public DllCheck()
+        {
+            //通过TestStand调用获取Ini配置文件的路径
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            string dir = Path.GetDirectoryName(path);
+            _sIniPathPMS = new DirectoryInfo(string.Format(@"{0}..\..\", dir)).FullName + @"Config\PMS.ini";
+        }
 
         /// <summary>
         /// 动态匹配ALV_CAN_Comms.dll
@@ -445,6 +456,7 @@ namespace PMS.DLL
             }
             catch (Exception ex)
             {
+                MsgBoxHelper.MsgBoxError("Exception:" + "\n" + "DllCheck - AlvCanCommsDllCheckForRadar()");
                 throw ex;
             }
 
@@ -459,5 +471,26 @@ namespace PMS.DLL
 
             return true;
         }
+
+        /// <summary>
+        /// 是否重新编译过TestStepsCVI
+        /// </summary>
+        /// <returns>false: 没有编译过 true: 编译过</returns>
+        public bool IsRebuildTestStepsCVI()
+        {
+            bool ret = false;
+
+            //读RebuildTestStepsCVI的标志
+            string sRebuildTestStepsCVIFlag = IniHelper.ReadIni(_sPMSSection, "PMS_RebuildTestStepsCVI", "NULL", _sIniPathPMS);
+
+            //如果标志为1，表示打开过TestSteps
+            if (sRebuildTestStepsCVIFlag.Equals("1"))
+            {
+                return true;
+            }
+
+            return ret;
+        }
+        
     }
 }

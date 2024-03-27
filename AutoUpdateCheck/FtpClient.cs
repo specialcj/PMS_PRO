@@ -85,7 +85,7 @@ namespace AutoUpdateCheckPMS
             catch (Exception ex)
             {
                 //LogHelper.Error("Download Exception: " + ex.Message);
-                //MessageBox.Show(ex.Message);
+                throw ex;
             }
         }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ImageMagick;
 using PMS.DLL;
+using PMS.ITAC;
 
 namespace WinPMS.Debug
 {
@@ -24,7 +25,7 @@ namespace WinPMS.Debug
             List<string> sList = new List<string>();
 
             //ALV_CAN_COMMS - gm#DLL_X_X_71_2
-            //sList.Add("Radar 77GHz G1.2 GM Global B LRR L233 MY23 FLR");
+            sList.Add("Radar 77GHz G1.2 GM Global B LRR L233 MY23 FLR");
 
             //DLL_X_X_71_17
             //sList.Add("Radar 77GHz G1.2 Geea2.0 KX11 CR");
@@ -57,7 +58,7 @@ namespace WinPMS.Debug
             //sList.Add("Radar 77GHz G1.3 GAC A55 RCR");
 
             //Veh
-            sList.Add("6819808AAA");
+            //sList.Add("6819808AAA");
             //sList.Add("6819808CCC");
             foreach (string sDescCompare in sList)
             {
@@ -65,6 +66,20 @@ namespace WinPMS.Debug
             }
         }
 
+
+        private void btn_ITacCheck_Click(object sender, EventArgs e)
+        {
+            ITacCheck iTacCheck = new ITacCheck();
+
+            //工程序列号：682954300000000011
+            //客户序列号：10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$
+
+            iTacCheck.switchSerialNumberCheck(-1, "RA02311010", "682954300000000011", "10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$");
+            iTacCheck.switchSerialNumberCheck(-2, "RA02311010", "682954300000000011", "10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$");
+            iTacCheck.switchSerialNumberCheck(-3, "RA02311010", "682954300000000011", "10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$");
+            iTacCheck.switchSerialNumberCheck(-5, "RA02311010", "682954300000000011", "10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$");
+            iTacCheck.switchSerialNumberCheck(9999, "RA02311010", "682954300000000011", "10#702000183AA$11#8MU$12#202305180002$13#30.01.04$14#0.0.1$");
+        }
 
         private void btn_HEIC2jpg_Click(object sender, EventArgs e)
         {
@@ -224,8 +239,9 @@ namespace WinPMS.Debug
 
             return temp;
         }
+
         #endregion
 
-
+        
     }
 }

@@ -10,7 +10,7 @@ V1.1.8.2
       -> SensorTest
 
 V1.1.8.3
--> add "PMS_DllCheckOnOff"
+-> add "PMS_DllCheckOnOff" in PMS.ini
 -> optimize DllCheck.cs
 
 V1.1.8.4
@@ -22,6 +22,18 @@ V1.1.8.4
       -> PACKING -> ongoing
 -> Add #PMS_OpenTestStepsCVI in PMS.ini
 
+
+V1.1.8.5
+-> Add the check logic between iTAC property and PLM files - ongoing
+
+V1.1.8.6
+-> Add Bypass setting for Radar SEL
+
+V1.1.8.7
+-> Add Radar Packing config
+
+V1.1.8.8
+-> Add #PMS_RebuildTestStepsCVI in PMS.ini
 
 
 TBD

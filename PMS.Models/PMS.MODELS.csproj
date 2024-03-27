@@ -62,6 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DModels\MenuInfosModel.cs" />
+    <Compile Include="DModels\StationSetupModel.cs" />
+    <Compile Include="RadarPackingInfoModel.cs" />
+    <Compile Include="RadarPackingIniModel.cs" />
+    <Compile Include="RadarPackingWIModel.cs" />
     <Compile Include="RDR2AlvCanCommsDll.cs" />
     <Compile Include="RDR2AlvCanComms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

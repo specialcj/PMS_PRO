@@ -57,6 +57,8 @@ namespace PMS.COMMON.Helper
 
         public static string sIniPMSOpenTestStepsCVI = "";
 
+        public static string sIniPMSRebuildTestStepsCVI = "";
+
         //public static string sIniPMSVersion = "";
 
         public static string sIniPwdOpr = "";
@@ -90,7 +92,7 @@ namespace PMS.COMMON.Helper
         #endregion
 
 
-        #region define Ini Section
+        #region define INI Section
         /// <summary>
         /// "PMS"
         /// </summary>
@@ -101,6 +103,8 @@ namespace PMS.COMMON.Helper
         public const string INI_PMS_CONFORMITY_REPORT_SECTION = "PMS_Conformity_Report";
 
         public const string INI_SECTION_VEONEER = "Veoneer";
+
+        public const string INI_SECTION_RDR_LINE_STATION = "RDR_Line_Station";
 
         public const string INI_SECTION_RDR = "RDR";
 
@@ -127,7 +131,27 @@ namespace PMS.COMMON.Helper
         public const string INI_SECTION_RDR4_ALV_CAN_COMMS_DLL = "RDR4_ALV_CAN_COMMS_DLL";
         
         public const string INI_SECTION_RDR5_ALV_CAN_COMMS_DLL = "RDR5_ALV_CAN_COMMS_DLL";
+        
+        public const string INI_SECTION_RDR_PDI = "RDR_PDI";
+        
+        public const string INI_SECTION_RDR_PACKING = "RDR_PACKING";
         #endregion
 
+
+        #region define bypass
+        public const string RADAR_SEL_BYPASS_SETTING_DEFAULT = "SWL_Bypass = N;EOL_Bypass = N;LBL_Bypass = N";
+        #endregion
+
+
+        #region define authority
+        public const string PMS_AUTHORITY = "System.ComponentModel.DataContext.dll";
+
+        #endregion
+
+
+        #region define RegisterInfo
+        public static string sComputerInfo;
+        public static string sComputerInfoDisplay;
+        #endregion
     }
 }

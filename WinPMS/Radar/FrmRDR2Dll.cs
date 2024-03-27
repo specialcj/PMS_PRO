@@ -20,9 +20,14 @@ namespace WinPMS.Radar
         }
 
         private FrmProgressBarModel _frmProgressBarModel = null;
+        private FrmRadarBypassSetting _frmRadarBypassSetting = null;
+
         private string _sIniPathPMSUsed = "";
+        private string _sBypassConfigFile = "";//定义Bypass的配置文件
+        private string _sBypassLineRead = "";//定义读取到的Bypass行，默认为：SWL_Bypass = N; EOL_Bypass = N; LBL_Bypass = N
 
         private int _iPMSOpenTestStepsCVI = 0;
+        private int _iBypassTimeerTick = 0;
 
         #region 事件
         /// <summary>
@@ -37,12 +42,16 @@ namespace WinPMS.Radar
                 //禁用删除按钮
                 tsbtnDelete.Enabled = false;
 
+                //获取Bypass的配置文件
+                _sBypassConfigFile = IniHelper.ReadIni(FileHelper.INI_RDR_SEL_SECTION, "Radar_Bypass_Config_File_Path", "NULL", FileHelper.sIniFilePathCFM);
+
                 //获取当前窗体的Tag值
                 if (null != this.Tag)
                 {
                     _frmProgressBarModel = this.Tag as FrmProgressBarModel;
                     InitInfo();
                     LoadAlvCanCommsDll();
+                    CheckRadarSelBypass();
                 }
             };
             act.TryCatchInvoke("Loading Form error!\n\n页面加载异常！");
@@ -79,10 +88,20 @@ namespace WinPMS.Radar
                 return;
             }
 
+            //将RebuildTestStepsCVI的标志设为0
+            IniHelper.WriteIni(FileHelper.INI_SECTION_PMS, "PMS_RebuildTestStepsCVI", " " + "0", FileHelper.sIniFilePathPMS);
+            //读RebuildTestStepsCVI的标志
+            string sRebuildTestStepsCVIFlag = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_RebuildTestStepsCVI", "NULL", FileHelper.sIniFilePathPMS);
+            //判断RebuildTestStepsCVI的标志是否为0
+            if (!sRebuildTestStepsCVIFlag.Equals("0"))
+            {
+                MsgBoxHelper.MsgBoxShowOnTop("PMS_RebuildTestStepsCVI is not 0.", "Info");
+            }
+
             DataGridViewRow row = dgvDll.SelectedRows[0];//获取选中的行
             RDR2AlvCanCommsDll alvCanCommsDllInfo = row.DataBoundItem as RDR2AlvCanCommsDll;//将当前行绑定的数据转换为实体类
 
-            if (alvCanCommsDllInfo.FolderPath.ToUpper().Substring(alvCanCommsDllInfo.FolderPath.ToUpper().LastIndexOf(@"\") + 1) == _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix)
+            if (alvCanCommsDllInfo.FolderPath.ToUpper().Substring(alvCanCommsDllInfo.FolderPath.ToUpper().LastIndexOf(@"\") + 1) == _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.ToUpper())
             {
                 MessageBox.Show("Current dll is Active, can't switch! \n\n当前dll为激活状态，不能切换！", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -156,14 +175,23 @@ namespace WinPMS.Radar
                             if (sFolderPathCurrent == alvCanCommsDllInfo.FolderPath)
                             {
                                 //sFolderPathNew = folderPath.Substring(0, folderPath.Length - (dllVersion.Length + 1));
-                                sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf(_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix) + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.Length);
+
+                                //sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf(_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix) + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.Length);
+
+                                //sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf("\\") + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.Length + 1);
+
+                                sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf("\\")) + "\\" + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix;
+
                                 Directory.Move(sFolderPathCurrent, sFolderPathNew);
                             }
                             else
                             {
                                 if (sDllExist.Equals("Yes"))
                                 {
+                                    //sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf("\\") + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.Length + 1) + "_" + sDllVersion;
+
                                     sFolderPathNew = sFolderPathCurrent.Substring(0, sFolderPathCurrent.LastIndexOf("\\")) + "\\" + _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix + "_" + sDllVersion;
+
                                     if (sFolderPathCurrent.ToUpper() != sFolderPathNew.ToUpper())
                                     {
                                         Directory.Move(sFolderPathCurrent, sFolderPathNew);
@@ -182,7 +210,7 @@ namespace WinPMS.Radar
                             string folder = dgvDll.Rows[i].Cells["FolderPath"].FormattedValue.ToString();
                             string dllVersion = dgvDll.Rows[i].Cells["DllVersion"].FormattedValue.ToString();
 
-                            if (folder.Substring(folder.LastIndexOf("\\")).ToUpper().EndsWith(_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix) && dllVersion == alvCanCommsDllInfo.DllVersion)
+                            if (folder.Substring(folder.LastIndexOf("\\")).ToUpper().EndsWith(_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.ToUpper()) && dllVersion == alvCanCommsDllInfo.DllVersion)
                             {
                                 dllActive = true;
                             }
@@ -231,6 +259,17 @@ namespace WinPMS.Radar
         private void btnOpenTestStepsCVI_Click(object sender, EventArgs e)
         {
             btnSwitchDll.Enabled = true;
+
+            //将RebuildTestStepsCVI的标志设为1，表示已经重新编译过了
+            IniHelper.WriteIni(FileHelper.INI_SECTION_PMS, "PMS_RebuildTestStepsCVI", " " + "1", FileHelper.sIniFilePathPMS);
+            //读RebuildTestStepsCVI的标志
+            string sRebuildTestStepsCVIFlag = IniHelper.ReadIni(FileHelper.INI_SECTION_PMS, "PMS_RebuildTestStepsCVI", "NULL", FileHelper.sIniFilePathPMS);
+            //判断RebuildTestStepsCVI的标志是否为1
+            if (!sRebuildTestStepsCVIFlag.Equals("1"))
+            {
+                MsgBoxHelper.MsgBoxShowOnTop("PMS_RebuildTestStepsCVI is not 1.", "Info");
+            }
+
             try
             {
                 if (DialogResult.Yes == MsgBoxHelper.MsgBoxConfirm("Open\n" + txtTestStepsCVI.Text + " ？", "Info", 2))
@@ -274,6 +313,21 @@ namespace WinPMS.Radar
             }
         }
 
+
+        /// <summary>
+        /// 设置Bypass
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBypassSet_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("设置Bypass之前请先关闭所有测试程序！");
+
+            _frmRadarBypassSetting = new FrmRadarBypassSetting();
+            _frmRadarBypassSetting.Show();
+        }
+
+
         /// <summary>
         /// 定时更新dll激活状态
         /// </summary>
@@ -288,7 +342,7 @@ namespace WinPMS.Radar
                     string sFolderPath = row.Cells["FolderPath"].FormattedValue.ToString();
                     sFolderPath = sFolderPath.Substring(sFolderPath.LastIndexOf("\\") + 1);
 
-                    if (sFolderPath.ToUpper() == _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix)
+                    if (sFolderPath.ToUpper() == _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.ToUpper())
                     {
                         row.Cells["DllActive"].Value = "true";
                     }
@@ -385,7 +439,7 @@ namespace WinPMS.Radar
             if (sButtonText == "Open")
             {
                 MsgBoxHelper.MsgBoxShow("Not support", "NA");
-               
+
                 //DataGridViewRow row = dgvDll.SelectedRows[0];//获取选中的行
                 //RDR2AlvCanCommsDll alvCanCommsDllInfo = row.DataBoundItem as RDR2AlvCanCommsDll;//将当前行绑定的数据转换为实体类
 
@@ -399,8 +453,6 @@ namespace WinPMS.Radar
                 //}
             }
         }
-
-
 
 
         /// <summary>
@@ -440,7 +492,7 @@ namespace WinPMS.Radar
         /// </summary>
         private void InitInfo()
         {
-            _frmProgressBarModel.LoadIni?.Invoke();
+            _frmProgressBarModel.LoadAction?.Invoke();
 
             txtAlvCanCommsFolderPath.Text = _frmProgressBarModel.RdrAlvCanComms.FolderPath;
             txtAlvCanCommsFolderNamePrefix.Text = _frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix;
@@ -497,6 +549,7 @@ namespace WinPMS.Radar
 
                 //将ALV_CAN_COMMS固定的文件夹名称转为List
                 List<string> AlvCanFolderNamePrefixFixedList = new List<string>(_frmProgressBarModel.RdrAlvCanComms.DllFolderNamePrefixFixed.ToUpper().Split(','));
+
                 //将ALV_CAN_COMMS固定的文件夹下的.dll名称转为List
                 List<string> AlvCanDllFileNameFixedList = new List<string>(_frmProgressBarModel.RdrAlvCanComms.DllFileNameFixed.Split(','));
 
@@ -600,7 +653,7 @@ namespace WinPMS.Radar
                     if (!bDllFixedFlag)
                     {
                         //判断该目录是否是以ALV_CAN_COMMS开头的目录
-                        if (subDirName.ToUpper().StartsWith(@_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix))
+                        if (subDirName.ToUpper().StartsWith(@_frmProgressBarModel.RdrAlvCanComms.FolderNamePrefix.ToUpper()))
                         {
                             //实例化AlvCanComms类
                             RDR2AlvCanCommsDll alvCanCommsDll = new RDR2AlvCanCommsDll();
@@ -665,7 +718,66 @@ namespace WinPMS.Radar
         }
 
 
+        private void CheckRadarSelBypass()
+        {
+            try
+            {
+                StreamReader sr = new StreamReader(_sBypassConfigFile);
+                //读取Bypass配置文件的第一行
+                _sBypassLineRead = sr.ReadLine();//SWL_Bypass = N; EOL_Bypass = N; LBL_Bypass = N
+                //while (!sr.EndOfStream)
+                //{
+                //    _sBypassLine = sr.ReadLine();
+                //}
+
+                sr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void timerIsBypass_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                StreamReader sr = new StreamReader(_sBypassConfigFile);
+                //读取Bypass配置文件的第一行
+                _sBypassLineRead = sr.ReadLine();//SWL_Bypass = N; EOL_Bypass = N; LBL_Bypass = N
+                //while (!sr.EndOfStream)
+                //{
+                //    _sBypassLine = sr.ReadLine();
+                //}
+
+                sr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            //if ((null != _frmRadarBypassSetting && _frmRadarBypassSetting.IsBypass) || _sBypassLineRead != FileHelper.RADAR_SEL_BYPASS_SETTING_DEFAULT) 
+            if (_sBypassLineRead != FileHelper.RADAR_SEL_BYPASS_SETTING_DEFAULT)
+            {
+                _iBypassTimeerTick++;
+                if (_iBypassTimeerTick % 2 == 0)
+                {
+                    btnBypassSet.BackColor = Color.Red;
+                }
+                else
+                {
+                    btnBypassSet.BackColor = default;
+                }
+            }
+            else
+            {
+                btnBypassSet.BackColor = default;
+            }
+        }
         #endregion
+
+
 
     }
 }

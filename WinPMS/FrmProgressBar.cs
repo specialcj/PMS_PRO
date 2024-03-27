@@ -53,7 +53,7 @@ namespace WinPMS
                         //PMSVersion = FileHelper.sIniPMSVersion,
                         PMSVersion = Application.ProductVersion,
                         RdrAlvCanComms = _RdrAlvCanComms,
-                        LoadIni = LoadIni,
+                        LoadAction = LoadIni,
                     }
                 };
             }

@@ -70,16 +70,37 @@
     <Reference Include="AutoUpdater.NET, Version=1.7.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Autoupdater.NET.Official.1.7.2\lib\net45\AutoUpdater.NET.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Enums.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>..\packages\Enums.NET.4.0.1\lib\net45\Enums.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="ExApi">
+      <HintPath>Lib\ExApi.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="IMSApiDotNet">
+      <HintPath>Lib\IMSApiDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="Magick.NET-Q16-AnyCPU, Version=11.1.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET-Q16-AnyCPU.11.1.2\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
     </Reference>
     <Reference Include="Magick.NET.Core, Version=11.1.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
       <HintPath>..\packages\Magick.NET.Core.11.1.2\lib\net20\Magick.NET.Core.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.Signed.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=2.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.2.3.2\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.OData.Client, Version=7.13.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.OData.Client.7.13.0\lib\net45\Microsoft.OData.Client.dll</HintPath>
     </Reference>
@@ -111,9 +132,27 @@
     <Reference Include="mii.net, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Lib\mii.net.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.Core, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\netstandard2.0\NPOI.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\netstandard2.0\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\netstandard2.0\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\netstandard2.0\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.ImageSharp.2.1.4\lib\netstandard2.0\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Spire.Doc, Version=10.8.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
       <HintPath>..\packages\FreeSpire.Doc.10.8.0\lib\net40\Spire.Doc.dll</HintPath>
     </Reference>
@@ -127,17 +166,24 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.6.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Diagnostics.Process, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.Process.4.3.0\lib\net461\System.Diagnostics.Process.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -146,6 +192,23 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.6.0.1\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -155,8 +218,10 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -164,7 +229,6 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="VEONEERiTACAPI_CFM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -211,7 +275,14 @@
       <DependentUpon>FrmDebugConfigTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="FModels\FrmLoginModel.cs" />
+    <Compile Include="FModels\FrmModel.cs" />
     <Compile Include="FModels\FrmProgressBarModel.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +294,12 @@
     </Compile>
     <Compile Include="FrmAboutPMS.Designer.cs">
       <DependentUpon>FrmAboutPMS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSyncPMS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSyncPMS.designer.cs">
+      <DependentUpon>FrmSyncPMS.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmRegister.cs">
       <SubType>Form</SubType>
@@ -265,11 +342,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Radar\FrmRadarRecipeConvert.cs">
+    <Compile Include="Radar\FrmBasicFileDelete.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Radar\FrmRadarRecipeConvert.designer.cs">
-      <DependentUpon>FrmRadarRecipeConvert.cs</DependentUpon>
+    <Compile Include="Radar\FrmBasicFileDelete.designer.cs">
+      <DependentUpon>FrmBasicFileDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Radar\FrmRadarBypassSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Radar\FrmRadarBypassSetting.designer.cs">
+      <DependentUpon>FrmRadarBypassSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Radar\FrmRadarGM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Radar\FrmRadarGM.designer.cs">
+      <DependentUpon>FrmRadarGM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Radar\FrmRadarPDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Radar\FrmRadarPDI.designer.cs">
+      <DependentUpon>FrmRadarPDI.cs</DependentUpon>
     </Compile>
     <Compile Include="Radar\FrmRDR2Dll.cs">
       <SubType>Form</SubType>
@@ -277,23 +372,29 @@
     <Compile Include="Radar\FrmRDR2Dll.designer.cs">
       <DependentUpon>FrmRDR2Dll.cs</DependentUpon>
     </Compile>
-    <Compile Include="Radar\FrmRDR2Packing.cs">
+    <Compile Include="Radar\FrmRDR2DllConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Radar\FrmRDR2Packing.designer.cs">
-      <DependentUpon>FrmRDR2Packing.cs</DependentUpon>
+    <Compile Include="Radar\FrmRDR2DllConfig.designer.cs">
+      <DependentUpon>FrmRDR2DllConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Radar\FrmRDR2PDI.cs">
+    <Compile Include="Radar\FrmRadarPacking.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Radar\FrmRDR2PDI.designer.cs">
-      <DependentUpon>FrmRDR2PDI.cs</DependentUpon>
+    <Compile Include="Radar\FrmRadarPacking.designer.cs">
+      <DependentUpon>FrmRadarPacking.cs</DependentUpon>
     </Compile>
     <Compile Include="Radar\FrmRDR2SystemConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Radar\FrmRDR2SystemConfig.designer.cs">
       <DependentUpon>FrmRDR2SystemConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Radar\FrmRadarPackingInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Radar\FrmRadarPackingInfo.designer.cs">
+      <DependentUpon>FrmRadarPackingInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\FrmConvertToICO.cs">
       <SubType>Form</SubType>
@@ -312,6 +413,12 @@
     </Compile>
     <Compile Include="Tools\FrmConformityReport.designer.cs">
       <DependentUpon>FrmConformityReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\FrmiTacCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\FrmiTacCheck.designer.cs">
+      <DependentUpon>FrmiTacCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools\FrmQRCodeScan.cs">
       <SubType>Form</SubType>
@@ -349,6 +456,9 @@
     <EmbeddedResource Include="FrmAboutPMS.resx">
       <DependentUpon>FrmAboutPMS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmSyncPMS.resx">
+      <DependentUpon>FrmSyncPMS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
@@ -371,24 +481,36 @@
       <DependentUpon>FrmProgressBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Radar\FrmRadarRecipeConvert.resx">
-      <DependentUpon>FrmRadarRecipeConvert.cs</DependentUpon>
+    <EmbeddedResource Include="Radar\FrmBasicFileDelete.resx">
+      <DependentUpon>FrmBasicFileDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Radar\FrmRadarBypassSetting.resx">
+      <DependentUpon>FrmRadarBypassSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Radar\FrmRadarGM.resx">
+      <DependentUpon>FrmRadarGM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Radar\FrmRadarPDI.resx">
+      <DependentUpon>FrmRadarPDI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Radar\FrmRDR2Dll.resx">
       <DependentUpon>FrmRDR2Dll.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Radar\FrmRDR2Packing.resx">
-      <DependentUpon>FrmRDR2Packing.cs</DependentUpon>
+    <EmbeddedResource Include="Radar\FrmRDR2DllConfig.resx">
+      <DependentUpon>FrmRDR2DllConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Radar\FrmRDR2PDI.resx">
-      <DependentUpon>FrmRDR2PDI.cs</DependentUpon>
+    <EmbeddedResource Include="Radar\FrmRadarPacking.resx">
+      <DependentUpon>FrmRadarPacking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Radar\FrmRDR2SystemConfig.resx">
       <DependentUpon>FrmRDR2SystemConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Radar\FrmRadarPackingInfo.resx">
+      <DependentUpon>FrmRadarPackingInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\FrmConvertToICO.resx">
       <DependentUpon>FrmConvertToICO.cs</DependentUpon>
@@ -398,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\FrmConformityReport.resx">
       <DependentUpon>FrmConformityReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\FrmiTacCheck.resx">
+      <DependentUpon>FrmiTacCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\FrmQRCodeScan.resx">
       <DependentUpon>FrmQRCodeScan.cs</DependentUpon>
@@ -457,7 +582,12 @@
     <None Include="Config\RecipeTemplate\Temp.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Doc\PMS_Doc.xlsx" />
+    <None Include="Lib\ihas.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ihas_Test.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -478,6 +608,7 @@
     <Folder Include="bin\Release\" />
     <Folder Include="Config\ConformityReportTemplate\Radar\Packing\" />
     <Folder Include="Config\ConformityReportTemplate\Radar\SEL\" />
+    <Folder Include="Doc\" />
     <Folder Include="Resources\" />
     <Folder Include="Ver\" />
   </ItemGroup>
@@ -671,6 +802,52 @@
     <Content Include="Imgs\pineapple.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Imgs\R32x32\about_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\help.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\help_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\image_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\lefthand_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\packing_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\packing_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\packing_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\regist_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\regist_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Imgs\R32x32\report_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Imgs\R32x32\sync_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imgs\R32x32\sync_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\ExApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\IMSApiDotNet.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\System.ComponentModel.DataContext.dll" />
     <Content Include="test1.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -731,13 +908,14 @@
     <Content Include="Imgs\R32x32\SystemConfig_3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Lib\mii.net.dll" />
-    <Content Include="Lib\VEONEERiTACAPI_CFM.dll" />
-    <Content Include="pineapple.ico" />
-    <Content Include="Imgs\bg.png">
+    <Content Include="Lib\mii.net.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imgs\R32x32\help.png">
+    <Content Include="Lib\VEONEERiTACAPI_CFM.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="pineapple.ico" />
+    <Content Include="Imgs\bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Imgs\R32x32\light1.png">
@@ -814,6 +992,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\iTacApi\PMS.ITAC.csproj">
+      <Project>{6EC30A47-5FA7-4D4A-878B-C03678CDD925}</Project>
+      <Name>PMS.ITAC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PMS.Common\PMS.COMMON.csproj">
       <Project>{9B5DF878-5807-4E9A-BE19-446B17C2C2A2}</Project>
       <Name>PMS.COMMON</Name>
@@ -886,9 +1068,8 @@
 move *.dll ..\$(ConfigurationName)\dll
 move *.pdb ..\$(ConfigurationName)\dll
 move *.xml ..\$(ConfigurationName)\dll
-xcopy $(SolutionDir)AutoUpdateCheck\bin\Debug\AutoUpdateCheckPMS.exe $(TargetDir) /Y /I
-xcopy $(SolutionDir)AutoUpdateCheck\bin\Debug\AutoUpdateCheckPMS.exe.config $(TargetDir) /Y /I
-xcopy $(SolutionDir)AutoUpdateCheck\bin\Debug\AutoUpdateCheckPMS.pdb $(TargetDir) /Y /I
+xcopy $(SolutionDir)WinPMS\Lib\System.ComponentModel.DataContext.dll $(TargetDir)dll /Y /I
+
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

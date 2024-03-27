@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using PMS.COMMON.Helper;
 using System;
 using System.Management;
 using System.Net.NetworkInformation;
@@ -65,7 +66,9 @@ namespace PMS.COMMON.Util
             }
             catch (Exception ex)
             {
-                //这里写异常的处理  
+                //TODO 这里写异常的处理
+                MsgBoxHelper.MsgBoxError("Exception:" + "\n" + "ComputerInfo - GetHardWareInfo()");
+                throw ex;
             }
             return string.Empty;
         }
@@ -105,7 +108,9 @@ namespace PMS.COMMON.Util
             }
             catch (Exception ex)
             {
-                //这里写异常的处理  
+                //TODO 这里写异常的处理
+                MsgBoxHelper.MsgBoxError("Exception:" + "\n" + "ComputerInfo - GetMacAddressByNetworkInformation");
+                throw ex;
             }
             return macAddress;
         }

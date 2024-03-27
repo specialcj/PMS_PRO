@@ -17,33 +17,17 @@ using ZXing;
 
 namespace WinPMS.Radar
 {
-    public partial class FrmRadarRecipeConvert : Form
+    public partial class _FrmDemo : Form
     {
-        private string _sRadarRecipeIni = @"C:\Users\jason.cai\Desktop\Recipe_Demo.ini";
 
-
-        public FrmRadarRecipeConvert()
+        public _FrmDemo()
         {
             InitializeComponent();
         }
 
 
-
-
-
-
-
         #region 事件
-        private void FrmRadarRecipeConvert_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<string> RecipeSections = IniHelper.ReadSections(_sRadarRecipeIni);
-            RecipeSections = IniHelper.ReadSectionsEx(_sRadarRecipeIni);
-        }
 
         private void tsbtnClose_Click(object sender, EventArgs e)
         {
@@ -55,6 +39,7 @@ namespace WinPMS.Radar
 
 
         #endregion
+
 
 
         #region 方法

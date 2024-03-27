@@ -40,6 +40,10 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnClose = new System.Windows.Forms.ToolStripButton();
             this.tsBtnHelp = new System.Windows.Forms.ToolStripButton();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             panelWhere = new System.Windows.Forms.Panel();
             panelWhere.SuspendLayout();
             this.tsMenus.SuspendLayout();
@@ -168,6 +172,39 @@
             this.tsBtnHelp.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.tsBtnHelp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(704, 242);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 45);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(21, 210);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(118, 147);
+            this.listBox1.TabIndex = 4;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(232, 210);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(136, 193);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(396, 210);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(228, 204);
+            this.treeView1.TabIndex = 6;
+            // 
             // FrmDebugConfigTransfer
             // 
             this.AllowDrop = true;
@@ -175,6 +212,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1265, 682);
+            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(panelWhere);
             this.Controls.Add(this.tsMenus);
             this.Name = "FrmDebugConfigTransfer";
@@ -199,5 +240,9 @@
         private System.Windows.Forms.ToolStripButton tsbtnRefresh;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripButton tsBtnHelp;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }

@@ -12,7 +12,12 @@ namespace PMS.COMMON.Helper
         /// <returns></returns>
         public static DialogResult MsgBoxShow(string msg, string titile)
         {
-            return MessageBox.Show(msg, titile, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            return MessageBox.Show(msg, titile, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+        }
+
+        public static DialogResult MsgBoxShowOnTop(string msg, string titile)
+        {
+            return MessageBox.Show(msg, titile, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
         }
 
         /// <summary>
@@ -27,11 +32,11 @@ namespace PMS.COMMON.Helper
             switch (defaultButton)
             {
                 case 1:
-                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                 case 2:
-                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification);
                 default:
-                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    return MessageBox.Show(msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
 
         }
@@ -43,7 +48,7 @@ namespace PMS.COMMON.Helper
         /// <param name="msg">内容</param>
         public static void MsgBoxError(string msg)
         {
-            MessageBox.Show(msg, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error,MessageBoxDefaultButton.Button1);
+            MessageBox.Show(msg, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
         }
 
     }

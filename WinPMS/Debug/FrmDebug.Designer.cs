@@ -38,6 +38,7 @@ namespace WinPMS.Debug
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btn_SendMail = new System.Windows.Forms.Button();
             this.btn_ImgToPDF = new System.Windows.Forms.Button();
+            this.btn_ITacCheck = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_DllCheckForRadar2
@@ -132,11 +133,23 @@ namespace WinPMS.Debug
             this.btn_ImgToPDF.UseVisualStyleBackColor = true;
             this.btn_ImgToPDF.Click += new System.EventHandler(this.btn_ImgToPDF_Click);
             // 
+            // btn_ITacCheck
+            // 
+            this.btn_ITacCheck.Location = new System.Drawing.Point(429, 10);
+            this.btn_ITacCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ITacCheck.Name = "btn_ITacCheck";
+            this.btn_ITacCheck.Size = new System.Drawing.Size(111, 40);
+            this.btn_ITacCheck.TabIndex = 9;
+            this.btn_ITacCheck.Text = "ITacCheck";
+            this.btn_ITacCheck.UseVisualStyleBackColor = true;
+            this.btn_ITacCheck.Click += new System.EventHandler(this.btn_ITacCheck_Click);
+            // 
             // FrmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1100, 581);
+            this.Controls.Add(this.btn_ITacCheck);
             this.Controls.Add(this.btn_ImgToPDF);
             this.Controls.Add(this.btn_SendMail);
             this.Controls.Add(this.listBox1);
@@ -165,5 +178,6 @@ namespace WinPMS.Debug
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btn_SendMail;
         private System.Windows.Forms.Button btn_ImgToPDF;
+        private System.Windows.Forms.Button btn_ITacCheck;
     }
 }
